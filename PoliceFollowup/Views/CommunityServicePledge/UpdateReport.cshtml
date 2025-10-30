@@ -127,7 +127,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="control-label">نوع التهمة بموجب الامر او الحكم الصادر</label>
-                            @Html.DropDownListFor(model => model.AccusationType, new SelectList(ViewBag.AccusationTypeMaster, "AccusationTypeName", "AccusationTypeName"), "يرجى الاختيار", new { @Id = "AccusationType", @class = "form-control" })
+                            @Html.DropDownListFor(model => model.AccusationType, new SelectList(ViewBag.AccusationTypeMaster, "AccusationTypeName", "AccusationTypeName"), "يرجى الاختيار", new { @Id = "AccusationType", @class = "form-control is-invalid", @Required = "@Required" })
+                            @Html.ValidationMessageFor(model => model.AccusationType, "", new { @class = "text-danger" })
                         </div>
                     </div>
 
@@ -135,8 +136,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label class="control-label">تاريخ تنفيذ الخدمة</label>
-                            @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
-
+                            @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control is-invalid", @Required = "@Required", type = "date" })
+                            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -146,6 +147,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">التوقيع</label>
+                            @Html.TextBoxFor(model => model.Signature, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+
 
                 <div style="display:none">
                     @Html.EditorFor(model => model.CreatedDate)

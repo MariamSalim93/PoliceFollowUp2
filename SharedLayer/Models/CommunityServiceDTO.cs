@@ -41,7 +41,6 @@ namespace SharedLayer.Models
 
         [Display(Name = "الحالة الجسدية والنفسية")]
         public string PhysicalPychologicalStatus { get; set; }
-        [Required(ErrorMessage = "هذا الحقل إجباري")]
 
         [Display(Name = "الزيارات التنفيذية")]
         public string ExecutiveVisits { get; set; }

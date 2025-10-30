@@ -95,19 +95,24 @@ new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace }
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">رقم القضية</label>
-                    @Html.TextBoxFor(model => model.CaseNo, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.CaseNo, new { @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.CaseNo, "", new { @class = "text-danger" })
+
                 </div>
             </div><div class="col-md-4">
                       <div class="form-group">
                           <label class="control-label">نوع الحكم</label>
-                          @Html.DropDownListFor(model => model.JudgmentType, new SelectList(ViewBag.JudgmentTypeMaster, "JudgmentTypeName", "JudgmentTypeName"), "يرجى الاختيار", new { @Id = "JudgmentType", @class = "form-control" })
+                          @Html.DropDownListFor(model => model.JudgmentType, new SelectList(ViewBag.JudgmentTypeMaster, "JudgmentTypeName", "JudgmentTypeName"), "يرجى الاختيار", new { @Id = "JudgmentType", @class = "form-control is-invalid", @Required = "@Required" })
+                          @Html.ValidationMessageFor(model => model.JudgmentType, "", new { @class = "text-danger" })
 
                       </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">تاريخ الحكم</label>
-                    @Html.TextBoxFor(model => model.JudgmentDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                    @Html.TextBoxFor(model => model.JudgmentDate, "{0:yyyy-MM-dd}", new { @class = "form-control is-invalid", @Required = "@Required", type = "date" })
+                    @Html.ValidationMessageFor(model => model.JudgmentDate, "", new { @class = "text-danger" })
+
                 </div>
             </div>
           
@@ -117,14 +122,17 @@ new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace }
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">نطاق المراقبة</label>
-                    @Html.DropDownListFor(model => model.MonitoringArea, new SelectList(ViewBag.MonitoringAreaMaster, "MonitoringAreaName", "MonitoringAreaName"), "يرجى الاختيار", new { @Id = "MonitoringArea", @class = "form-control" })
+                    @Html.DropDownListFor(model => model.MonitoringArea, new SelectList(ViewBag.MonitoringAreaMaster, "MonitoringAreaName", "MonitoringAreaName"), "يرجى الاختيار", new { @Id = "MonitoringArea", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.MonitoringArea, "", new { @class = "text-danger" })
 
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">تاريخ بدء المراقبة</label>
-                    @Html.TextBoxFor(model => model.StartMonitoringDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                    @Html.TextBoxFor(model => model.StartMonitoringDate, "{0:yyyy-MM-dd}", new { @class = "form-control is-invalid", @Required = "@Required", type = "date" })
+                    @Html.ValidationMessageFor(model => model.StartMonitoringDate, "", new { @class = "text-danger" })
+
                 </div>
             </div>
             <div class="col-md-4">
@@ -139,22 +147,21 @@ new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace }
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">التهمة</label>
-                    @Html.DropDownListFor(model => model.Blame, new SelectList(ViewBag.BlameMaster, "BlameName", "BlameName"), "يرجى الاختيار", new { @Id = "Blame", @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Blame, new SelectList(ViewBag.BlameMaster, "BlameName", "BlameName"), "يرجى الاختيار", new { @Id = "Blame", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.Blame, "", new { @class = "text-danger" })
+
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">مصدر الحكم</label>
-                    @Html.DropDownListFor(model => model.JudgmentSource, new SelectList(ViewBag.JudgmentSourceMaster, "JudgmentSourceName", "JudgmentSourceName"), "يرجى الاختيار", new { @Id = "JudgmentSource", @class = "form-control" })
+                    @Html.DropDownListFor(model => model.JudgmentSource, new SelectList(ViewBag.JudgmentSourceMaster, "JudgmentSourceName", "JudgmentSourceName"), "يرجى الاختيار", new { @Id = "JudgmentSource", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.JudgmentSource, "", new { @class = "text-danger" })
+
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="control-label">المرفقات</label>
-                    @Html.TextBoxFor(model => model.Attachments, new { @class = "form-control" })
-                </div>
-            </div>
+          
         </div>
 
         <div class="row mt-3" style="font-size:small; display:none">
