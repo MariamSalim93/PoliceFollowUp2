@@ -1,0 +1,54 @@
+﻿.CustomCard {
+    padding: 10px;
+    margin: 5px 0px 5px 0px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.card-1:hover {
+    border: 1px solid #d45656;
+    color: #d45656;
+    background-color: #d456560e;
+}
+
+.card-1-title {
+    background-color: #d456560e;
+    color: #d45656;
+    font-weight: 700;
+}
+
+.card-2:hover {
+    border: 1px solid #1ecec0;
+    color: #1ecec0;
+    background-color: #1ecec00e;
+}
+
+.card-2-title {
+    background-color: #1ecec00e;
+    color: #1ecec0;
+    font-weight: 700;
+}
+
+.card-3:hover {
+    border: 1px solid #1e81ce;
+    color: #1e81ce;
+    background-color: #1e81ce0e;
+}
+
+.card-3-title {
+    background-color: #1e81ce0e;
+    color: #1e81ce;
+    font-weight: 700;
+}
+
+.card-4:hover {
+    border: 1px solid #edbd5b;
+    color: #edbd5b;
+    background-color: #edbd5b0e;
+}
+
+.card-4-title {
+    background-color: #edbd5b0e;
+    color: #edbd5b;
+    font-weight: 700;
+}

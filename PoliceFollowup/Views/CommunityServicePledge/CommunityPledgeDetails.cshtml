@@ -1,0 +1,426 @@
+﻿@model SharedLayer.Models.CommunityServicePledgeDTO
+
+@{
+    ViewBag.Title = "تفاصيل تعهد الخدمة المجتمعية";
+}
+
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <link href="~/Content/CSSFiles/HomeStyle.css" rel="stylesheet" />
+
+    <style>
+        * {
+            text-align: right;
+            direction: rtl
+        }
+
+
+        .container-fluid {
+            font-size: 12px;
+        }
+
+        h3 {
+            font-size: 18px !important;
+        }
+
+        .Subtitle {
+            background-color: #81715e0e;
+            color: #81715e;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .control-label {
+            font-weight: 600;
+            color: #6b5f50;
+            font-size: 12px;
+        }
+
+        .form-control {
+            font-size: 12px;
+        }
+
+        .detail-value {
+            color: #333;
+            font-size: 11px;
+        }
+
+        .row-detail {
+            padding: 5px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+            .row-detail:last-child {
+                border-bottom: none;
+            }
+
+        .nav-link {
+            color: #81715e;
+            font-size: 12px;
+        }
+
+        .nav-tabs .nav-item.show .nav-link,
+        .nav-tabs .nav-link.active {
+            background-color: #81715e0b;
+            color: #81715e;
+            font-weight: 600;
+            border-top: 3px solid #81715e;
+            border-radius: 0px;
+        }
+
+        .status-badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .status-pending {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .status-inactive {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .info-check {
+            width: 14px;
+            height: 14px;
+            cursor: not-allowed;
+        }
+
+        .btn-back {
+            background-color: #81715e;
+            color: white;
+            padding: 5px 15px;
+            font-weight: 600;
+            font-size: 11px;
+            border: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-back:hover {
+                background-color: #6b5f50;
+                color: white;
+                text-decoration: none;
+            }
+
+        .btn-print {
+            background-color: #e8e3dd;
+            color: #7b7268;
+            padding: 5px 15px;
+            font-weight: 600;
+            font-size: 11px;
+            border: 1px solid #7b7268;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-print:hover {
+                background-color: #7b7268;
+                color: white;
+            }
+
+        .table {
+            font-size: 11px;
+        }
+
+            .table th {
+                font-size: 11px;
+                padding: 5px;
+            }
+
+            .table td {
+                padding: 5px;
+            }
+
+        .p-3 {
+            padding: 0.75rem !important;
+        }
+
+        .p-2 {
+            padding: 0.5rem !important;
+        }
+
+
+        .btn i {
+            font-size: 10px;
+        }
+        /* Make both buttons identical in box metrics */
+        .btn-back, .btn-edit {
+            display: inline-flex;
+            align-items: center;
+            gap: .25rem; /* same as gap-1 */
+            padding: 5px 15px; /* identical */
+            font-size: 11px; /* identical */
+            line-height: 1.2; /* identical */
+            border-radius: 8px; /* identical cornerradius */
+            border: 0; /* kill Bootstrap border on btn-warning */
+            vertical-align: middle;
+        }
+
+        /* Make both buttons identical in box metrics */
+        .btn-back, .btn-edit {
+            display: inline-flex;
+            align-items: center;
+            gap: .25rem; /* same as gap-1 */
+            padding: 5px 15px; /* identical */
+            font-size: 11px; /* identical */
+            line-height: 1.2; /* identical */
+            border-radius: 8px; /* identical cornerradius */
+            border: 0; /* kill Bootstrap border on btn-warning */
+            vertical-align: middle;
+        }
+
+        /* Colors only */
+        .btn-edit {
+            background: #ffc107;
+            color: #4e4a45;
+        }
+
+            .btn-edit:hover {
+                background: #e0a800;
+                color: #fff;
+            }
+
+        .btn-back {
+            background: #81715e;
+            color: #fff;
+        }
+
+            .btn-back:hover {
+                background: #6b5f50;
+                color: #fff;
+            }
+
+        .header-actions {
+            margin-right: auto;
+        }
+    </style>
+</head>
+
+<div class="container-fluid mt-3">
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+<div class="p-3 bg-white shadow-sm">
+    <div class="d-flex align-items-center mb-3">
+        <img src="~/Content/images/report.png" width="34" style="margin-top:-4px;">
+        <h3 class="mb-0 mx-2" style="color:#7b7268">تفاصيل تعهد الخدمة المجتمعية</h3>
+
+        <div class="header-actions">
+            @using (Html.BeginForm("UpdateReport", "CommunityServicePledge", new { id = Model.ReportID }, FormMethod.Get, new { @class = "d-inline-block m-0" }))
+            {
+                <button type="submit" class="btn btn-edit"><i class="fa fa-edit" style="margin-left:.25rem;"></i> تعديل</button>
+            }
+            <a href='@Url.Action("CommunityPledgeList","CommunityServicePledge")' class="btn btn-back">
+                <i class="fas fa-arrow-right" style="margin-left:.25rem;"></i> رجوع
+            </a>
+        </div>
+    </div>
+
+    <br />
+
+
+    <div class="row">
+        <!-- القسم الأول: المعلومات الأساسية -->
+        <div class="col-md-6">
+            <div class="Subtitle">معلومات التقرير</div>
+            <div class="p-2">
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">رقم التقرير</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Model.ReportID</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">رقم الملف</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Model.FileNo</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">حالة التدقيق</label>
+                        </div>
+                        <div class="col-sm-7">
+                            @{
+                                string statusClass = Model.Status == "جديد" ? "status-active" :
+                                                    Model.Status == "تم التعديل" ? "status-pending" : "status-inactive";
+                            }
+                            <span class="status-badge @statusClass">@Model.Status</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">تاريخ الإنشاء</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Html.DisplayFor(m => m.CreatedDate)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">منشئ التقرير</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Model.CreatedBy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">آخر تعديل بواسطة</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Model.EditedBy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">تاريخ التعديل</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Html.DisplayFor(m => m.EditDate)</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">ملاحظات التعديل</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Model.EditNote</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">المعتمد</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Model.ApprovedBy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">تاريخ الاعتماد</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Html.DisplayFor(m => m.ApproveDate)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- القسم الثاني: بيانات الحكم -->
+        <div class="col-md-6">
+            <div class="Subtitle">بيانات الحكم</div>
+            <div class="p-2">
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">نوع التهمة بموجب الامر او الحكم الصادر</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Model.AccusationType</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">تاريخ تنفيذ الخدمة</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Html.DisplayFor(m => m.StartDate)</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-detail">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <label class="control-label">تاريخ انتهاء الخدمة</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <span class="detail-value">@Html.DisplayFor(m => m.EndDate)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Add any additional JavaScript if needed
+
+            // Print functionality with better formatting
+            window.addEventListener('beforeprint', function () {
+                $('.btn-back, .btn-print').hide();
+            });
+
+            window.addEventListener('afterprint', function () {
+                $('.btn-back, .btn-print').show();
+            });
+        });
+    </script>
+}

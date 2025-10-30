@@ -1,0 +1,149 @@
+﻿@model IEnumerable<SharedLayer.Master.ResidenceDTO>
+
+@{
+    ViewBag.Title = "قائمة مقر السكن";
+}
+
+<head>
+    <link href="~/Content/CSSFiles/HomeStyle.css" rel="stylesheet" />
+    <link href="~/Content/CSSFiles/StatusStyle.css" rel="stylesheet" />
+    <style>
+
+        table thead tr {
+            border: none;
+        }
+    </style>
+
+</head>
+
+@using (Html.BeginForm("AddResidence", "Master", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid mt-3">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-12 ">
+                <div class="p-3 bg-white shadow-sm" style="font-size:small">
+                    <div class="Subtitle">اضافة مقر السكن</div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mt-4">
+                                <input type="text" name="ResidenceName" value="" class="form-control" required placeholder="مقر السكن" />
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mt-2" style="float:right">
+                                <button type="submit" class="btn btn-sm btn-success mt-3 " style=" font-size:medium;">
+                                    <i class="fa fa-plus p-1"></i> اضافة
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+<div class="container-fluid mt-3">
+    <div class="p-3 bg-white shadow-sm">
+        <h4 class="p-3" style="color: #7b7268">قائمة مقر السكن</h4>
+        <table id="TableId" class="display border-0 nowrap" style="width:100%;font-size:smaller">
+            <thead style="text-align:right;">
+                <tr style="background-color: #e0dad1; color: #221f1c;">
+                    <th> @Html.DisplayNameFor(model => model.ResidenceId)</th>
+                    <th> @Html.DisplayNameFor(model => model.ResidenceName)</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <!-- DataTables CSS -->
+    <link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/DataTables/css/responsive.dataTables.min.css" rel="stylesheet" />
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.min.js"></script>
+
+    <!-- Buttons JS for export functionality -->
+    <script src="~/Scripts/DataTables/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/DataTables/buttons.flash.min.js"></script>
+    <script src="~/Scripts/jszip.min.js"></script>
+    <script src="~/Scripts/pdfmake/pdfmake.min.js"></script>
+    <script src="~/Scripts/pdfmake/vfs_fonts.js"></script>
+    <script src="~/Scripts/DataTables/buttons.html5.min.js"></script>
+    <script src="~/Scripts/DataTables/buttons.print.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var oTable;
+            $.ajax({
+                url: '@Url.Action("GetListOfResidenceJson", "Master")',
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    oTable = $('#TableId').DataTable({
+                        data: data, // Use the JSON data returned from the server
+                        responsive: true,
+                        columns: [
+                            { data: "ResidenceId", width: "30%" }, // Adjusted column width
+                            { data: "ResidenceName", width: "50%" },
+
+                        ],
+                        order: [[0, 'desc']], // Sorting by ActionTypeId in descending order
+                        language: {
+                            search: "",
+                            searchPlaceholder: "الاستعلام",
+                            sLengthMenu: "_MENU_ ",
+                            info: "عرض _START_ إلى _END_ من اجمالي _TOTAL_ ",
+                            infoFiltered: "(تصفية _MAX_ من الاجمالي)",
+                            paginate: {
+                                next: 'التالي',
+                                previous: 'السابق'
+                            }
+                        },
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'copy',
+                                text: '<i class="fa fa-copy"></i> نسخ',
+                                className: 'btn btn-sm buttons-copy'
+                            },
+                            {
+                                extend: 'excel',
+                                text: '<i class="fa fa-file-excel-o"></i> اكسل',
+                                className: 'btn btn-sm buttons-excel'
+                            },
+                            {
+                                extend: 'print',
+                                text: '<i class="fa fa-print"></i> طباعة',
+                                className: 'btn btn-sm buttons-print'
+                            }
+                        ],
+                        initComplete: function () {
+                            $('.dataTables_filter input').addClass('form-control');
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("An error occurred:", status, error);
+                }
+            });
+        });
+    </script>
+}
+

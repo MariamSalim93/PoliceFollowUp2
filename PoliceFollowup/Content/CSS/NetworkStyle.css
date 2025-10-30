@@ -1,0 +1,165 @@
+﻿.CustomCard {
+    width: 100%;
+    direction: rtl;
+    word-wrap: break-word;
+    padding: 15px;
+    border: solid 1px white;
+    box-shadow: -1px -2px 6px -2px rgba(147, 197, 253, 0.31);
+    background-color: #ffffff8f;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.CustomText{
+    font-size:medium;
+}
+
+.card-1:hover {
+    border: 1px solid #d45656;
+    color: #d45656;
+    background-color: #d456560e;
+}
+
+.card-1-title {
+    background-color: #d456560e;
+    color: #d45656;
+}
+
+.card-2:hover {
+    border: 1px solid #6DCFBE;
+    color: #24b29a;
+    background-color: #6dcfbe16;
+}
+
+.card-2-title {
+    background-color: #5ba4540e;
+    color: #5ba454;
+}
+
+.card-3:hover {
+    border: 1px solid #64C7ED;
+    color: #3098c1;
+    background-color: #64c7ed10;
+}
+
+.card-3-title {
+    background-color: #1e81ce0e;
+    color: #1e81ce;
+}
+
+.card-4:hover {
+    border: 1px solid #8c8c8c;
+    color: #8c8c8c;
+    background-color: #8c8c8c0e;
+}
+
+.card-4-title {
+    background-color: #8c8c8c0e;
+    color: #8c8c8c;
+}
+
+.card-5:hover {
+    border: 1px solid #cc6020;
+    color: #cc6020;
+    background-color: #cc60200e;
+}
+
+.card-5-title {
+    background-color: #cc60200e;
+    color: #cc6020;
+}
+
+.card-6:hover {
+    border: 1px solid #bfa912;
+    color: #bfa912;
+    background-color: #bfa9120e;
+}
+
+.card-6-title {
+    background-color: #bfa9120e;
+    color: #bfa912;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    background-color: #f6faff;
+    padding: 7px;
+    border-radius: 7px;
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 0px 0px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: white
+        }
+
+.show {
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .card-container {
+        display: none;
+    }
+
+    .dropdown {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .dropdown {
+        display: none;
+    }
+}
+
+.DataTitle {
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    color: #d45656;
+    background-color: #d456560e;
+    margin: 10px 0px;
+    font-weight: 500;
+}
+
+.DataLabel {
+    font-size: 14px;
+    color: #555555;
+    font-weight: 700;
+}
+
+.DataLabelEN {
+    font-size: 14px;
+    color: #555555;
+    font-weight: 700;
+    float: left;
+}
+
+.DataText {
+    font-size: 14px;
+    color: #555555;
+    text-align: center;
+}
+
+.Labels {
+    padding: 7px;
+    font-size: 14px;
+    color: #555555;
+    font-weight: 700;
+}
+
+.LabelsEN {
+    padding: 7px;
+    font-size: 14px;
+    color: #555555;
+    float: left;
+}

@@ -1,0 +1,256 @@
+﻿
+@model SharedLayer.Models.CommunityServiceDTO
+
+@{
+    ViewBag.Title = "تنفيذ الخدمة المجتمعية";
+}
+<head>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/JsScript/formFieldValidation.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="~/Content/CSSFiles/HomeStyle.css" rel="stylesheet" />
+
+    <style>
+
+        .btn.btn-Add {
+            background-color: #7b7268 !important;
+            color: white;
+            text-align: center;
+            padding: 5px 15px;
+            font-weight: 600;
+        }
+
+        .btn-Add:hover {
+            background-color: #e8e3dd;
+            color: #7b7268;
+        }
+
+        * {
+            text-align: right;
+            direction: rtl
+        }
+
+        .Subtitle {
+            background-color: #81715e0e;
+            color: #81715e;
+            padding: 15px;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .control-label {
+            font-weight: 600;
+        }
+
+        .form-control {
+            font-size: small;
+        }
+
+        select {
+            -webkit-appearance: menulist;
+            -moz-appearance: menulist;
+            appearance: menulist;
+        }
+
+            select.custom-select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background-image: url('arrow-down-icon.png');
+                background-repeat: no-repeat;
+                background-position: right center;
+                padding-right: 300px;
+            }
+
+        .nav-link {
+            color: #81715e;
+        }
+
+        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+            background-color: #81715e0b;
+            color: #81715e;
+            font-weight: 600;
+            border-top: 3px solid #81715e;
+            border-radius: 0px;
+        }
+    </style>
+</head>
+<div class="container-fluid mt-3">
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success">@TempData["Success"]</div>
+    }
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Error"]</div>
+    }
+
+
+    @using (Ajax.BeginForm("AddCommunityService", "ConvictFile",
+    new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace }
+    ))
+    {
+
+        @Html.AntiForgeryToken()
+
+<div class="p-3 bg-white shadow-sm" style="font-size:small">
+    <h3 class="m-0 mb-3" style="color: #7b7268">تنفيذ الخدمة المجتمعية</h3>
+
+  
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">رقم القضية</label>
+                @Html.TextBoxFor(model => model.CaseNo,  new { @class = "form-control"})
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">تاريخ الحكم</label>
+                @Html.TextBoxFor(model => model.JudgmentDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">التهمة</label>
+                @Html.DropDownListFor(model => model.Blame, new SelectList(ViewBag.BlameMaster, "BlameName", "BlameName"), "يرجى الاختيار", new { @Id = "Blame", @class = "form-control" })
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">الزيارات التنفيذية</label>
+                @Html.DropDownListFor(model => model.ExecutiveVisits, new SelectList(ViewBag.VisitsMaster, "VisitsName", "VisitsName"), "يرجى الاختيار", new { @Id = "ExecutiveVisits", @class = "form-control" })
+
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">اسم المشرف</label>
+                @Html.DropDownListFor(model => model.SupervisorName, new SelectList(ViewBag.SupervisorMaster, "SupervisorName", "SupervisorName"), "يرجى الاختيار", new { @Id = "SupervisorName", @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">الضابط المسؤول</label>
+                @Html.DropDownListFor(model => model.OfficerName, new SelectList(ViewBag.OfficerMaster, "OfficerName", "OfficerName"), "يرجى الاختيار", new { @Id = "OfficerName", @class = "form-control" })
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">تاريخ البدء</label>
+                @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">تاريخ الانتهاء </label>
+                @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">الحالة الجسدية والنفسية</label>
+                @Html.TextBoxFor(model => model.PhysicalPychologicalStatus, new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">اماكن تطبيق أعمال الخدمة المجتمعية</label>
+                @Html.DropDownListFor(model => model.CommunityServicePlaces, new SelectList(ViewBag.PlacesMaster, "PlacesName", "PlacesName"), "يرجى الاختيار", new { @Id = "PlacesName", @class = "form-control" })
+
+            </div>
+        </div>
+       
+    </div>
+
+    <!-- Top readonly row (summary) -->
+    <div class="row mt-3" style="font-size:small; display:none">
+        <input type="text" name="FileNo" value="@ViewBag.CommunityService.FileNo" />
+
+        <input type="text" name="Status" value="@ViewBag.CommunityService.Status" class="form-control" />
+
+        <input type="datetime-local" name="CreatedDate" value="@((ViewBag.CommunityService.CreatedDate as DateTime?)?.ToString("yyyy-MM-ddTHH:mm"))" class="form-control bg-body-secondary" readonly />
+        <input type="text" name="CreatedBy" value="@ViewBag.CommunityService.CreatedBy" class="form-control bg-body-secondary" readonly />
+
+        <input type="text" name="EditedBy" value="@ViewBag.CommunityService.EditedBy" class="form-control" />
+        <textarea name="EditNote" class="form-control" rows="3">@ViewBag.CommunityService.EditNote</textarea>
+
+        <input type="text" name="ApprovedBy" value="@ViewBag.CommunityService.ApprovedBy" class="form-control" />
+        <textarea name="ApproveNotes" class="form-control" rows="3">@ViewBag.CommunityService.ApproveNotes</textarea>
+        <input type="datetime-local" id="EditDate" value="" class="form-control" />
+        <input type="datetime-local" id="ApproveDate" value="" class="form-control" />
+    </div>
+
+</div>
+  
+    <div class="row">
+        <div class="mt-3" style="text-align: left !important;">
+            <input type="submit" class="btn btn-sm btn-Add p-2" value="حفظ" />
+        </div>
+    </div>
+
+
+
+    }
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Function to calculate age
+        function calculateAge() {
+            var birthDateVal = $('#BirthDate').val();
+
+            if (birthDateVal) {
+                var today = new Date();
+                var birthDate = new Date(birthDateVal);
+
+                if (!isNaN(birthDate.getTime())) {
+                    var age = today.getFullYear() - birthDate.getFullYear();
+                    var monthDiff = today.getMonth() - birthDate.getMonth();
+
+                    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                        age--;
+                    }
+
+                    if (age >= 0 && age <= 150) {
+                        $('#Age').val(age);
+                    } else {
+                        $('#Age').val('');
+                    }
+                } else {
+                    $('#Age').val('');
+                }
+            } else {
+                $('#Age').val('');
+            }
+        }
+
+        // Calculate age on page load
+        calculateAge();
+
+        // Calculate age when birth date changes
+        $('#BirthDate').on('change input', function () {
+            calculateAge();
+        });
+    });
+</script>
+
+
+
+

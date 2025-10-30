@@ -1,0 +1,161 @@
+﻿@model IEnumerable<SharedLayer.Models.ReceiveCaseDTO>
+
+@{
+    ViewBag.Title = "قائمة استقبال حالة";
+}
+
+<style>
+    .infoststatus {
+        border-radius: 7px;
+        font-size: smaller;
+        text-align: center;
+        font-weight: 700;
+        color: white;
+    }
+
+    table.dataTable thead > tr > th.sorting {
+        text-align: right;
+    }
+
+    .dataTables_wrapper {
+        width: 100%;
+        overflow-x: auto;
+    }
+    /* Custom styles for DataTables buttons */
+    .dt-button {
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 0.25rem;
+        padding: 0.375rem 0.75rem;
+        margin-right: 5px;
+        border: none; /* Remove border */
+    }
+
+        .dt-button:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        /* Remove the focus outline when buttons are clicked */
+        .dt-button:focus {
+            box-shadow: none;
+        }
+
+    .btn-Add {
+        background-color: #7b7268;
+        color: white;
+        text-align: center;
+        padding: 5px 15px;
+        font-weight: 600;
+    }
+
+        .btn-Add:hover {
+            background-color: #e8e3dd;
+            color: #7b7268;
+        }
+
+    .dataTables_filter {
+        padding: 10px;
+    }
+</style>
+
+
+<div class="container-fluid mt-3">
+    <div class="p-3 bg-white shadow-sm">
+        <a href="@Url.Action("AddCase", "ReceiveCase")" class="btn btn-sm btn-Add" style="float:left">اضافـة حالة</a>
+
+        <h3 class="p-3" style="color: #7b7268">قائمة استقبال حالة</h3>
+        <table id="recordsTable" class="display nowrap p-3" style="width:100%; text-align:right; font-size:small">
+            <thead>
+                <tr style="text-align:right">
+                    <th>الرقم</th>
+                    <th>تاريخ استقبال الحالة</th>
+                    <th>نوع الحالة</th>
+                    <th>الاسم</th>
+                    <th>الجنس</th>
+                    <th>الجنسية</th>
+                    <th>رقم الهاتف</th>
+                    <th>الرقم الموحد - الهوية</th>
+                    <th>المحرر</th>
+                    <th>التفاصيل</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ReportID</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.StatusType</td>
+                       
+                        <td>@item.CreatedBy</td>
+                        <td>
+                            <a href="Details">
+                                <img src="~/Content/images/View.png" width="28" style="cursor:pointer" />
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.2/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#recordsTable').DataTable({
+                responsive: true,
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Arabic.json",
+                    "search": "الاستعـلام : "
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        text: 'تصدير إلى Excel',
+                        className: 'dt-button',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'pdfHtml5',
+                        text: 'تصدير إلى PDF',
+                        className: 'dt-button',
+                        exportOptions: {
+                            columns: ':visible'
+                        },
+                        customize: function (doc) {
+                            doc.defaultStyle.font = 'Amiri';
+                            doc.content.forEach(function (content) {
+                                if (content.table) {
+                                    content.layout = 'lightHorizontalLines';
+                                    content.table.widths = Array(content.table.body[0].length + 1).join('*').split('');
+                                    content.table.alignment = 'right';
+                                }
+                            });
+                            doc.styles.tableHeader.alignment = 'right';
+                        }
+                    }
+                ]
+            });
+        });
+
+    </script>
+}

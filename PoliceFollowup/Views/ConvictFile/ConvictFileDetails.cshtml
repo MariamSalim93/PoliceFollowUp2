@@ -1,0 +1,1347 @@
+﻿@model SharedLayer.Models.ConvictFileDTO
+
+@{
+    ViewBag.Title = "تفاصيل ملف محكوم";
+}
+<head>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/JsScript/formFieldValidation.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="~/Content/CSSFiles/HomeStyle.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/collapseToggle.js"></script>
+    <style>
+        * {
+            text-align: right;
+            font-size: small;
+        }
+
+        body {
+            background: #f5f6fa;
+        }
+
+        /* Modern Header Style */
+        .page-header {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            padding: 30px;
+            margin: 20px 5px 30px 5px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(129, 113, 94, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .page-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -100px;
+                width: 200px;
+                height: 200px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+            }
+
+            .page-header::after {
+                content: '';
+                position: absolute;
+                bottom: -50px;
+                left: -50px;
+                width: 150px;
+                height: 150px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 50%;
+            }
+
+            .page-header h3 {
+                color: white !important;
+                margin: 0;
+                font-size: 28px;
+                font-weight: 600;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                position: relative;
+                z-index: 1;
+            }
+
+            .page-header img {
+                filter: brightness(0) invert(1);
+                position: relative;
+                z-index: 1;
+            }
+
+        /* Modern Card Style */
+        .modern-card {
+            background: white;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            margin-bottom: 20px;
+        }
+
+            .modern-card:hover {
+                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.12);
+                transform: translateY(-3px);
+            }
+
+        .card-header-section {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: right;
+            margin: 0;
+        }
+
+        /* Detail Fields Styling */
+        .detail-row {
+            padding: 12px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+
+            .detail-row:hover {
+                background: #f8f9fa;
+            }
+
+            .detail-row:last-child {
+                border-bottom: none;
+            }
+
+        .detail-field {
+            display: flex;
+            align-items: center;
+            padding: 5px 0;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #666;
+            min-width: 120px;
+            margin-left: 10px;
+        }
+
+        .detail-value {
+            color: #333;
+            flex: 1;
+        }
+
+        /* Attachment Button Enhancement */
+        .btn-attachment {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            color: white !important;
+            font-size: 12px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: none;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+            .btn-attachment:hover {
+                background: linear-gradient(135deg, #6d5f50 0%, #9a8d7e 100%);
+                box-shadow: 0 3px 10px rgba(129, 113, 94, 0.3);
+                transform: translateY(-1px);
+                color: white !important;
+                text-decoration: none;
+            }
+
+        /* Action Buttons */
+        .action-buttons {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .btn-action {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            color: white;
+            padding: 10px 25px;
+            border: none;
+            border-radius: 25px;
+            margin: 0 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+            .btn-action:hover {
+                background: linear-gradient(135deg, #6d5f50 0%, #9a8d7e 100%);
+                box-shadow: 0 5px 15px rgba(129, 113, 94, 0.3);
+                transform: translateY(-2px);
+                color: white;
+                text-decoration: none;
+            }
+
+        .btn-secondary {
+            background: #6c757d;
+        }
+
+            .btn-secondary:hover {
+                background: #5a6268;
+                box-shadow: 0 5px 15px rgba(108, 117, 125, 0.3);
+            }
+
+        /* Full width fields */
+        .full-width-field {
+            grid-column: 1 / -1;
+        }
+
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .detail-field {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .detail-label {
+                margin-bottom: 5px;
+            }
+        }
+
+        /* Custom styling for tabs matching your brown theme */
+        .custom-tabs {
+            border-bottom: 2px solid #ab9e8f;
+            margin-bottom: 20px;
+        }
+
+            .custom-tabs .nav-link {
+                color: #81715e;
+                background-color: transparent;
+                border: 1px solid transparent;
+                border-bottom: none;
+                padding: 10px 20px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                margin-left: 5px;
+                border-radius: 8px 8px 0 0;
+            }
+
+                .custom-tabs .nav-link:hover {
+                    background-color: #f5f3f0;
+                    color: #6b5d4f;
+                    border-color: #e0dbd5 #e0dbd5 transparent;
+                }
+
+                .custom-tabs .nav-link.active {
+                    color: #fff;
+                    background-color: #8b7f73;
+                    border-color: #8b7f73 #8b7f73 transparent;
+                }
+
+        .tab-content-wrapper {
+            padding: 20px 0;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @@keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* RTL Support */
+        [dir="rtl"] .custom-tabs .nav-link {
+            margin-left: 0;
+            margin-right: 5px;
+        }
+
+        /* Responsive design for mobile */
+        @@media (max-width: 768px) {
+            .custom-tabs .nav-link {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+        }
+        .Subheadtitle {
+            background: linear-gradient(135deg, #f8f6f4 0%, #f0ebe6 100%);
+            border-left: 4px solid #81715e;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            padding:10px;
+        }
+
+            .Subheadtitle:hover {
+                background: linear-gradient(135deg, #f0ebe6 0%, #e8e0d8 100%);
+            }
+
+        .card-header-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<div class="container-fluid mt-3">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <div class="d-flex align-items-center" style="gap: 15px;">
+                    <img src="~/Content/images/arrest.png" width="40" />
+                    <h3 class="mb-0">تفاصيل ملف محكوم</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- بيانات المحكوم -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="modern-card">
+                <h6 class="card-header-section d-flex align-items-center justify-content-between">
+                    بيانات المحكوم
+
+                    @using (Html.BeginForm("UpdateReport", "ConvictFile",
+                                           new { id = Model.ReportID },
+                                           FormMethod.Get,
+                                           new { @class = "m-0" }))
+                    {
+                        <button type="submit" class="btn btn-warning btn-sm d-inline-flex align-items-center gap-1">
+                            <i class="fa fa-edit ms-1"></i> تعديل
+                        </button>
+                    }
+                </h6>
+                <div class="card-body" style="padding: 0;">
+
+                    <!-- Row 1: Name & Fake Name -->
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Name)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.Name)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.FakeName)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.FakeName)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Gender & Nationality -->
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Gender)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.Gender)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Nationality)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.Nationality)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: BirthDate & Age -->
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.BirthDate)</span>
+                                    <span class="detail-value">
+                                        @if (Model.BirthDate != null)
+                                        {
+                                            @Model.BirthDate.Value.ToString("dd/MM/yyyy")
+                                        }
+                                        else
+                                        {
+                                            <span>-</span>
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Age)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.Age)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Education Level & Disability -->
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.EducationalLevel)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.EducationalLevel)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Disability)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.Disability)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Marital Status & Profession -->
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.MaritalStatus)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.MaritalStatus)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Profession)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.Profession)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 6: Residence & Unified No -->
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Residence)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.Residence)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.UnifiedNo)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.UnifiedNo)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 7: Emirates ID & Attachments -->
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.EmiratesID)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.EmiratesID)</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Phone)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.Phone)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Attachments)</span>
+                                    <span class="detail-value">
+                                        @if (!string.IsNullOrWhiteSpace(Model.Attachments))
+                                        {
+                                            <a href="@Url.Content(Model.Attachments)" target="_blank" class="btn-attachment">
+                                                <i class="fa fa-paperclip"></i> عرض المرفق
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span style="color: #999;">لا يوجد</span>
+                                        }
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Row 8: Notes (Full width) -->
+                    <div class="detail-row">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="detail-field">
+                                    <span class="detail-label">@Html.DisplayNameFor(m => m.Notes)</span>
+                                    <span class="detail-value">@Html.DisplayFor(m => m.Notes)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="Subheadtitle collapse-toggle" data-target=".data" style="cursor: pointer;">
+                        <div class="p-2">
+                            تفاصيل التقرير
+                            <i class="fa fa-plus" style="float:left"></i>
+                        </div>
+                    </div>
+
+                    <div class="collapse data" style="display:none;">
+
+                        <!-- Row 1: Created Date & Created By -->
+                        <div class="detail-row">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="detail-field">
+                                        <span class="detail-label">@Html.DisplayNameFor(m => m.CreatedDate)</span>
+                                        <span class="detail-value">@Html.DisplayFor(m => m.CreatedDate)</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="detail-field">
+                                        <span class="detail-label">@Html.DisplayNameFor(m => m.CreatedBy)</span>
+                                        <span class="detail-value">@Html.DisplayFor(m => m.CreatedBy)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Row 2: Edit Date & Edited By -->
+                        <div class="detail-row">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="detail-field">
+                                        <span class="detail-label">@Html.DisplayNameFor(m => m.EditDate)</span>
+                                        <span class="detail-value">@Html.DisplayFor(m => m.EditDate)</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="detail-field">
+                                        <span class="detail-label">@Html.DisplayNameFor(m => m.EditedBy)</span>
+                                        <span class="detail-value">@Html.DisplayFor(m => m.EditedBy)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="detail-row">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="detail-field">
+                                        <span class="detail-label">@Html.DisplayNameFor(m => m.EditNote)</span>
+                                        <span class="detail-value">@Html.DisplayFor(m => m.EditNote)</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="detail-field">
+                                        <span class="detail-label">@Html.DisplayNameFor(m => m.Status)</span>
+                                        <span class="detail-value">@Html.DisplayFor(m => m.Status)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Row 3: Status & Edit Note -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- تفاصيل التقرير -->
+        <div class="col-md-6">
+            <div class="modern-card">
+                <h6 class="card-header-section">
+                    تفاصيل اجراءات المحكوم
+                </h6>
+                @{
+                    int rowCount = 0;
+                    var receiveCases = new List<dynamic>();
+
+                    foreach (var item in ViewBag.ListReceiveCase)
+                    {
+                        if (item.FileNo == Model.ReportID)
+                        {
+                            rowCount++;
+                            receiveCases.Add(item);
+                        }
+                    }
+                }
+
+                <div class="Subheadtitle collapse-toggle" data-target=".data-1" style="cursor: pointer;">
+                    <div class="p-2">
+                        استقبال حالة
+                        <i class="fa fa-plus" style="float:left"></i>
+                        <span class="badge @(rowCount > 0 ? "bg-danger" : "bg-primary")">@rowCount</span>
+                    </div>
+                </div>
+
+                <div class="collapse-container">
+                    <div class="collapse data-1" style="display:none;">
+                        <div class="p-3">
+                            <table class="table table-bordered table-sm text-center align-middle" style="font-size: smaller;">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">رقم التقرير</th>
+                                        <th class="col-md-3" style="background-color:#faf8f6;">نوع الحالة</th>
+                                        <th class="col-md-3" style="background-color:#faf8f6;">الحكم أو القرار الصادر</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">مصدر الحكم</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">تاريخ الإنشاء</th>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">التفاصيل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (receiveCases.Any())
+                                    {
+                                        foreach (var item in receiveCases)
+                                        {
+                                            <tr>
+                                                <td class="col-md-1">@item.ReportID</td>
+                                                <td class="col-md-3">@item.StatusType</td>
+                                                <td class="col-md-3">@item.Decision</td>
+                                                <td class="col-md-2">@item.JudgmentSource</td>
+                                                <td class="col-md-2">@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                                                <td class="col-md-1">
+                                                    <a href="@Url.Action("ReceiveCaseDetails", "ReceiveCase", new { id = item.ReportID })"
+                                                       target="_blank"
+                                                       title="عرض التفاصيل">
+                                                        <img src="~/Content/images/View.png"
+                                                             alt="عرض"
+                                                             style="width: 20px; height: 20px; cursor: pointer;" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-muted">لا توجد بيانات لعرضها</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6" style="background-color:#faf8f6;">
+                                            <strong>إجمالي الإجراءات:</strong>
+                                            <span style="margin-right:10px;">@rowCount</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                @{
+                    int rowCountCS = 0;
+                    var csItems = new List<dynamic>();
+
+                    foreach (var item in ViewBag.ListCommunityService)
+                    {
+                        if (item.FileNo == Model.ReportID)
+                        {
+                            rowCountCS++;
+                            csItems.Add(item);
+                        }
+                    }
+                }
+
+                <div class="Subheadtitle collapse-toggle" data-target=".data-2" style="cursor: pointer;">
+                    <div class="p-2">
+                        الخدمة المجتمعية
+                        <i class="fa fa-plus" style="float:left"></i>
+                        <span class="badge @(rowCountCS > 0 ? "bg-danger" : "bg-primary")">@rowCountCS</span>
+                    </div>
+                </div>
+
+                <div class="collapse-container">
+                    <div class="collapse data-2" style="display:none;">
+                        <div class="p-3">
+                            <table class="table table-bordered table-sm text-center align-middle" style="font-size: smaller;">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">رقم التقرير</th>
+                                        <th class="col-md-3" style="background-color:#faf8f6;">نوع التهمة</th>
+                                        <th class="col-md-3" style="background-color:#faf8f6;">رقم القضية</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">تاريخ الإنشاء</th>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">التفاصيل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (csItems.Any())
+                                    {
+                                        foreach (var item in csItems)
+                                        {
+                                            <tr>
+                                                <td class="col-md-1">@item.ReportID</td>
+                                                <td class="col-md-3">@item.Blame</td>
+                                                <td class="col-md-3">@item.CaseNo</td>
+                                                <td class="col-md-2">@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                                                <td class="col-md-1">
+                                                    <a href="@Url.Action("CommunityServiceDetails", "CommunityService", new { id = item.ReportID })"
+                                                       target="_blank"
+                                                       title="عرض التفاصيل">
+                                                        <img src="~/Content/images/View.png"
+                                                             alt="عرض"
+                                                             style="width: 20px; height: 20px; cursor: pointer;" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-muted">لا توجد بيانات لعرضها</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="background-color:#faf8f6;">
+                                            <strong>إجمالي الإجراءات:</strong>
+                                            <span style="margin-right:10px;">@rowCountCS</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                @{
+                    int rowCountEM = 0;
+                    var emItems = new List<dynamic>();
+
+                    foreach (var item in ViewBag.ListElectronicMonitoring)
+                    {
+                        if (item.FileNo == Model.ReportID)
+                        {
+                            rowCountEM++;
+                            emItems.Add(item);
+                        }
+                    }
+                }
+
+                <div class="Subheadtitle collapse-toggle" data-target=".data-3" style="cursor: pointer;">
+                    <div class="p-2">
+                        المراقبة الإلكترونية
+                        <i class="fa fa-plus" style="float:left"></i>
+                        <span class="badge @(rowCountEM > 0 ? "bg-danger" : "bg-primary")">@rowCountEM</span>
+                    </div>
+                </div>
+
+                <div class="collapse-container">
+                    <div class="collapse data-3" style="display:none;">
+                        <div class="p-3">
+                            <table class="table table-bordered table-sm text-center align-middle" style="font-size: smaller;">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">رقم التقرير</th>
+                                        <th class="col-md-3" style="background-color:#faf8f6;">رقم القضية</th>
+                                        <th class="col-md-3" style="background-color:#faf8f6;">نوع الحكم</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">تاريخ الإنشاء</th>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">التفاصيل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (emItems.Any())
+                                    {
+                                        foreach (var item in emItems)
+                                        {
+                                            <tr>
+                                                <td class="col-md-1">@item.ReportID</td>
+                                                <td class="col-md-3">@item.CaseNo</td>
+                                                <td class="col-md-3">@item.JudgmentType</td>
+                                                <td class="col-md-2">@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                                                <td class="col-md-1">
+                                                    <a href="@Url.Action("ElectronicMonitoringDetails", "ElectronicMonitoring", new { id = item.ReportID })"
+                                                       target="_blank"
+                                                       title="عرض التفاصيل">
+                                                        <img src="~/Content/images/View.png"
+                                                             alt="عرض"
+                                                             style="width: 20px; height: 20px; cursor: pointer;" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-muted">لا توجد بيانات لعرضها</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="background-color:#faf8f6;">
+                                            <strong>إجمالي الإجراءات:</strong>
+                                            <span style="margin-right:10px;">@rowCountEM</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                @{
+                    int rowCountCP = 0;
+                    var cpItems = new List<dynamic>();
+
+                    foreach (var item in ViewBag.ListCommunityPledge)
+                    {
+                        if (item.FileNo == Model.ReportID)
+                        {
+                            rowCountCP++;
+                            cpItems.Add(item);
+                        }
+                    }
+                }
+
+                <div class="Subheadtitle collapse-toggle" data-target=".data-4" style="cursor: pointer;">
+                    <div class="p-2">
+                        تعهد الخدمة المجتمعية
+                        <i class="fa fa-plus" style="float:left"></i>
+                        <span class="badge @(rowCountCP > 0 ? "bg-danger" : "bg-primary")">@rowCountCP</span>
+                    </div>
+                </div>
+
+                <div class="collapse-container">
+                    <div class="collapse data-4" style="display:none;">
+                        <div class="p-3">
+                            <table class="table table-bordered table-sm text-center align-middle" style="font-size: smaller;">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">رقم التقرير</th>
+                                        <th class="col-md-4" style="background-color:#faf8f6;">نوع التهمة</th>
+                                        <th class="col-md-3" style="background-color:#faf8f6;">تاريخ الإنشاء</th>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">التفاصيل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (cpItems.Any())
+                                    {
+                                        foreach (var item in cpItems)
+                                        {
+                                            <tr>
+                                                <td class="col-md-1">@item.ReportID</td>
+                                                <td class="col-md-4">@item.AccusationType</td>
+                                                <td class="col-md-3">@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                                                <td class="col-md-1">
+                                                    <a href="@Url.Action("CommunityPledgeDetails", "CommunityPledge", new { id = item.ReportID })"
+                                                       target="_blank"
+                                                       title="عرض التفاصيل">
+                                                        <img src="~/Content/images/View.png"
+                                                             alt="عرض"
+                                                             style="width: 20px; height: 20px; cursor: pointer;" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="4" class="text-muted">لا توجد بيانات لعرضها</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" style="background-color:#faf8f6;">
+                                            <strong>إجمالي الإجراءات:</strong>
+                                            <span style="margin-right:10px;">@rowCountCP</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                @* ===================== تعهد القيد الإلكتروني (data-5) ===================== *@
+                @{
+                    int rowCountHP = 0;
+                    var hpItems = new List<dynamic>();
+
+                    foreach (var item in ViewBag.ListPledgeHandcuff)
+                    {
+                        if (item.FileNo == Model.ReportID)
+                        {
+                            rowCountHP++;
+                            hpItems.Add(item);
+                        }
+                    }
+                }
+
+                <div class="Subheadtitle collapse-toggle" data-target=".data-5" style="cursor: pointer;">
+                    <div class="p-2">
+                        تعهد القيد الإلكتروني
+                        <i class="fa fa-plus" style="float:left"></i>
+                        <span class="badge @(rowCountHP > 0 ? "bg-danger" : "bg-primary")">@rowCountHP</span>
+                    </div>
+                </div>
+
+                <div class="collapse-container">
+                    <div class="collapse data-5" style="display:none;">
+                        <div class="p-3">
+                            <table class="table table-bordered table-sm text-center align-middle" style="font-size: smaller;">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">رقم التقرير</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">رقم القضية</th>
+                                        <th class="col-md-4" style="background-color:#faf8f6;">الحكم الصادر</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">تاريخ الإنشاء</th>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">التفاصيل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (hpItems.Any())
+                                    {
+                                        foreach (var item in hpItems)
+                                        {
+                                            <tr>
+                                                <td class="col-md-1">@item.ReportID</td>
+                                                <td class="col-md-2">@item.CaseNo</td>
+                                                <td class="col-md-4">@item.JudgmentIssued</td>
+                                                <td class="col-md-2">@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                                                <td class="col-md-1">
+                                                    <a href="@Url.Action("PledgeHandcuffDetails", "PledgeHandcuff", new { id = item.ReportID })"
+                                                       target="_blank"
+                                                       title="عرض التفاصيل">
+                                                        <img src="~/Content/images/View.png"
+                                                             alt="عرض"
+                                                             style="width: 20px; height: 20px; cursor: pointer;" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-muted">لا توجد بيانات لعرضها</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="background-color:#faf8f6;">
+                                            <strong>إجمالي الإجراءات:</strong>
+                                            <span style="margin-right:10px;">@rowCountHP</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                @* ========================== الزيارات (data-6) ========================== *@
+                @{
+                    int rowCountV = 0;
+                    var vItems = new List<dynamic>();
+
+                    foreach (var item in ViewBag.ListVisit)
+                    {
+                        if (item.FileNo == Model.ReportID)
+                        {
+                            rowCountV++;
+                            vItems.Add(item);
+                        }
+                    }
+                }
+
+                <div class="Subheadtitle collapse-toggle" data-target=".data-6" style="cursor: pointer;">
+                    <div class="p-2">
+                        الزيارات
+                        <i class="fa fa-plus" style="float:left"></i>
+                        <span class="badge @(rowCountV > 0 ? "bg-danger" : "bg-primary")">@rowCountV</span>
+                    </div>
+                </div>
+
+                <div class="collapse-container">
+                    <div class="collapse data-6" style="display:none;">
+                        <div class="p-3">
+                            <table class="table table-bordered table-sm text-center align-middle" style="font-size: smaller;">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">رقم التقرير</th>
+                                        <th class="col-md-4" style="background-color:#faf8f6;">مكان الزيارة</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">تاريخ الزيارة</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">تاريخ الإنشاء</th>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">التفاصيل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (vItems.Any())
+                                    {
+                                        foreach (var item in vItems)
+                                        {
+                                            <tr>
+                                                <td class="col-md-1">@item.ReportID</td>
+                                                <td class="col-md-4">@item.VisitPlace</td>
+                                                <td class="col-md-2">@item.VisitDate.ToString("yyyy-MM-dd")</td>
+                                                <td class="col-md-2">@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                                                <td class="col-md-1">
+                                                    <a href="@Url.Action("VisitDetails", "Visit", new { id = item.ReportID })"
+                                                       target="_blank"
+                                                       title="عرض التفاصيل">
+                                                        <img src="~/Content/images/View.png"
+                                                             alt="عرض"
+                                                             style="width: 20px; height: 20px; cursor: pointer;" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-muted">لا توجد بيانات لعرضها</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="background-color:#faf8f6;">
+                                            <strong>إجمالي الإجراءات:</strong>
+                                            <span style="margin-right:10px;">@rowCountV</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                @* ======================= التقارير النهائية (data-7) ======================= *@
+                @{
+                    int rowCountFR = 0;
+                    var frItems = new List<dynamic>();
+
+                    foreach (var item in ViewBag.ListFinalReports)
+                    {
+                        if (item.FileNo == Model.ReportID)
+                        {
+                            rowCountFR++;
+                            frItems.Add(item);
+                        }
+                    }
+                }
+
+                <div class="Subheadtitle collapse-toggle" data-target=".data-7" style="cursor: pointer;">
+                    <div class="p-2">
+                        التقارير النهائية
+                        <i class="fa fa-plus" style="float:left"></i>
+                        <span class="badge @(rowCountFR > 0 ? "bg-danger" : "bg-primary")">@rowCountFR</span>
+                    </div>
+                </div>
+
+                <div class="collapse-container">
+                    <div class="collapse data-7" style="display:none;">
+                        <div class="p-3">
+                            <table class="table table-bordered table-sm text-center align-middle" style="font-size: smaller;">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">رقم التقرير</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">رقم القضية</th>
+                                        <th class="col-md-4" style="background-color:#faf8f6;">جهة التنفيذ</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">تاريخ الإنشاء</th>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">التفاصيل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (frItems.Any())
+                                    {
+                                        foreach (var item in frItems)
+                                        {
+                                            <tr>
+                                                <td class="col-md-1">@item.ReportID</td>
+                                                <td class="col-md-2">@item.CaseNo</td>
+                                                <td class="col-md-4">@item.ImplementingAuthority</td>
+                                                <td class="col-md-2">@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                                                <td class="col-md-1">
+                                                    <a href="@Url.Action("FinalReportsDetails", "FinalReports", new { id = item.ReportID })"
+                                                       target="_blank"
+                                                       title="عرض التفاصيل">
+                                                        <img src="~/Content/images/View.png"
+                                                             alt="عرض"
+                                                             style="width: 20px; height: 20px; cursor: pointer;" />
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-muted">لا توجد بيانات لعرضها</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="background-color:#faf8f6;">
+                                            <strong>إجمالي الإجراءات:</strong>
+                                            <span style="margin-right:10px;">@rowCountFR</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                @{
+                    int rowCountatt = 0;
+                    var attItems = new List<dynamic>();
+
+                    foreach (var item in ViewBag.ListAttachment)
+                    {
+                        if (item.FileNo == Model.ReportID)
+                        {
+                            rowCountatt++;
+                            attItems.Add(item);
+                        }
+                    }
+                }
+
+                <div class="Subheadtitle collapse-toggle" data-target=".data-8" style="cursor: pointer;">
+                    <div class="p-2">
+                        المرفقات
+                        <i class="fa fa-plus" style="float:left"></i>
+                        <span class="badge @(rowCountatt > 0 ? "bg-danger" : "bg-primary")">@rowCountatt</span>
+                    </div>
+                </div>
+
+                <div class="collapse-container">
+                    <div class="collapse data-8" style="display:none;">
+                        <div class="p-3">
+                            <table class="table table-bordered table-sm text-center align-middle" style="font-size: smaller;">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">رقم المرفق</th>
+                                        <th class="col-md-3" style="background-color:#faf8f6;">اسم المرفق</th>
+                                        <th class="col-md-3" style="background-color:#faf8f6;">تم الانشاء بواسطة</th>
+                                        <th class="col-md-2" style="background-color:#faf8f6;">تاريخ الإنشاء</th>
+                                        <th class="col-md-1" style="background-color:#faf8f6;">التفاصيل</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (attItems.Any())
+                                    {
+                                        foreach (var item in attItems)
+                                        {
+                                            <tr>
+                                                <td>@item.AttachmentID</td>
+                                                <td>@item.AttachmentName</td>
+                                                <td>@item.CreatedBy</td>
+                                                <td>@item.CreatedDate.ToString("yyyy-MM-dd")</td>
+                                                <td>
+                                                    <a href="@Url.Content(Convert.ToString(item.Attachments))"
+                                                       target="_blank" class="btn-attachment">
+                                                        <i class="fa fa-paperclip"></i>
+                                                    </a>
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-muted">لا توجد بيانات لعرضها</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5" style="background-color:#faf8f6;">
+                                            <strong>إجمالي الإجراءات:</strong>
+                                            <span style="margin-right:10px;">@rowCountatt</span>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row mt-3">
+
+      
+        <div class="col-md-12">
+            <div class="modern-card">
+                <h6 class="card-header-section">
+                    اجراءات المحكوم
+                </h6>
+
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success">@TempData["Success"]</div>
+                }
+                @if (TempData["Error"] != null)
+                {
+                    <div class="alert alert-danger">@TempData["Error"]</div>
+                }
+
+                <div class="card-body" style="padding: 15px;">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs custom-tabs" id="procedureTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="case-tab" data-bs-toggle="tab" data-bs-target="#case" type="button" role="tab" aria-controls="case" aria-selected="false">
+                                استقبال حالة
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="community-tab" data-bs-toggle="tab" data-bs-target="#community" type="button" role="tab" aria-controls="community" aria-selected="true">
+                                الخدمة المجتمعية
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="followup-tab" data-bs-toggle="tab" data-bs-target="#followup" type="button" role="tab" aria-controls="followup" aria-selected="false">
+                                المراقبة الالكترونية
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="investigation-tab" data-bs-toggle="tab" data-bs-target="#investigation" type="button" role="tab" aria-controls="investigation" aria-selected="false">
+                                تعهد الخدمة المجتمعية
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">
+                                تعهد القيد الكتروني
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="visit-tab" data-bs-toggle="tab" data-bs-target="#visit" type="button" role="tab" aria-controls="visit" aria-selected="false">
+                                الزيارات
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="reports-tab" data-bs-toggle="tab" data-bs-target="#reports" type="button" role="tab" aria-controls="reports" aria-selected="false">
+                                التقارير النهائية
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="attachment-tab" data-bs-toggle="tab" data-bs-target="#attachment" type="button" role="tab" aria-controls="attachment" aria-selected="false">
+                                المرفقات
+                            </button>
+                        </li>
+
+
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content" id="procedureTabsContent">
+                        <div class="tab-pane fade show active" id="case" role="tabpanel" aria-labelledby="case-tab">
+                            <div class="tab-content-wrapper">
+                                @Html.Partial("_AddReceiveCase", new SharedLayer.Models.ReceiveCaseDTO())
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="community" role="tabpanel" aria-labelledby="community-tab">
+                            <div class="tab-content-wrapper">
+                                @Html.Partial("_AddCommunityService", new SharedLayer.Models.CommunityServiceDTO())
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="followup" role="tabpanel" aria-labelledby="followup-tab">
+                            <div class="tab-content-wrapper">
+                                @Html.Partial("_AddElectronicMonitoring", new SharedLayer.Models.ElectronicMonitoringDTO())
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="investigation" role="tabpanel" aria-labelledby="investigation-tab">
+                            <div class="tab-content-wrapper">
+                                @Html.Partial("_AddCommunityPledge", new SharedLayer.Models.CommunityServicePledgeDTO())
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+                            <div class="tab-content-wrapper">
+                                @Html.Partial("_AddPledgeHandcuff", new SharedLayer.Models.PledgeHandcuffDTO())
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="visit" role="tabpanel" aria-labelledby="visit-tab">
+                            <div class="tab-content-wrapper">
+                                @Html.Partial("_AddVisit", new SharedLayer.Models.VisitDTO())
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="reports" role="tabpanel" aria-labelledby="reports-tab">
+                            <div class="tab-content-wrapper">
+                                @Html.Partial("_AddFinalReports", new SharedLayer.Models.FinalReportsDTO())
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="attachment" role="tabpanel" aria-labelledby="attachment-tab">
+                            <div class="tab-content-wrapper">
+                                @Html.Partial("_AddAttachment", new SharedLayer.Models.AttachmentDTO())
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Action Buttons -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="action-buttons">
+                <a href="@Url.Action("UpdateReport", "ConvictFile", new { id = Model.ReportID })" class="btn-action">
+                    <i class="fa fa-edit"></i> تعديل
+                </a>
+                <button type="button" onclick="window.print()" class="btn-action btn-secondary">
+                    <i class="fa fa-print"></i> طباعة
+                </button>
+                <a href="@Url.Action("ConvictFileList", "ConvictFile")" class="btn-action btn-secondary">
+                    <i class="fa fa-arrow-right"></i> العودة للقائمة
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+    $(document).ready(function () {
+        // Save active tab to localStorage
+        $('button[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
+            localStorage.setItem('activeTab', $(e.target).attr('id'));
+        });
+
+        // Restore active tab on page load
+        var activeTab = localStorage.getItem('activeTab');
+        if (activeTab) {
+            $('#' + activeTab).tab('show');
+        }
+
+        // Optional: Add loading effect when switching tabs
+        $('button[data-bs-toggle="tab"]').on('click', function (e) {
+            var targetPane = $($(this).data('bs-target'));
+            targetPane.css('opacity', '0.5');
+            setTimeout(function () {
+                targetPane.css('opacity', '1');
+            }, 100);
+        });
+    });
+</script>

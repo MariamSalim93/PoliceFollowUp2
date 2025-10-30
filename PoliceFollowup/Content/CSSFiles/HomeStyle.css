@@ -1,0 +1,478 @@
+﻿* {
+    font-family: 'Changa';
+}
+
+.card {
+    width: 100%;
+    direction: rtl;
+    word-wrap: break-word;
+    padding: 5px;
+    border: solid 1px white;
+    border-radius: 12px;
+    box-shadow: -1px -2px 6px -2px rgba(147, 197, 253, 0.31);
+    background-color: #ffffff8f;
+    margin-bottom: 20px;
+}
+
+.card-light:hover {
+    border: solid 1px rgb(147,197,253);
+}
+
+.card-title {
+    padding-top: 10px;
+}
+
+.card-text {
+    font-size: smaller;
+}
+
+.InternalSystems {
+    box-shadow: -1px 1px 10px 0px rgba(153,140,128,0.22);
+    -webkit-box-shadow: -1px 1px 10px 0px rgba(153,140,128,0.22);
+    -moz-box-shadow: -1px 1px 10px 0px rgba(153,140,128,0.22);
+    background-color: #81715e;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+}
+
+    .InternalSystems button {
+        float: left;
+    }
+
+    .InternalSystems img {
+        margin: 0 10px;
+    }
+
+.SubSystem {
+    background-color: #e0dad1;
+    color: white;
+    font-size: 15px;
+    color: #403b36;
+    font-weight: 700;
+    text-align: center;
+}
+
+.CustomCard {
+    width: 100%;
+    direction: rtl;
+    word-wrap: break-word;
+    padding: 15px;
+    border: solid 1px white;
+    box-shadow: -1px -2px 6px -2px rgba(147, 197, 253, 0.31);
+    background-color: #ffffff8f;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.CustomText {
+    font-size: medium;
+}
+
+.card-1:hover {
+    border: 1px solid #d45656;
+    color: #d45656;
+    background-color: #d456560e;
+}
+
+.card-1-title {
+    background-color: #d456560e;
+    color: #d45656;
+}
+
+.card-2:hover {
+    border: 1px solid #6DCFBE;
+    color: #24b29a;
+    background-color: #6dcfbe16;
+}
+
+.card-2-title {
+    background-color: #5ba4540e;
+    color: #5ba454;
+}
+
+.card-3:hover {
+    border: 1px solid #64C7ED;
+    color: #3098c1;
+    background-color: #64c7ed10;
+}
+
+.card-3-title {
+    background-color: #1e81ce0e;
+    color: #1e81ce;
+}
+
+.card-4:hover {
+    border: 1px solid #FFB050;
+    color: #e1820e;
+    background-color: #ffb05010;
+}
+
+.card-4-title {
+    background-color: #8c8c8c0e;
+    color: #8c8c8c;
+}
+
+.card-5:hover {
+    border: 1px solid #FFE66D;
+    color: #cbba00;
+    background-color: #FFE66D0e;
+}
+
+.card-5-title {
+    background-color: #cc60200e;
+    color: #cc6020;
+}
+
+.card-6:hover {
+    border: 1px solid #bfa912;
+    color: #bfa912;
+    background-color: #bfa9120e;
+}
+
+.card-6-title {
+    background-color: #bfa9120e;
+    color: #bfa912;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    background-color: #f6faff;
+    padding: 7px;
+    border-radius: 7px;
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 0px 0px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: white
+        }
+
+.show {
+    display: block;
+}
+
+@media (max-width: 767px) {
+    .card-container {
+        display: none;
+    }
+
+    .dropdown {
+        display: block;
+    }
+}
+
+@media (min-width: 768px) {
+    .dropdown {
+        display: none;
+    }
+}
+
+.DataTitle {
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    color: #d45656;
+    background-color: #d456560e;
+    margin: 10px 0px;
+    font-weight: 500;
+}
+
+.DataLabel {
+    font-size: 14px;
+    color: #555555;
+    font-weight: 700;
+}
+
+.DataLabelEN {
+    font-size: 14px;
+    color: #555555;
+    font-weight: 700;
+    float: left;
+}
+
+.DataText {
+    font-size: 14px;
+    color: #555555;
+    text-align: center;
+}
+
+.Labels {
+    padding: 7px;
+    font-size: 14px;
+    color: #555555;
+    font-weight: 700;
+}
+
+.LabelsEN {
+    padding: 7px;
+    font-size: 14px;
+    color: #555555;
+    float: left;
+}
+
+
+
+.btn-Add {
+    background-color: #7b7268;
+    color: white;
+    text-align: center;
+    padding: 5px 15px;
+    font-weight: 600;
+}
+
+.btn-Add-2 {
+    background-color: #e8e3dd;
+    color: #7b7268;
+}
+
+.btn-Add:hover {
+    background-color: #e8e3dd;
+    color: #7b7268;
+}
+
+.btn-Add-2:hover {
+    background-color: #e8e3dd;
+    color: #7b7268;
+}
+
+
+* {
+    text-align: right;
+}
+
+.form-group {
+    padding: 7px;
+}
+
+.Subtitle {
+    background-color: #81715e0e;
+    color: #81715e;
+    padding: 15px;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.control-label {
+    font-weight: 600;
+}
+
+.form-control {
+    font-size: small;
+}
+
+.nav-link {
+    color: #81715e;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    background-color: #81715e0b;
+    color: #81715e;
+    font-weight: 600;
+    border-top: 3px solid #81715e;
+    border-radius: 0px;
+}
+
+.letTitle {
+    text-align: center;
+    font-size: larger;
+    font-weight: 700;
+}
+
+.letText {
+    text-align: justify;
+    line-height: 30px;
+    padding: 15px;
+}
+
+.LetDept {
+    border: 1px solid #c1bbb6;
+    padding: 3px 10px;
+    border-radius: 7px;
+    font-size: smaller;
+}
+
+.Action {
+    text-align: right;
+}
+
+.Auditor {
+    text-align: left;
+    font-weight: 700;
+}
+
+.texts {
+    padding: 5px;
+}
+
+
+.card-follow {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border-radius: 0;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 5px;
+    border: solid 1px #efe8e0;
+}
+
+.card-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.card-icon-1 {
+    background-color: #ebf2fa
+}
+
+.card-icon-2 {
+    background-color: #fef6ee
+}
+
+.card-icon-3 {
+    background-color: #faecec
+}
+
+.card-icon-4 {
+    background-color: #eff8ec
+}
+
+.card-content {
+    padding: 10px;
+    flex: 1;
+}
+
+    .card-content h3 {
+        margin: 0 0 10px;
+        font-size: 18px;
+    }
+
+    .card-content p {
+        margin: 0;
+        font-size: 12px;
+        color: #666;
+    }
+
+.card-titles {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.card-title-1 {
+    color: #387dc8;
+}
+
+.card-title-2 {
+    color: #eda348;
+}
+
+.card-title-3 {
+    color: #cc3c3c;
+}
+
+.card-title-4 {
+    color: #5cbc44;
+}
+
+.card-text {
+    text-align: right
+}
+
+.card-notes {
+    color: #8b8b8b;
+}
+
+
+.infoststatus {
+    border-radius: 7px;
+    font-size: smaller;
+    text-align: center;
+    font-weight: 700;
+    color: white;
+}
+
+table.dataTable thead > tr > th.sorting {
+    text-align: right;
+}
+
+.dataTables_wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.dt-button {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    margin-right: 5px;
+    border: none;
+}
+
+    .dt-button:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+
+
+    .dt-button:focus {
+        box-shadow: none;
+    }
+
+
+.dataTables_filter {
+    padding: 10px;
+}
+
+.buttons-copy {
+    float: left;
+    background-color: #d1dceb;
+    color: #163771;
+}
+
+.buttons-print {
+    float: left;
+    background-color: #f8e7e7;
+    color: #871d1d;
+}
+
+.buttons-excel {
+    float: left;
+    background-color: #e7f5e5;
+    color: #1e6210;
+}
+
+.buttons-copy:hover {
+    background-color: #163771;
+    color: white;
+}
+
+.buttons-print:hover {
+    background-color: #871d1d;
+    color: white;
+}
+
+.buttons-excel:hover {
+    background-color: #1e6210;
+    color: white;
+}
+
+
+.Subheadtitle {
+    color: #81715e;
+    font-weight: 700;
+}

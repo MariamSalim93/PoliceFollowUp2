@@ -1,0 +1,32 @@
+﻿.CategoryTitle {
+    padding: 10px 5px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    background: #81715e;
+}
+
+.headTitle {
+    text-align: center;
+    color: #7b7268;
+}
+
+.ServTitle {
+    text-align: center;
+    color: #998c80;
+    font-size: 1.00em;
+    padding: 10px;
+}
+
+.ServCount {
+    font-size: 1.30em;
+    padding-left: 20px;
+    float: left;
+}
+
+.card:hover {
+    border: solid 1px #81715e;
+    color: #81715e;
+}
+
+

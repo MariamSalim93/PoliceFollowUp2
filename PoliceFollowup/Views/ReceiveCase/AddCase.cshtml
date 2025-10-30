@@ -1,0 +1,316 @@
+﻿
+@{
+    ViewBag.Title = "استقبال حالة";
+}
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="~/Scripts/js/fabric.min.js"></script>
+    <style>
+
+        * {
+            text-align: right;
+            direction: rtl
+        }
+
+        .Subtitle {
+            background-color: #81715e0e;
+            color: #81715e;
+            padding: 15px;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .control-label {
+            font-weight: 600;
+        }
+
+        .form-control {
+            font-size: small;
+        }
+
+        select {
+            -webkit-appearance: menulist;
+            -moz-appearance: menulist;
+            appearance: menulist;
+        }
+
+            select.custom-select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background-image: url('arrow-down-icon.png');
+                background-repeat: no-repeat;
+                background-position: right center;
+                padding-right: 300px;
+            }
+
+        .nav-link {
+            color: #81715e;
+        }
+
+        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+            background-color: #81715e0b;
+            color: #81715e;
+            font-weight: 600;
+            border-top: 3px solid #81715e;
+            border-radius: 0px;
+        }
+    </style>
+</head>
+<div class="container-fluid mt-3">
+    <div class="p-3 bg-white shadow-sm" style="font-size:small">
+        <h3 class="p-3" style="color: #7b7268">استقبال حالة</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">نوع الحالة</label>
+                    <select class="form-control" id="formType">
+                        <option value="">يرجى الاختيار</option>
+                        <option value="community">خدمة مجتمعية</option>
+                        <option value="electronic">مراقبة إلكترونية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="Subtitle" style="margin-bottom: 20px;">البيانات الشخصية</div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">الاسم</label>
+                    <input type="text" value=" " class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">الجنس</label>
+                    <select class="form-control">
+                        <option>يرجى الاختيار</option>
+                        <option>ذكر</option>
+                        <option>انثى</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">الجنسية</label>
+                    <select class="form-control">
+                        <option>يرجى الاختيار</option>
+                        <option>الامارات</option>
+                        <option>الاردن</option>
+                        <option>العراق</option>
+                        <option>قطر</option>
+                        <option>البحرين</option>
+                    </select>
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">تاريخ الميلاد</label>
+                    <input type="date" value=" " class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">الحالة الوظيفية</label>
+                    <select class="form-control">
+                        <option> يرجى الاختيار</option>
+                        <option>موظف</option>
+                        <option>عاطل عن العمل</option>
+                        <option>طالب</option>
+                        <option>متقاعد</option>
+                        <option>ربة منزل</option>
+                        <option>عمل حر</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">الحالة الاجتماعية</label>
+                    <select class="form-control">
+                        <option> يرجى الاختيار</option>
+                        <option>أعزب</option>
+                        <option>متزوج</option>
+                        <option>مطلق</option>
+                        <option>أرمل</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">الرقم الموحد - الهوية</label>
+                    <input type="text" value=" " class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">العنوان أو محل الاقامة</label>
+                    <input type="text" value=" " class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">رقم الهاتف</label>
+                    <input type="text" value=" " class="form-control" />
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-4 community-only">
+                <div class="form-group">
+                    <label class="control-label">رقم هاتف آخر</label>
+                    <input type="text" value=" " class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4 community-only">
+                <div class="form-group">
+                    <label class="control-label">صلة القرابة</label>
+                    <input type="text" value=" " class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="Subtitle" style="margin-bottom: 20px;">بيانات الحكم</div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">الحكم أو القرار الصادر</label>
+                    <input type="text" value=" " class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">جهة التنفيذ</label>
+                    <input type="text" value=" " class="form-control" />
+                </div>
+            </div>
+            <div class="col-md-4 community-only">
+                <div class="form-group">
+                    <label class="control-label">تاريخ بدء التنفيذ</label>
+                    <input type="date" value=" " class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-4 community-only">
+                <div class="form-group">
+                    <label class="control-label">تاريخ الانتهاء</label>
+                    <input type="date" value=" " class="form-control" />
+                </div>
+            </div>
+
+        </div>
+        <div class="Subtitle" style="margin-bottom: 20px; text-align: right;">توضيح المعلومات والبيانات</div>
+
+        <div style="max-width: 700px; margin-right: 0; margin-left: auto;">
+            <table class="table table-bordered table-sm text-center" style="font-size: 18px;">
+                <thead class="Subtitle">
+                    <tr>
+                        <th style="width: 5%; font-size: 18px;">م</th>
+                        <th style="width: 60%; font-size: 18px;">المعلومات التي تم توضيحها</th>
+                        <th style="width: 6%; font-size: 18px;">نعم</th>
+                        <th style="width: 6%; font-size: 18px;">لا</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>منطوق الحكم أو القرار الصادر من الجهة القضائية</td>
+                        <td><input type="radio" name="q1" value="yes" /></td>
+                        <td><input type="radio" name="q1" value="no" /></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>الجهة المعنية بالتنفيذ</td>
+                        <td><input type="radio" name="q2" value="yes" /></td>
+                        <td><input type="radio" name="q2" value="no" /></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>المدة القانونية بالتنفيذ</td>
+                        <td><input type="radio" name="q3" value="yes" /></td>
+                        <td><input type="radio" name="q3" value="no" /></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>الإجراءات الواجب اتباعها</td>
+                        <td><input type="radio" name="q4" value="yes" /></td>
+                        <td><input type="radio" name="q4" value="no" /></td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>العقوبات المترتبة في حال مخالفة الأوامر والتعليمات</td>
+                        <td><input type="radio" name="q5" value="yes" /></td>
+                        <td><input type="radio" name="q5" value="no" /></td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>طريقة التواصل مع جهات التنفيذ و الإشراف</td>
+                        <td><input type="radio" name="q6" value="yes" /></td>
+                        <td><input type="radio" name="q6" value="no" /></td>
+                    </tr>
+                    <tr id="question7">
+                        <td>7</td>
+                        <td>طريقة التواصل مع جهات التنفيذ و الإشراف</td>
+                        <td><input type="radio" name="q7" value="yes" /></td>
+                        <td><input type="radio" name="q7" value="no" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <a href="@Url.Action("RecordsAudit", "FamilyCourtCase")" class="btn btn btn-success" style="float:left">حـفظ  </a>
+
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.community-only').hide();
+        $('#question7').show(); // Ensure visible initially
+
+        $('#formType').on('change', function () {
+            var selected = $(this).val();
+
+            if (selected === 'electronic') {
+                $('.community-only').show();
+                $('#question7').hide(); // Hide question 7
+            } else {
+                $('.community-only').hide();
+                $('#question7').show(); // Show question 7
+            }
+        });
+    });
+</script>
+
+
+

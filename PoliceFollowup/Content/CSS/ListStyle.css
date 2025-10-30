@@ -1,0 +1,47 @@
+﻿.Title {
+    padding: 20px;
+    color: white;
+    font-weight: 400;
+    font-size:1.30em;
+}
+
+.ListContainer {
+    margin: 0px;
+    background: rgb(245,244,243);
+    background: linear-gradient(90deg, rgba(245,244,243,1) 27%, rgba(129,113,94,1) 100%);
+}
+
+.TblContainer {
+    padding: 20px;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    padding: 5px 10px;
+    margin: 10px;
+    width: 100%;
+    border: 1px solid #808080;
+    border-radius: 5px;
+    font-size: smaller;
+}
+
+
+
+.MainTitle {
+    box-shadow: -1px 1px 10px 0px rgba(153,140,128,0.22);
+    -webkit-box-shadow: -1px 1px 10px 0px rgba(153,140,128,0.22);
+    -moz-box-shadow: -1px 1px 10px 0px rgba(153,140,128,0.22);
+    background-color: #81715e;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 17px;
+}
+
+    .MainTitle button {
+        float: left;
+    }
+
+    .MainTitle img {
+        margin: 0 10px;
+    }
+

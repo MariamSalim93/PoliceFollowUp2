@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewBag.Title = "تفاصيل استقبال حالة";
+}
+
+<head>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/Scripts/js/fabric.min.js"></script>
+    <style>
+        * {
+            text-align: right;
+            direction: rtl
+        }
+
+        .Subtitle {
+            background-color: #81715e0e;
+            color: #81715e;
+            padding: 15px;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .control-label {
+            font-weight: 600;
+        }
+
+        .form-control {
+            font-size: small;
+        }
+
+        select {
+            -webkit-appearance: menulist;
+            -moz-appearance: menulist;
+            appearance: menulist;
+        }
+
+            select.custom-select {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                background-image: url('arrow-down-icon.png');
+                background-repeat: no-repeat;
+                background-position: right center;
+                padding-right: 300px;
+            }
+
+        .nav-link {
+            color: #81715e;
+        }
+
+        .nav-tabs .nav-item.show .nav-link,
+        .nav-tabs .nav-link.active {
+            background-color: #81715e0b;
+            color: #81715e;
+            font-weight: 600;
+            border-top: 3px solid #81715e;
+            border-radius: 0px;
+        }
+    </style>
+</head>
+<div class="container-fluid mt-3">
+    <div class="p-3 bg-white shadow-sm" style="font-size:small">
+        <h3 class="p-3" style="color: #7b7268">تفاصيل استقبال حالة</h3>
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="p-2">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="control-label">نوع الحالة</label>
+                        </div>
+                        <div class="col-sm-8">
+                            المراقبة الالكترونية
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="Subtitle">البيانات شخصية</div>
+                    <div class="p-2">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">الاسم</label>
+                            </div>
+                            <div class="col-sm-8">
+                                راشد أحمد محمد
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">الجنس</label>
+                            </div>
+                            <div class="col-sm-8">
+                                ذكر
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">الجنسية</label>
+                            </div>
+                            <div class="col-sm-8">
+                                العراق
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">تاريخ الميلاد</label>
+                            </div>
+                            <div class="col-sm-8">
+                                30-07-1968
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">الحالة الوظيفية</label>
+                            </div>
+                            <div class="col-sm-8">
+                                موظف
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">الحالة الاجتماعية</label>
+                            </div>
+                            <div class="col-sm-8">
+                                متزوج
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">الرقم الموحد - الهوية</label>
+                            </div>
+                            <div class="col-sm-8">
+                                784196816737337
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">الهاتف</label>
+                            </div>
+                            <div class="col-sm-8">
+                                05680297399
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">رقم هاتف آخر</label>
+                            </div>
+                            <div class="col-sm-8">
+                                0568088899
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">العنوان أو محل الاقامة</label>
+                            </div>
+                            <div class="col-sm-8">
+                                دبي ، شارع 468 منزل 15
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">صلة القرابة</label>
+                            </div>
+                            <div class="col-sm-8">
+                                صديق
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="Subtitle">بيانات الحكم  </div>
+                    <div class="p-2">
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">الحكم أو القرار الصادر</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <span>خدمة المجتمع</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">جهة التنفيذ</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <span>المحكمة العليا</span>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">حالة التدقيق</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <span>قيد التدقيق </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">تاريخ بدء التنفيذ</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <span>20-05-2025</span>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label class="control-label">تاريخ الانتهاء</label>
+                            </div>
+                            <div class="col-sm-8">
+                                <span>20-06-2025</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="Subtitle">توضيح المعلومات والبيانات</div>
+
+                    <div style="max-width: 700px; margin-right: 0; margin-left: auto; margin-top: 20px;">
+                        <table class="table table-bordered table-sm text-center" style="font-size: 14px;">
+
+                            <thead class="Subtitle">
+                                <tr>
+                                    <th style="width: 5%;">م</th>
+                                    <th style="width: 60%;">المعلومات التي تم توضيحها</th>
+                                    <th style="width: 15%;">نعم</th>
+                                    <th style="width: 15%;">لا</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>منطوق الحكم أو القرار الصادر من الجهة القضائية</td>
+                                    <td><input type="radio" name="q1" value="no" disabled /></td>
+                                    <td><input type="radio" name="q1" value="yes" checked /></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>الجهة المعنية بالتنفيذ</td>
+                                    <td><input type="radio" name="q2" value="yes" checked /></td>
+                                    <td><input type="radio" name="q2" value="no" disabled /></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>المدة القانونية بالتنفيذ</td>
+                                    <td><input type="radio" name="q3" value="yes" checked /></td>
+                                    <td><input type="radio" name="q3" value="no" disabled /></td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>الإجراءات الواجب اتباعها</td>
+                                    <td><input type="radio" name="q4" value="yes" disabled /></td>
+                                    <td><input type="radio" name="q4" value="no" checked /></td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>العقوبات المترتبة في حال مخالفة الأوامر والتعليمات</td>
+                                    <td><input type="radio" name="q5" value="yes" checked /></td>
+                                    <td><input type="radio" name="q5" value="no" disabled /></td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>طريقة التواصل مع جهات التنفيذ و الإشراف</td>
+                                    <td><input type="radio" name="q6" value="yes" checked /></td>
+                                    <td><input type="radio" name="q6" value="no" disabled /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

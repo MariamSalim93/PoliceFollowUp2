@@ -1,0 +1,329 @@
+﻿@model SharedLayer.Models.ConvictFileDTO
+
+@{
+    ViewBag.Title = "تعديل ملف محكوم";
+}
+<head>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/JsScript/formFieldValidation.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-grid.min.css" rel="stylesheet" />
+    <link href="~/Content/CSSFiles/HomeStyle.css" rel="stylesheet" />
+
+    <style>
+        * {
+            text-align: right;
+        }
+
+        .Subtitle {
+            background-color: #81715e0e;
+            color: #7b7268;
+            padding: 12px 15px;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+        .control-label {
+            font-weight: 600;
+            color: #666;
+            font-size: 13px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            font-size: 13px;
+            padding: 6px 10px;
+            height: 34px;
+        }
+
+        textarea.form-control {
+            height: auto;
+            min-height: 80px;
+        }
+
+        /* Remove extra spacing */
+        .row {
+            margin-bottom: 0 !important;
+        }
+
+        .col-md-4 {
+            margin-bottom: 15px;
+        }
+
+        /* Table styling */
+        thead.custom-header th {
+            background-color: #81715e0e;
+            color: #7b7268;
+            padding: 10px;
+        }
+
+        .table {
+            margin-bottom: 15px;
+        }
+
+            .table td {
+                padding: 10px;
+            }
+    </style>
+</head>
+
+@using (Html.BeginForm("UpdateReport", "ConvictFile", FormMethod.Post,
+    new { enctype = "multipart/form-data", id = "attachmentForm", @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid mt-3">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ReportID)
+
+        <div class="p-3 bg-white shadow-sm" style="font-size:small">
+            <div class="d-flex align-items-center" style="gap: 10px;">
+                <img src="~/Content/images/arrest.png" width="34" style="margin-top: -4px;" />
+                <h3 class="mb-0" style="color: #7b7268;">تعديل ملف محكوم</h3>
+            </div>
+            <br />
+
+            <div class="Subtitle">بيانات المحكوم</div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label">الاسم</label>
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">الاسم الوهمي</label>
+                    @Html.TextBoxFor(model => model.FakeName, new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">الجنس</label>
+                    @Html.DropDownListFor(m => m.Gender, new SelectList(new[] {
+                      new { Value = "", Text = "يرجى الاختيار" },
+                      new { Value = "ذكر", Text = "ذكر" },
+                      new { Value = "أنثى", Text = "أنثى" }
+                      }, "Value", "Text"), new { @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label">الجنسية</label>
+                    @Html.DropDownListFor(model => model.Nationality, new SelectList(ViewBag.NationalityMaster, "NationalityName", "NationalityName"), "يرجى الاختيار", new { @Id = "Nationality", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">تاريخ الميلاد</label>
+                    @if (Model.BirthDate.HasValue)
+                    {
+                        @Html.TextBoxFor(model => model.BirthDate, new { @class = "form-control is-invalid", @Required = "@Required", type = "date", @id = "BirthDate", @Value = Model.BirthDate.Value.ToString("yyyy-MM-dd") })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.BirthDate, new { @class = "form-control is-invalid", @Required = "@Required", type = "date", @id = "BirthDate" })
+                    }
+                    @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">العمر</label>
+                    @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @readonly = "readonly", id = "Age", style = "background-color: #f8f8f8;" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label">المستوى التعليمي</label>
+                    @Html.DropDownListFor(model => model.EducationalLevel,
+                        new SelectList(new[] {
+                            new { Value = "", Text = "يرجى الاختيار" },
+                            new { Value = "غير متعلم", Text = "غير متعلم" },
+                            new { Value = "ابتدائي", Text = "ابتدائي" },
+                            new { Value = "إعدادي", Text = "إعدادي" },
+                            new { Value = "ثانوي", Text = "ثانوي" },
+                            new { Value = "دبلوم", Text = "دبلوم" },
+                            new { Value = "بكالوريوس", Text = "بكالوريوس" },
+                            new { Value = "ماجستير", Text = "ماجستير" },
+                            new { Value = "دكتوراه", Text = "دكتوراه" }
+                        }, "Value", "Text", Model.EducationalLevel),
+                        new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">الاعاقة</label>
+                    @Html.DropDownListFor(model => model.Disability,
+                        new SelectList(new[] {
+                            new { Value = "", Text = "يرجى الاختيار" },
+                            new { Value = "نعم", Text = "نعم" },
+                            new { Value = "لا", Text = "لا" }
+                        }, "Value", "Text", Model.Disability),
+                        new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">الحالة الاجتماعية</label>
+                    @Html.DropDownListFor(model => model.MaritalStatus,
+                     new SelectList(new[] {
+                         new { Value = "", Text = "يرجى الاختيار" },
+                         new { Value = "أعزب", Text = "أعزب" },
+                         new { Value = "متزوج", Text = "متزوج" },
+                         new { Value = "مطلق", Text = "مطلق" },
+                         new { Value = "أرمل", Text = "أرمل" }
+                     }, "Value", "Text"),
+                     new { @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label">المهنة</label>
+                    @Html.DropDownListFor(model => model.Profession,
+                        new SelectList(new[] {
+                            new { Value = "", Text = "يرجى الاختيار" },
+                            new { Value = "موظف", Text = "موظف" },
+                            new { Value = "عاطل عن العمل", Text = "عاطل عن العمل" },
+                            new { Value = "طالب", Text = "طالب" },
+                            new { Value = "متقاعد", Text = "متقاعد" },
+                            new { Value = "ربة منزل", Text = "ربة منزل" },
+                            new { Value = "عمل حر", Text = "عمل حر" }
+                        }, "Value", "Text", Model.Profession),
+                        new { @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.Profession, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">مقر السكن</label>
+                    @Html.DropDownListFor(model => model.Residence, new SelectList(ViewBag.ResidenceMaster, "ResidenceName", "ResidenceName"), "يرجى الاختيار", new { @Id = "Residence", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.Residence, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">الرقم الموحد</label>
+                    @Html.TextBoxFor(model => model.UnifiedNo, new { @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.UnifiedNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label">رقم الهوية</label>
+                    @Html.TextBoxFor(model => model.EmiratesID, new { @class = "form-control" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">رقم الهاتف</label>
+                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                </div>
+                <div class="col-md-8">
+                    <label class="control-label">الملاحظات</label>
+                    @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", rows = 3 })
+                </div>
+            </div>
+
+            <div class="Subtitle">المرفقات</div>
+
+            <table class="table table-bordered text-center" style="font-size: small;">
+                <thead class="custom-header">
+                    <tr>
+                        <th>المرفق الحالي</th>
+                        <th>إرفاق جديد</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            @if (!string.IsNullOrWhiteSpace(Model.Attachments))
+                            {
+                                <a href="@Url.Content(Model.Attachments)" target="_blank"
+                                   class="btn btn-sm"
+                                   style="background-color: #eae4de; color: #333; font-size: 12px; padding: 6px 12px; border-radius: 6px;">
+                                    <i class="fa fa-paperclip" style="padding-left:5px;"></i> عرض المرفق
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">لا يوجد مرفق</span>
+                            }
+                        </td>
+                        <td>
+                            <input type="file" name="Attachments" class="form-control" style="height: auto; padding: 5px;" />
+                            @Html.ValidationMessageFor(model => model.Attachments, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="Subtitle">تفاصيل التقرير</div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label">تاريخ الانشاء</label>
+                    @Html.TextBoxFor(model => model.CreatedDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">تم الانشاء بواسطة</label>
+                    @Html.TextBoxFor(model => model.CreatedBy, new { @class = "form-control", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">تاريخ التعديل</label>
+                    @Html.TextBoxFor(model => model.EditDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label">تم التعديل بواسطة</label>
+                    @Html.TextBoxFor(model => model.EditedBy, new { @class = "form-control", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">الحالة</label>
+                    @Html.TextBoxFor(model => model.Status, new { @class = "form-control", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">ملاحظات التعديل</label>
+                    @Html.TextAreaFor(model => model.EditNote, new { @class = "form-control", rows = 3 })
+                </div>
+            </div>
+
+            <div class="mt-4" style="text-align: left !important;">
+                <input type="submit" class="btn btn-sm btn-Add p-2" value="حفظ التقرير" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(document).ready(function () {
+        function calculateAge() {
+            var birthDateVal = $('#BirthDate').val();
+            if (birthDateVal) {
+                var today = new Date();
+                var birthDate = new Date(birthDateVal);
+
+                var age = today.getFullYear() - birthDate.getFullYear();
+                var monthDiff = today.getMonth() - birthDate.getMonth();
+
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                    age--;
+                }
+
+                if (age >= 0 && age <= 150) {
+                    $('#Age').val(age);
+                } else {
+                    $('#Age').val('');
+                }
+            } else {
+                $('#Age').val('');
+            }
+        }
+
+        calculateAge();
+
+        $('#BirthDate').on('change keyup blur', function () {
+            calculateAge();
+        });
+    });
+</script>

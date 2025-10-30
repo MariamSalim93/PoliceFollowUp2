@@ -1,0 +1,62 @@
+﻿
+.SecurityDegree {
+    padding: 2px 10px;
+    font-size: smaller;
+    width: 100px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.SecurityDegreeHigh {
+    color: #930000;
+}
+
+.SecurityDegreeMedium {
+    color: #d12727;
+}
+
+.SecurityDegreeLow {
+    color: #c78806;
+}
+
+.SecurityDegreeNone {
+    color: #4047d0;
+}
+
+.status {
+    padding: 2px 10px;
+    background-color: #0a59a9;
+    color: white;
+    border-radius: 6px;
+    font-size: smaller;
+    width: 100px;
+    text-align: center;
+}
+
+.statusNew {
+    background-color: #0a59a9;
+}
+
+.statusInProgress {
+    background-color: #ffb350;
+}
+
+.statusApproved {
+    background-color: #5fb233;
+}
+
+.statusUpdate {
+    background-color: #90c1b8;
+}
+
+.statusAudit {
+    background-color: #c61212;
+}
+
+.statusCancelled{
+    background-color: #808080;
+}
+
+
+
+
