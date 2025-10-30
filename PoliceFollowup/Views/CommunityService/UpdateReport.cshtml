@@ -121,7 +121,9 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">رقم القضية</label>
-                    @Html.TextBoxFor(model => model.CaseNo, new { @class = "form-control" })
+                    @Html.TextBoxFor(model => model.CaseNo, new { @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.CaseNo, "", new { @class = "text-danger" })
+
                 </div>
             </div>
 
@@ -132,7 +134,9 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">تاريخ الحكم</label>
-                    @Html.TextBoxFor(model => model.JudgmentDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                    @Html.TextBoxFor(model => model.JudgmentDate, "{0:yyyy-MM-dd}", new { @class = "form-control is-invalid", @Required = "@Required", type = "date" })
+                    @Html.ValidationMessageFor(model => model.JudgmentDate, "", new { @class = "text-danger" })
+
                 </div>
             </div>
             <div class="col-md-4">
@@ -176,7 +180,8 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">التهمة</label>
-                    @Html.DropDownListFor(model => model.Blame, new SelectList(ViewBag.BlameMaster, "BlameName", "BlameName"), "يرجى الاختيار", new { @Id = "Blame", @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Blame, new SelectList(ViewBag.BlameMaster, "BlameName", "BlameName"), "يرجى الاختيار", new { @Id = "Blame", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.Blame, "", new { @class = "text-danger" })
 
                 </div>
             </div>
@@ -193,7 +198,9 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">اماكن تطبيق أعمال الخدمة المجتمعية</label>
-                    @Html.DropDownListFor(model => model.CommunityServicePlaces, new SelectList(ViewBag.PlacesMaster, "PlacesName", "PlacesName"), "يرجى الاختيار", new { @Id = "PlacesName", @class = "form-control" })
+                    @Html.DropDownListFor(model => model.CommunityServicePlaces, new SelectList(ViewBag.PlacesMaster, "PlacesName", "PlacesName"), "يرجى الاختيار", new { @Id = "PlacesName", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.CommunityServicePlaces, "", new { @class = "text-danger" })
+
                 </div>
             </div>
         </div>

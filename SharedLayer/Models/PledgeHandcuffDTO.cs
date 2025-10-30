@@ -8,6 +8,7 @@ namespace SharedLayer.Models
 {
     public class PledgeHandcuffDTO
     {
+        [Key]
         [Display(Name = "رقم التقرير")]
         public int ReportID { get; set; }
 
@@ -15,16 +16,22 @@ namespace SharedLayer.Models
         public int FileNo { get; set; }
 
         [Display(Name = "رقم القضية")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string CaseNo { get; set; }
 
         [Display(Name = "الحكم الصادر")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string JudgmentIssued { get; set; }
 
         [Display(Name = "رقم الجهاز")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string DeviceNo { get; set; }
 
         [Display(Name = "عدد الشاحن")]
         public string NumberOfCharger { get; set; }
+
+        [Display(Name = "التوقيع")]
+        public string Signature { get; set; }
 
         [Display(Name = "تم الانشاء بواسطة")]
         public string CreatedBy { get; set; }

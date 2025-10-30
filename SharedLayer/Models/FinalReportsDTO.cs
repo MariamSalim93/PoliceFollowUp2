@@ -8,6 +8,7 @@ namespace SharedLayer.Models
 {
     public class FinalReportsDTO
     {
+        
         [Display(Name = "رقم التقرير")]
         public int ReportID { get; set; }
 
@@ -15,23 +16,29 @@ namespace SharedLayer.Models
         public int FileNo { get; set; }
 
         [Display(Name = "رقم القضية")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string CaseNo { get; set; }
 
         [Display(Name = "جهة التنفيذ")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string ImplementingAuthority { get; set; }
 
         [Display(Name = "تاريخ التنفيذ")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public DateTime? ImplementingDate { get; set; }
 
         [Display(Name = "تاريخ الانتهاء")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public DateTime? EndDate { get; set; }
 
         [Display(Name = "موجز التقرير النهائي")]
         public string ReportSummary { get; set; }
+
+
         [Display(Name = "تم الانشاء بواسطة")]
         public string CreatedBy { get; set; }
 

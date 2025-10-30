@@ -15,17 +15,25 @@ namespace SharedLayer.Models
         public int FileNo { get; set; }
 
         [Display(Name = "نوع التهمة بموجب الامر او الحكم الصادر")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string AccusationType { get; set; }
 
         [Display(Name = "تاريخ تنفيذ الخدمة")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public DateTime? StartDate { get; set; }
 
         [Display(Name = "تاريخ انتهاء الخدمة")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
+        
         public DateTime? EndDate { get; set; }
+
+
+        [Display(Name = "التوقيع")]
+        public string Signature { get; set; }
+        
         [Display(Name = "تم الانشاء بواسطة")]
         public string CreatedBy { get; set; }
 

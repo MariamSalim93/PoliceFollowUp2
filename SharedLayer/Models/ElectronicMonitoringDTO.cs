@@ -15,22 +15,27 @@ namespace SharedLayer.Models
         public int FileNo { get; set; }
 
         [Display(Name = "رقم القضية")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string CaseNo { get; set; }
 
         [Display(Name = "نوع الحكم")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string JudgmentType { get; set; }
 
         [Display(Name = "تاريخ الحكم")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public DateTime? JudgmentDate { get; set; }
 
         [Display(Name = "نطاق المراقبة")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string MonitoringArea { get; set; }
 
         [Display(Name = "تاريخ بدء المراقبة")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public DateTime? StartMonitoringDate { get; set; }
 
         [Display(Name = "تاريخ انتهاء المراقبة")]
@@ -39,13 +44,13 @@ namespace SharedLayer.Models
         public DateTime? EndMonitoringDate { get; set; }
 
         [Display(Name = "التهمة")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string Blame { get; set; }
 
         [Display(Name = "مصدر الحكم")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string JudgmentSource { get; set; }
 
-        [Display(Name = "المرفقات")]
-        public string Attachments { get; set; }
         [Display(Name = "تم الانشاء بواسطة")]
         public string CreatedBy { get; set; }
 

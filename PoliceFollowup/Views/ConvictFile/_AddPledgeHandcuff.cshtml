@@ -103,13 +103,16 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label class="control-label">رقم القضية</label>
-                @Html.TextBoxFor(model => model.CaseNo, new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.CaseNo, new { @class = "form-control is-invalid", @Required = "@Required" })
+                @Html.ValidationMessageFor(model => model.CaseNo, "", new { @class = "text-danger" })
+
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label class="control-label">الحكم الصادر</label>
-                @Html.DropDownListFor(model => model.JudgmentIssued, new SelectList(ViewBag.DecisionMaster, "DecisionName", "DecisionName"), "يرجى الاختيار", new { @Id = "JudgmentIssued", @class = "form-control" })
+                @Html.DropDownListFor(model => model.JudgmentIssued, new SelectList(ViewBag.DecisionMaster, "DecisionName", "DecisionName"), "يرجى الاختيار", new { @Id = "JudgmentIssued", @class = "form-control is-invalid", @Required = "@Required" })
+                @Html.ValidationMessageFor(model => model.JudgmentIssued, "", new { @class = "text-danger" })
 
 
             </div>
@@ -117,7 +120,8 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label class="control-label">رقم الجهاز</label>
-                @Html.DropDownListFor(model => model.DeviceNo, new SelectList(ViewBag.DeviceNoMaster, "DeviceNoName", "DeviceNoName"), "يرجى الاختيار", new { @Id = "DeviceNo", @class = "form-control" })
+                @Html.DropDownListFor(model => model.DeviceNo, new SelectList(ViewBag.DeviceNoMaster, "DeviceNoName", "DeviceNoName"), "يرجى الاختيار", new { @Id = "DeviceNo", @class = "form-control is-invalid", @Required = "@Required" })
+                @Html.ValidationMessageFor(model => model.DeviceNo, "", new { @class = "text-danger" })
 
             </div>
         </div>
@@ -128,6 +132,12 @@
             <div class="form-group">
                 <label class="control-label">عدد الشاحن</label>
                 @Html.TextBoxFor(model => model.NumberOfCharger, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">التوقيع</label>
+                @Html.TextBoxFor(model => model.Signature, new { @class = "form-control" })
             </div>
         </div>
     </div>

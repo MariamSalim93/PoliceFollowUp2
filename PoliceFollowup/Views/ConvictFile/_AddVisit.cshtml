@@ -103,19 +103,24 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label class="control-label">تاريخ الزيارة</label>
-                @Html.TextBoxFor(model => model.VisitDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                @Html.TextBoxFor(model => model.VisitDate, "{0:yyyy-MM-dd}", new { @class = "form-control is-invalid", @Required = "@Required", type = "date" })
+                @Html.ValidationMessageFor(model => model.VisitDate, "", new { @class = "text-danger" })
+
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label class="control-label">مكان الزيارة</label>
-                @Html.EditorFor(model => model.VisitPlace, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.VisitPlace, new { htmlAttributes = new { @class = "form-control is-invalid", @Required = "@Required" } })
+                @Html.ValidationMessageFor(model => model.VisitPlace, "", new { @class = "text-danger" })
+
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label class="control-label">اسم الجهة المنفذة</label>
-                @Html.DropDownListFor(model => model.ImplementingAuthority, new SelectList(ViewBag.AuthorityMaster, "AuthorityName", "AuthorityName"), "يرجى الاختيار", new { @Id = "ImplementingAuthority", @class = "form-control" })
+                @Html.DropDownListFor(model => model.ImplementingAuthority, new SelectList(ViewBag.AuthorityMaster, "AuthorityName", "AuthorityName"), "يرجى الاختيار", new { @Id = "ImplementingAuthority", @class = "form-control is-invalid", @Required = "@Required" })
+                @Html.ValidationMessageFor(model => model.ImplementingAuthority, "", new { @class = "text-danger" })
 
 
             </div>

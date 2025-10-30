@@ -17,12 +17,15 @@ namespace SharedLayer.Models
         [Display(Name = "تاريخ الزيارة")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.DateTime)]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public DateTime? VisitDate { get; set; }
 
         [Display(Name = "مكان الزيارة")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string VisitPlace { get; set; }
 
         [Display(Name = "اسم الجهة المنفذة")]
+        [Required(ErrorMessage = "هذا الحقل إجباري")]
         public string ImplementingAuthority { get; set; }
 
         [Display(Name = "تقرير الزيارة")]

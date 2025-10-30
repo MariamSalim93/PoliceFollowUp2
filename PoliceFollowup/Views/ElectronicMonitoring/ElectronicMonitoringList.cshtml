@@ -71,128 +71,156 @@
     <script src="~/Scripts/mainScripts/InfoSourceDT.js"></script>
     <script type="text/javascript">
 
-    $(document).ready(function () {
-        var oTable;
-        $.ajax({
-            url: "@Url.Action("GetListOfElectronicMonitoringJson", "ElectronicMonitoring")",
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                oTable = $('#TableId').DataTable({
-                    data: data,
-                    responsive: true,
-                    columns: [
-                        { data: "ReportID", width: 70 },
-                        { data: "FileNo", width: 200 },
-                        { data: "CaseNo", width: 200 },
-                        { data: "JudgmentType", width: 200 },
+   $(document).ready(function () {
 
-                        {
-                            data: "StartMonitoringDate", width: 70,
-                            render: function (data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    var match = data.match(/\/Date\((\d+)\)\//);
-                                    if (match) {
-                                        var date = new Date(parseInt(match[1], 10));
-                                        var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-                                        return formattedDate;
-                                    } else {
-                                        return "Invalid date";
-                                    }
-                                }
-                                return data;
-                            }
-                        },
-                        {
-                            data: "EndMonitoringDate", width: 70,
-                            render: function (data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    var match = data.match(/\/Date\((\d+)\)\//);
-                                    if (match) {
-                                        var date = new Date(parseInt(match[1], 10));
-                                        var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-                                        return formattedDate;
-                                    } else {
-                                        return "Invalid date";
-                                    }
-                                }
-                                return data;
-                            }
-                        },
-                        {
-                            data: "CreatedDate", width: 70,
-                            render: function (data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    var match = data.match(/\/Date\((\d+)\)\//);
-                                    if (match) {
-                                        var date = new Date(parseInt(match[1], 10));
-                                        var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-                                        return formattedDate;
-                                    } else {
-                                        return "Invalid date";
-                                    }
-                                }
-                                return data;
-                            }
-                        },
-                        { data: "CreatedBy", width: 200 },
-                        {
-                            data: null, width: 40,
-                            render: function (data, type, row) {
-                                var links = "";
+    // Helper function to format date
+    function formatDateColumn(defaultText) {
+        return function(data, type, row) {
+            if (type === 'display' || type === 'filter') {
+                // Check if data is null or undefined
+                if (!data || data === null) {
+                    return defaultText || "";
+                }
 
-                                links += "<a href='/ElectronicMonitoring/ElectronicMonitoringDetails/" + row.ReportID  + "' target='_blank' data-toggle='tooltip' data-placement='left' title='التفاصيل' style='text-decoration:none'><img src='/Content/images/View.png' width='24' /> </a>";
+                // Try to parse .NET Date format
+                var match = data.match(/\/Date\((\d+)\)\//);
+                if (match) {
+                    var date = new Date(parseInt(match[1], 10));
+                    // Format as dd/MM/yyyy for Arabic context
+                    var day = date.getDate();
+                    var month = date.getMonth() + 1;
+                    var year = date.getFullYear();
 
-                                return links;
-                            }
+                    // Pad with zeros if needed
+                    day = day < 10 ? '0' + day : day;
+                    month = month < 10 ? '0' + month : month;
+
+                    return day + '/' + month + '/' + year;
+                }
+
+                // Try to parse ISO date format as fallback
+                try {
+                    var date = new Date(data);
+                    if (!isNaN(date.getTime())) {
+                        var day = date.getDate();
+                        var month = date.getMonth() + 1;
+                        var year = date.getFullYear();
+
+                        day = day < 10 ? '0' + day : day;
+                        month = month < 10 ? '0' + month : month;
+
+                        return day + '/' + month + '/' + year;
+                    }
+                } catch(e) {
+                    // Continue to return invalid date
+                }
+
+                return "تاريخ غير صالح";
+            }
+            return data;
+        };
+    }
+
+    var oTable;
+    $.ajax({
+        url: "@Url.Action("GetListOfElectronicMonitoringJson", "ElectronicMonitoring")",
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+            oTable = $('#TableId').DataTable({
+                data: data,
+                responsive: true,
+                columns: [
+                    { data: "ReportID", width: 70 },
+                    { data: "FileNo", width: 200 },
+                    { data: "CaseNo", width: 200 },
+                    { data: "JudgmentType", width: 200 },
+                    {
+                        data: "StartMonitoringDate",
+                        width: 70,
+                        render: formatDateColumn("")
+                    },
+                    {
+                        data: "EndMonitoringDate",
+                        width: 70,
+                        render: formatDateColumn(" ") // Shows "Not ended yet" for null values
+                    },
+                    {
+                        data: "CreatedDate",
+                        width: 70,
+                        render: formatDateColumn("")
+                    },
+                    { data: "CreatedBy", width: 200 },
+                    {
+                        data: null,
+                        width: 40,
+                        orderable: false,
+                        render: function (data, type, row) {
+                            return '<a href="/ElectronicMonitoring/ElectronicMonitoringDetails/' + row.ReportID  +
+                                   '" target="_blank" data-toggle="tooltip" data-placement="left" title="التفاصيل" ' +
+                                   'style="text-decoration:none"><img src="/Content/images/View.png" width="24" /> </a>';
                         }
-                    ],
-                    order: [[0, 'desc']],
-                    language: {
-                        search: "",
-                        searchPlaceholder: " الاستعــلام",
-                        sLengthMenu: "_MENU_ ",
-                        info: "عرض _START_ إلى _END_ من اجمالي _TOTAL_ ",
-                        infoFiltered: "(تصفية _MAX_ من الاجمالي)",
-                        paginate: {
-                            next: 'التالي',
-                            previous: 'السابق'
+                    }
+                ],
+                order: [[0, 'desc']],
+                language: {
+                    search: "",
+                    searchPlaceholder: " الاستعــلام",
+                    sLengthMenu: "_MENU_ ",
+                    info: "عرض _START_ إلى _END_ من اجمالي _TOTAL_ ",
+                    infoFiltered: "(تصفية _MAX_ من الاجمالي)",
+                    infoEmpty: "لا توجد بيانات",
+                    zeroRecords: "لم يتم العثور على نتائج",
+                    paginate: {
+                        next: 'التالي',
+                        previous: 'السابق'
+                    }
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'copy',
+                        text: '<i class="fa fa-copy"></i> نسخ',
+                        className: 'btn btn-sm buttons-copy'
+                    },
+                    {
+                        extend: 'excel',
+                        text: '<i class="fa fa fa-file-excel-o"></i> اكسل',
+                        className: 'btn btn-sm buttons-excel',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] // Exclude the action column
                         }
                     },
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'copy',
-                            text: '<i class="fa fa-copy"></i> نسخ',
-                            className: 'btn btn-sm buttons-copy'
-                      },
-                        {
-                            extend: 'excel',
-                            text: '<i class="fa fa fa-file-excel-o"></i> اكسل',
-                            className: 'btn btn-sm buttons-excel'
-                        },
-                        {
-                            extend: 'print',
-                            text: '<i class="fa fa-print"></i> طباعة',
-                            className: 'btn btn-sm buttons-print '
+                    {
+                        extend: 'print',
+                        text: '<i class="fa fa-print"></i> طباعة',
+                        className: 'btn btn-sm buttons-print',
+                        exportOptions: {
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7] // Exclude the action column
                         }
-                    ],
-
-                    initComplete: function () {
-                        $('.dataTables_filter input').addClass('form-control');
                     }
-                });
+                ],
+                initComplete: function () {
+                    $('.dataTables_filter input').addClass('form-control');
 
-                $('input', oTable.table().header()).on('keyup', function () {
-                    var colIdx = $(this).closest('th').index();
-                    oTable.column(colIdx).search(this.value).draw();
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error("An error occurred:", status, error);
-            }
-        });
+                    // Initialize tooltips
+                    $('[data-toggle="tooltip"]').tooltip();
+                }
+            });
+
+            // Custom search on header inputs (if you have them)
+            $('input', oTable.table().header()).on('keyup', function () {
+                var colIdx = $(this).closest('th').index();
+                oTable.column(colIdx).search(this.value).draw();
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("An error occurred:", status, error);
+            // Show user-friendly error message
+            alert("حدث خطأ أثناء تحميل البيانات. الرجاء المحاولة مرة أخرى.");
+        }
     });
+});
     </script>
 
 }
