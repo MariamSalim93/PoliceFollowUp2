@@ -16,60 +16,213 @@
     <style>
         * {
             text-align: right;
+            direction: rtl;
         }
 
+        body {
+            background: #f5f6fa;
+        }
+
+        /* Modern Header Style */
+        .page-header {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            padding: 30px;
+            margin: 20px 5px 30px 5px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(129, 113, 94, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .page-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -100px;
+                width: 200px;
+                height: 200px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+            }
+
+            .page-header::after {
+                content: '';
+                position: absolute;
+                bottom: -50px;
+                left: -50px;
+                width: 150px;
+                height: 150px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 50%;
+            }
+
+            .page-header h3 {
+                color: white !important;
+                margin: 0;
+                font-size: 28px;
+                font-weight: 600;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                position: relative;
+                z-index: 1;
+            }
+
+            .page-header img {
+                filter: brightness(0) invert(1);
+                position: relative;
+                z-index: 1;
+            }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+        /* Section Headers */
         .Subtitle {
-            background-color: #81715e0e;
-            color: #7b7268;
-            padding: 12px 15px;
+            background: linear-gradient(to right, #bdb0a1, #f0ece9);
+            color: #81715e;
+            padding: 12px 20px;
             font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 15px;
-            margin-top: 20px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            margin-top: 15px;
+            border-right: 4px solid #81715e;
+            border-radius: 4px;
         }
 
+        /* Form Controls */
         .control-label {
             font-weight: 600;
-            color: #666;
+            color: #4a4a4a;
             font-size: 13px;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .form-control {
             font-size: 13px;
-            padding: 6px 10px;
-            height: 34px;
+            padding: 8px 12px;
+            height: 38px;
+            border: 1.5px solid #d4d4d4;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
+
+            .form-control:focus {
+                border-color: #81715e;
+                box-shadow: 0 0 0 0.2rem rgba(129, 113, 94, 0.15);
+                outline: none;
+            }
+
+            .form-control[readonly] {
+                background-color: #f8f9fa !important;
+                cursor: not-allowed;
+            }
 
         textarea.form-control {
             height: auto;
-            min-height: 80px;
+            min-height: 85px;
+            resize: vertical;
         }
 
-        /* Remove extra spacing */
+        /* Form Layout */
         .row {
             margin-bottom: 0 !important;
         }
 
-        .col-md-4 {
-            margin-bottom: 15px;
+        .col-md-4, .col-md-8, .col-md-12 {
+            margin-bottom: 18px;
         }
 
-        /* Table styling */
-        thead.custom-header th {
-            background-color: #81715e0e;
-            color: #7b7268;
-            padding: 10px;
+        /* Validation Styles */
+        .is-invalid {
+            border-color: #dc3545 !important;
         }
 
+        .text-danger {
+            font-size: 11px;
+            color: #dc3545;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Table Styling */
         .table {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
         }
 
-            .table td {
-                padding: 10px;
+        thead.custom-header th {
+            background-color: #ab9e8f !important;
+            color: white !important;
+            padding: 8px 12px;
+            font-weight: 600;
+            font-size: 13px;
+            text-align: center;
+            border: none !important;
+        }
+
+
+        .table td {
+            padding: 15px;
+            vertical-align: middle;
+            border-color: #e0e0e0;
+        }
+
+        .table-bordered {
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Attachment Button */
+        .btn-attachment {
+            background-color: #81715e;
+            color: white;
+            font-size: 12px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+            .btn-attachment:hover {
+                background-color: #6b5f50;
+                color: white;
             }
+
+        /* Submit Button */
+        .btn-Add {
+            background: #81715e;
+            color: white;
+            border: none;
+            padding: 10px 30px !important;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(129, 113, 94, 0.3);
+        }
+
+            .btn-Add:hover {
+                background: #6b5f50;
+                box-shadow: 0 4px 10px rgba(129, 113, 94, 0.4);
+                transform: translateY(-1px);
+            }
+
+        /* File Input Styling */
+        input[type="file"].form-control {
+            padding: 6px 12px;
+            height: auto;
+        }
+
+        /* Dropdown Arrow */
+        select.form-control {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+            padding-left: 35px;
+        }
     </style>
 </head>
 
@@ -79,16 +232,22 @@
     @Html.AntiForgeryToken()
 
     <div class="container-fluid mt-3">
+        <!-- Modern Header -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <div class="d-flex align-items-center" style="gap: 15px;">
+                        <img src="~/Content/images/arrest.png" width="40" />
+                        <h3 class="mb-0">تعديل ملف محكوم</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ReportID)
 
-        <div class="p-3 bg-white shadow-sm" style="font-size:small">
-            <div class="d-flex align-items-center" style="gap: 10px;">
-                <img src="~/Content/images/arrest.png" width="34" style="margin-top: -4px;" />
-                <h3 class="mb-0" style="color: #7b7268;">تعديل ملف محكوم</h3>
-            </div>
-            <br />
-
+        <div class="form-card">
             <div class="Subtitle">بيانات المحكوم</div>
 
             <div class="row">
@@ -109,7 +268,6 @@
                       new { Value = "أنثى", Text = "أنثى" }
                       }, "Value", "Text"), new { @class = "form-control is-invalid", @Required = "@Required" })
                     @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-
                 </div>
             </div>
 
@@ -130,11 +288,10 @@
                         @Html.TextBoxFor(model => model.BirthDate, new { @class = "form-control is-invalid", @Required = "@Required", type = "date", @id = "BirthDate" })
                     }
                     @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
-
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">العمر</label>
-                    @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @readonly = "readonly", id = "Age", style = "background-color: #f8f8f8;" })
+                    @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @readonly = "readonly", id = "Age" })
                 </div>
             </div>
 
@@ -217,7 +374,7 @@
                     <label class="control-label">رقم الهاتف</label>
                     @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-4">
                     <label class="control-label">الملاحظات</label>
                     @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", rows = 3 })
                 </div>
@@ -225,7 +382,7 @@
 
             <div class="Subtitle">المرفقات</div>
 
-            <table class="table table-bordered text-center" style="font-size: small;">
+            <table class="table table-bordered">
                 <thead class="custom-header">
                     <tr>
                         <th>المرفق الحالي</th>
@@ -234,12 +391,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <td style="text-align: center;">
                             @if (!string.IsNullOrWhiteSpace(Model.Attachments))
                             {
-                                <a href="@Url.Content(Model.Attachments)" target="_blank"
-                                   class="btn btn-sm"
-                                   style="background-color: #eae4de; color: #333; font-size: 12px; padding: 6px 12px; border-radius: 6px;">
+                                <a href="@Url.Content(Model.Attachments)" target="_blank" class="btn btn-sm btn-attachment">
                                     <i class="fa fa-paperclip" style="padding-left:5px;"></i> عرض المرفق
                                 </a>
                             }
@@ -249,7 +404,7 @@
                             }
                         </td>
                         <td>
-                            <input type="file" name="Attachments" class="form-control" style="height: auto; padding: 5px;" />
+                            <input type="file" name="Attachments" class="form-control" />
                             @Html.ValidationMessageFor(model => model.Attachments, "", new { @class = "text-danger" })
                         </td>
                     </tr>
@@ -261,26 +416,26 @@
             <div class="row">
                 <div class="col-md-4">
                     <label class="control-label">تاريخ الانشاء</label>
-                    @Html.TextBoxFor(model => model.CreatedDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                    @Html.TextBoxFor(model => model.CreatedDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local", @readonly = "readonly" })
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">تم الانشاء بواسطة</label>
-                    @Html.TextBoxFor(model => model.CreatedBy, new { @class = "form-control", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                    @Html.TextBoxFor(model => model.CreatedBy, new { @class = "form-control", @readonly = "readonly" })
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">تاريخ التعديل</label>
-                    @Html.TextBoxFor(model => model.EditDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                    @Html.TextBoxFor(model => model.EditDate, "{0:yyyy-MM-ddTHH:mm}", new { @class = "form-control", type = "datetime-local", @readonly = "readonly" })
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-4">
                     <label class="control-label">تم التعديل بواسطة</label>
-                    @Html.TextBoxFor(model => model.EditedBy, new { @class = "form-control", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                    @Html.TextBoxFor(model => model.EditedBy, new { @class = "form-control", @readonly = "readonly" })
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">الحالة</label>
-                    @Html.TextBoxFor(model => model.Status, new { @class = "form-control", @readonly = "readonly", style = "background-color:#f8f8f8;" })
+                    @Html.TextBoxFor(model => model.Status, new { @class = "form-control", @readonly = "readonly" })
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">ملاحظات التعديل</label>
@@ -289,7 +444,7 @@
             </div>
 
             <div class="mt-4" style="text-align: left !important;">
-                <input type="submit" class="btn btn-sm btn-Add p-2" value="حفظ التقرير" />
+                <input type="submit" class="btn btn-sm btn-Add" value="حفظ التقرير" />
             </div>
         </div>
     </div>

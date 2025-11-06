@@ -17,36 +17,98 @@
             direction: rtl
         }
 
+        body {
+            background: #f5f6fa;
+        }
 
         .container-fluid {
             font-size: 12px;
         }
+
         h3 {
-            font-size: 18px !important; 
+            font-size: 18px !important;
         }
+
+        .page-header {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            padding: 30px;
+            margin: 20px 5px 30px 5px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(129, 113, 94, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .page-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -100px;
+                width: 200px;
+                height: 200px;
+                background: rgba(255,255,255,0.1);
+                border-radius: 50%;
+            }
+
+            .page-header::after {
+                content: '';
+                position: absolute;
+                bottom: -50px;
+                left: -50px;
+                width: 150px;
+                height: 150px;
+                background: rgba(255,255,255,0.05);
+                border-radius: 50%;
+            }
+
+            .page-header h3 {
+                color: #fff !important;
+                margin: 0;
+                font-size: 28px !important;
+                font-weight: 600;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                position: relative;
+                z-index: 1;
+            }
+
+            .page-header img {
+                position: relative;
+                z-index: 1;
+            }
 
         .Subtitle {
             background-color: #81715e0e;
             color: #81715e;
-            padding: 10px; 
+            padding: 10px;
             font-weight: 700;
-            font-size: 13px; 
+            font-size: 13px;
             margin-bottom: 10px;
+            border-right: 4px solid #81715e;
+        }
+        .Subtitle1 {
+            color: #81715e;
+            padding: 10px;
+            font-weight: 700;
+            font-size: 13px;
+            margin-bottom: 10px;
+            border-right: 4px solid #4d6528;
+            background-color: #d4e6be;
+            color: #4d6528;
         }
 
         .control-label {
             font-weight: 600;
             color: #6b5f50;
-            font-size: 12px; 
+            font-size: 12px;
         }
 
         .form-control {
-            font-size: 12px; 
+            font-size: 12px;
         }
 
         .detail-value {
             color: #333;
-            font-size: 11px; 
+            font-size: 11px;
         }
 
         .row-detail {
@@ -58,20 +120,6 @@
                 border-bottom: none;
             }
 
-        .nav-link {
-            color: #81715e;
-            font-size: 12px; 
-        }
-
-        .nav-tabs .nav-item.show .nav-link,
-        .nav-tabs .nav-link.active {
-            background-color: #81715e0b;
-            color: #81715e;
-            font-weight: 600;
-            border-top: 3px solid #81715e;
-            border-radius: 0px;
-        }
-
         .status-badge {
             padding: 3px 8px;
             border-radius: 4px;
@@ -81,110 +129,47 @@
 
         .status-active {
             background-color: #28a745;
-            color: white;
+            color: #fff;
         }
 
+
         .status-pending {
-            background-color: #ffc107;
-            color: #333;
+            background-color: #e6af08;
+            color: #fff;
         }
 
         .status-inactive {
-            background-color: #dc3545;
-            color: white;
+            background-color: #29579d;
+            color: #fff;
+        }
+        .status-cancel {
+            background-color: #ef2828;
+            color: #fff;
+        }
+        .status-inprocess {
+            background-color: #e0782d;
+            color: #fff;
         }
 
         .info-check {
             width: 14px;
-            height: 14px; 
+            height: 14px;
             cursor: not-allowed;
         }
 
-        .btn-back {
-            background-color: #81715e;
-            color: white;
-            padding: 5px 15px; 
-            font-weight: 600;
+        .btn-back, .btn-edit {
+            display: inline-flex;
+            align-items: center;
+            gap: .25rem;
+            padding: 5px 15px;
             font-size: 11px;
-            border: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-            .btn-back:hover {
-                background-color: #6b5f50;
-                color: white;
-                text-decoration: none;
-            }
-
-        .btn-print {
-            background-color: #e8e3dd;
-            color: #7b7268;
-            padding: 5px 15px; 
-            font-weight: 600;
-            font-size: 11px; 
-            border: 1px solid #7b7268;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-            .btn-print:hover {
-                background-color: #7b7268;
-                color: white;
-            }
-
-        .table {
-            font-size: 11px; 
-        }
-
-            .table th {
-                font-size: 11px; 
-                padding: 5px; 
-            }
-
-            .table td {
-                padding: 5px; 
-            }
-
-        .p-3 {
-            padding: 0.75rem !important; 
-        }
-
-        .p-2 {
-            padding: 0.5rem !important; 
-        }
-
-     
-        .btn i {
-            font-size: 10px;
-        }
-        /* Make both buttons identical in box metrics */
-        .btn-back, .btn-edit {
-            display: inline-flex;
-            align-items: center;
-            gap: .25rem; /* same as gap-1 */
-            padding: 5px 15px; /* identical */
-            font-size: 11px; /* identical */
-            line-height: 1.2; /* identical */
-            border-radius: 8px; /* identical cornerradius */
-            border: 0; /* kill Bootstrap border on btn-warning */
+            line-height: 1.2;
+            border-radius: 8px;
+            border: 0;
             vertical-align: middle;
+            transition: all .3s ease;
         }
 
-        /* Make both buttons identical in box metrics */
-        .btn-back, .btn-edit {
-            display: inline-flex;
-            align-items: center;
-            gap: .25rem; /* same as gap-1 */
-            padding: 5px 15px; /* identical */
-            font-size: 11px; /* identical */
-            line-height: 1.2; /* identical */
-            border-radius: 8px; /* identical cornerradius */
-            border: 0; /* kill Bootstrap border on btn-warning */
-            vertical-align: middle;
-        }
-
-        /* Colors only */
         .btn-edit {
             background: #ffc107;
             color: #4e4a45;
@@ -208,8 +193,105 @@
         .header-actions {
             margin-right: auto;
         }
-        /* RTL: pushes actions to the left */
 
+        .table {
+            font-size: 11px;
+        }
+
+            .table th {
+                font-size: 11px;
+                padding: 5px;
+            }
+
+            .table td {
+                padding: 5px;
+            }
+
+        .p-3 {
+            padding: .75rem !important;
+        }
+
+        .p-2 {
+            padding: .5rem !important;
+        }
+
+        .btn i {
+            font-size: 10px;
+        }
+
+        .section-container {
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .left-column, .right-column {
+            padding: 0 15px;
+        }
+
+        .section-divider {
+            margin: 20px 0;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .info-table {
+            margin-top: 10px;
+        }
+
+            .info-table thead {
+                background-color: #81715e0e;
+            }
+
+            .info-table tbody tr:hover {
+                background-color: #f9f9f9;
+            }
+
+        .info-indicator {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .info-yes {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .info-no {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .info-empty {
+            background-color: #e9ecef;
+            color: #6c757d;
+        }
+
+        .text-right {
+            text-align: right !important;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+        @@media print {
+            .btn-back, .btn-edit, .header-actions {
+                display: none !important;
+            }
+
+            .col-md-6 {
+                width: 50% !important;
+                float: right !important;
+            }
+        }
     </style>
 </head>
 
@@ -223,339 +305,348 @@
         <div class="alert alert-danger">@TempData["Error"]</div>
     }
 
-<div class="p-3 bg-white shadow-sm">
-    <div class="d-flex align-items-center mb-3">
-        <img src="~/Content/images/writing.png" width="34" style="margin-top:-4px;">
-        <h3 class="mb-0 mx-2" style="color:#7b7268">تفاصيل استقبال الحالة</h3>
+    @{
+        // إظهار معلومات الاعتماد فقط بعد الاعتماد (أو عند وجود قيم محفوظة)
+        bool isApproved = string.Equals(Model.Status, "معتمد", StringComparison.OrdinalIgnoreCase);
+        bool hasApprovalValues =
+            !string.IsNullOrWhiteSpace(Model.ApprovedBy) ||
+            Model.ApproveDate != null ||
+            !string.IsNullOrWhiteSpace(Model.ApproveNotes);
+        bool showApprovalInfo = isApproved || hasApprovalValues;
+    }
 
-        <div class="header-actions">
-            @using (Html.BeginForm("UpdateReport", "ReceiveCase", new { id = Model.ReportID }, FormMethod.Get, new { @class = "d-inline-block m-0" }))
-            {
-                <button type="submit" class="btn btn-edit"><i class="fa fa-edit" style="margin-left:.25rem;"></i> تعديل</button>
-            }
-            <a href='@Url.Action("ReceiveCaseList","ReceiveCase")' class="btn btn-back">
-                <i class="fas fa-arrow-right" style="margin-left:.25rem;"></i> رجوع
-            </a>
-        </div>
-    </div>
-
-    <br />
-
-
-    <div class="row">
-        <!-- القسم الأول: المعلومات الأساسية -->
-        <div class="col-md-4">
-            <div class="Subtitle">معلومات التقرير</div>
-            <div class="p-2">
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">رقم التقرير</label>
+    <div class="p-3 bg-white shadow-sm">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center" style="gap: 15px;">
+                            <img src="~/Content/images/writing.png" width="40" />
+                            <h3 class="mb-0">تفاصيل استقبال الحالة</h3>
                         </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.ReportID</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">رقم الملف</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.FileNo</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">نوع الحالة</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.StatusType</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">حالة التدقيق</label>
-                        </div>
-                        <div class="col-sm-7">
-                            @{
-                                string statusClass = Model.Status == "جديد" ? "status-active" :
-                                                    Model.Status == "تم التعديل" ? "status-pending" : "status-inactive";
+                        <div class="header-actions d-flex" style="gap: 10px;">
+                            @using (Html.BeginForm("UpdateReport", "ReceiveCase", new { id = Model.ReportID }, FormMethod.Get, new { @class = "m-0" }))
+                            {
+                                <button type="submit" class="btn btn-warning btn-sm d-inline-flex align-items-center gap-1">
+                                    <i class="fa fa-edit"></i> تعديل
+                                </button>
                             }
-                            <span class="status-badge @statusClass">@Model.Status</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تاريخ الإنشاء</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Html.DisplayFor(m => m.CreatedDate)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">منشئ التقرير</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.CreatedBy</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">آخر تعديل بواسطة</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.EditedBy</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تاريخ التعديل</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Html.DisplayFor(m => m.EditDate)</span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">ملاحظات التعديل</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.EditNote</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">المعتمد</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.ApprovedBy</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تاريخ الاعتماد</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Html.DisplayFor(m => m.ApproveDate)</span>
+                            <a href='@Url.Action("ReceiveCaseList", "ReceiveCase")' class="btn btn-light btn-sm d-inline-flex align-items-center gap-1">
+                                <i class="fas fa-arrow-right"></i> رجوع
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- القسم الثاني: بيانات الحكم -->
-        <div class="col-md-4">
-            <div class="Subtitle">بيانات الحكم والتنفيذ</div>
-            <div class="p-2">
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">القرار الصادر</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.Decision</span>
-                        </div>
-                    </div>
-                </div>
+        <br />
 
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">جهة التنفيذ</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.ImplementingAuthority</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">مصدر الحكم</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.JudgmentSource</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تاريخ بدء التنفيذ</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Html.DisplayFor(m => m.StartDate)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تاريخ الانتهاء</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Html.DisplayFor(m => m.EndDate)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- القسم الثالث: المعلومات التي تم توضيحها -->
-        <div class="col-md-4">
-            <div class="Subtitle">المعلومات التي تم توضيحها</div>
-            <div class="p-2">
-                <table class="table table-bordered table-sm text-center">
-                    <thead style="background-color: #81715e0e;">
-                        <tr>
-                            <th style="width: 10%;">م</th>
-                            <th style="width: 70%;">البيان</th>
-                            <th style="width: 10%;">نعم</th>
-                            <th style="width: 10%;">لا</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td class="text-right">منطوق الحكم أو القرار الصادر</td>
-                            <td>
-                                <input type="radio" class="info-check" name="info1"
-                                       @(Model.Info1 == "نعم" ? "checked" : "") disabled />
-                            </td>
-                            <td>
-                                <input type="radio" class="info-check" name="info1"
-                                       @(Model.Info1 == "لا" ? "checked" : "") disabled />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td class="text-right">الجهة المعنية بالتنفيذ</td>
-                            <td>
-                                <input type="radio" class="info-check" name="info2"
-                                       @(Model.Info2 == "نعم" ? "checked" : "") disabled />
-                            </td>
-                            <td>
-                                <input type="radio" class="info-check" name="info2"
-                                       @(Model.Info2 == "لا" ? "checked" : "") disabled />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td class="text-right">المدة القانونية بالتنفيذ</td>
-                            <td>
-                                <input type="radio" class="info-check" name="info3"
-                                       @(Model.Info3 == "نعم" ? "checked" : "") disabled />
-                            </td>
-                            <td>
-                                <input type="radio" class="info-check" name="info3"
-                                       @(Model.Info3 == "لا" ? "checked" : "") disabled />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td class="text-right">الإجراءات الواجب اتباعها</td>
-                            <td>
-                                <input type="radio" class="info-check" name="info4"
-                                       @(Model.Info4 == "نعم" ? "checked" : "") disabled />
-                            </td>
-                            <td>
-                                <input type="radio" class="info-check" name="info4"
-                                       @(Model.Info4 == "لا" ? "checked" : "") disabled />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td class="text-right">العقوبات المترتبة في حال المخالفة</td>
-                            <td>
-                                <input type="radio" class="info-check" name="info5"
-                                       @(Model.Info5 == "نعم" ? "checked" : "") disabled />
-                            </td>
-                            <td>
-                                <input type="radio" class="info-check" name="info5"
-                                       @(Model.Info5 == "لا" ? "checked" : "") disabled />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td class="text-right">طريقة التواصل مع جهات التنفيذ</td>
-                            <td>
-                                <input type="radio" class="info-check" name="info6"
-                                       @(Model.Info6 == "نعم" ? "checked" : "") disabled />
-                            </td>
-                            <td>
-                                <input type="radio" class="info-check" name="info6"
-                                       @(Model.Info6 == "لا" ? "checked" : "") disabled />
-                            </td>
-                        </tr>
-                        @if (!string.IsNullOrEmpty(Model.Info7))
-                        {
-                            <tr>
-                                <td>7</td>
-                                <td class="text-right">الهدف العام من تطبيق الخدمة المجتمعية</td>
-                                <td>
-                                    <input type="radio" class="info-check" name="info6"
-                                           @(Model.Info6 == "نعم" ? "checked" : "") disabled />
-                                </td>
-                                <td>
-                                    <input type="radio" class="info-check" name="info6"
-                                           @(Model.Info6 == "لا" ? "checked" : "") disabled />
-                                </td>
-                            </tr>
+        <!-- Two Column Layout -->
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-8 left-column">
+                <!-- معلومات التقرير -->
+                <div class="section-container">
+                    <div class="Subtitle">
+                        معلومات التقرير
+                        @{
+                            string statusClass = Model.Status == "جديد" ? "status-inactive" :
+                                                 Model.Status == "تم التعديل" ? "status-pending" :
+                                                 Model.Status == "قيد المراجعة" ? "status-inprocess" :
+                                                    Model.Status == "ملغي" ? "status-cancel" : "status-active";
                         }
-                    </tbody>
-                </table>
+                        <span class="status-badge @statusClass" style="float:left">@Model.Status</span>
+                    </div>
+                    <div class="p-2">
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-3"><label class="control-label">رقم التقرير</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Model.ReportID</span></div>
+                                <div class="col-sm-3"><label class="control-label">رقم الملف</label></div>
+                                <div class="col-sm-3 d-flex align-items-center">
+                                    <span class="detail-value" style="margin-left:8px;">@Model.FileNo</span>
+                                    <a href="@Url.Action("ConvictFileDetails", "ConvictFile", new { id = Model.FileNo })"
+                                       target="_blank"
+                                       data-toggle="tooltip"
+                                       data-placement="left"
+                                       title="عرض ملف المحكوم"
+                                       class="btn btn-sm btn-Add"
+                                       style="font-size:11px; margin-right:8px;">
+                                        <i class="fas fa-folder-open ml-1"></i> عرض ملف المحكوم
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- بيانات الحكم والتنفيذ -->
+                <div class="section-container">
+                    <div class="Subtitle">بيانات الحكم والتنفيذ</div>
+                    <div class="p-2">
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-3"><label class="control-label">نوع الحالة</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Model.StatusType</span></div>
+                                <div class="col-sm-3"><label class="control-label">القرار الصادر</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Model.Decision</span></div>
+                            </div>
+                        </div>
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-3"><label class="control-label">جهة التنفيذ</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Model.ImplementingAuthority</span></div>
+                                <div class="col-sm-3"><label class="control-label">مصدر الحكم</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Model.JudgmentSource</span></div>
+                            </div>
+                        </div>
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-3"><label class="control-label">تاريخ بدء التنفيذ</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Html.DisplayFor(m => m.StartDate)</span></div>
+                                <div class="col-sm-3"><label class="control-label">تاريخ الانتهاء</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Html.DisplayFor(m => m.EndDate)</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المعلومات التي تم توضيحها -->
+                <div class="section-container">
+                    <div class="Subtitle">المعلومات التي تم توضيحها</div>
+                    <div class="p-2">
+                        <table class="table table-bordered table-sm text-center info-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%;">م</th>
+                                    <th style="width:70%;">البيان</th>
+                                    <th style="width:10%;">نعم</th>
+                                    <th style="width:10%;">لا</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td class="text-right">منطوق الحكم أو القرار الصادر</td>
+                                    <td>@(Model.Info1 == "نعم" ? Html.Raw("<span class='info-indicator info-yes'>✓</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                    <td>@(Model.Info1 == "لا"  ? Html.Raw("<span class='info-indicator info-no'>✗</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td class="text-right">الجهة المعنية بالتنفيذ</td>
+                                    <td>@(Model.Info2 == "نعم" ? Html.Raw("<span class='info-indicator info-yes'>✓</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                    <td>@(Model.Info2 == "لا"  ? Html.Raw("<span class='info-indicator info-no'>✗</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td class="text-right">المدة القانونية بالتنفيذ</td>
+                                    <td>@(Model.Info3 == "نعم" ? Html.Raw("<span class='info-indicator info-yes'>✓</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                    <td>@(Model.Info3 == "لا"  ? Html.Raw("<span class='info-indicator info-no'>✗</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td class="text-right">الإجراءات الواجب اتباعها</td>
+                                    <td>@(Model.Info4 == "نعم" ? Html.Raw("<span class='info-indicator info-yes'>✓</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                    <td>@(Model.Info4 == "لا"  ? Html.Raw("<span class='info-indicator info-no'>✗</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td class="text-right">العقوبات المترتبة في حال المخالفة</td>
+                                    <td>@(Model.Info5 == "نعم" ? Html.Raw("<span class='info-indicator info-yes'>✓</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                    <td>@(Model.Info5 == "لا"  ? Html.Raw("<span class='info-indicator info-no'>✗</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td class="text-right">طريقة التواصل مع جهات التنفيذ</td>
+                                    <td>@(Model.Info6 == "نعم" ? Html.Raw("<span class='info-indicator info-yes'>✓</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                    <td>@(Model.Info6 == "لا"  ? Html.Raw("<span class='info-indicator info-no'>✗</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                </tr>
+                                @if (!string.IsNullOrEmpty(Model.Info7))
+                                {
+                                    <tr>
+                                        <td>7</td>
+                                        <td class="text-right">الهدف العام من تطبيق الخدمة المجتمعية</td>
+                                        <td>@(Model.Info7 == "نعم" ? Html.Raw("<span class='info-indicator info-yes'>✓</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                        <td>@(Model.Info7 == "لا"  ? Html.Raw("<span class='info-indicator info-no'>✗</span>") : Html.Raw("<span class='info-indicator info-empty'>−</span>"))</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
+
+            <!-- Right Column -->
+            <div class="col-md-4 right-column">
+
+
+                <!-- اعتماد التقرير -->
+                @if (Model.Status != "معتمد" && Model.Status != "ملغي")
+                {
+                    <div class="section-container">
+                        <div class="Subtitle1">اعتماد التقرير</div>
+                        <div class="p-2">
+                            @using (Html.BeginForm("Approve", "ReceiveCase", FormMethod.Post, new { @class = "m-0 needs-validation", novalidate = "novalidate", id = "approveForm" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="col-sm-7" style="display:none">
+                                    @Html.TextBoxFor(m => m.FileNo, new { @class = "form-control readonly-field", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.ReportID, new { @class = "form-control readonly-field", @readonly = "readonly" })
+                                    @Html.TextBoxFor(m => m.ApprovedBy, new { @class = "form-control", required = "required", placeholder = "اسم المعتمد" })
+                                    @Html.TextBoxFor(m => m.ApproveDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", required = "required" })
+                                </div>
+
+                                <div class="row-detail p-3">
+                                    <div class="row align-items-center">
+                                        <div class="col-sm-5"><label class="control-label mb-0">الحالة</label></div>
+                                        <div class="col-sm-7">
+                                            @Html.DropDownListFor(m => m.Status,
+                                                new SelectList(new[] {
+                                                    new { Value = "", Text = "يرجى الاختيار" },
+                                                    new { Value = "معتمد", Text = "معتمد" },
+                                                    new { Value = "ملغي", Text = "ملغي" },
+                                                    new { Value = "قيد المراجعة", Text = "قيد المراجعة" }
+                                                }, "Value", "Text", Model.Status),
+                                                new { @class = "form-control", required = "required" })
+                                            @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-sm-5"><label class="control-label mb-0">ملاحظات الاعتماد</label></div>
+                                        <div class="col-sm-7">
+                                            @Html.TextAreaFor(m => m.ApproveNotes, new { @class = "form-control", rows = 3, placeholder = "أضف ملاحظات الاعتماد هنا..." })
+                                            @Html.ValidationMessageFor(m => m.ApproveNotes, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between p-2">
+                                    <div>
+                                        <button type="submit" class="btn btn-sm" style="background-color: #d4e6be; color: #4d6528; font-weight: bold ">
+                                            <i class="fas fa-check ml-1"></i> اعتماد
+                                        </button>
+                                        <a href="@Url.Action("ReceiveCaseList", "ReceiveCase")" class="btn btn-sm btn-secondary ">إلغاء</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="section-container">
+                        <div class="Subtitle">اعتماد التقرير</div>
+                        <div class="p-2">
+                            <div class="alert alert-success mb-0">
+                                تم اعتماد التقرير. تظهر بيانات الاعتماد ضمن "متابعة التقرير" أدناه.
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <!-- متابعة التقرير -->
+                <div class="section-container">
+                    <div class="Subtitle">متابعة التقرير</div>
+                    <div class="p-2">
+                        <!-- تحرير التقرير -->
+                        <div class="row">
+                            <div class="col-sm-12 p-3 fw-bold" style="background-color:#e9f0f5">
+                                <i class="fas fa-file" style="margin-left:5px; color:#5e9cce;"></i>
+                                تحرير التقرير
+                            </div>
+                        </div>
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-5"><label class="control-label">تاريخ الإنشاء</label></div>
+                                <div class="col-sm-7"><span class="detail-value">@Html.DisplayFor(m => m.CreatedDate)</span></div>
+                            </div>
+                        </div>
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-5"><label class="control-label">منشئ التقرير</label></div>
+                                <div class="col-sm-7"><span class="detail-value">@Model.CreatedBy</span></div>
+                            </div>
+                        </div>
+
+                        <!-- تعديل التقرير -->
+                        @if (!string.IsNullOrWhiteSpace(Model.EditedBy))
+                        {
+                            <div class="row">
+                                <div class="col-sm-12 p-3 fw-bold" style="background-color:#f9f7e7">
+                                    <i class="fas fa-edit" style="margin-left:5px; color:#d4a017;"></i>
+                                    تعديل التقرير
+                                </div>
+                            </div>
+                            <div class="row-detail">
+                                <div class="row">
+                                    <div class="col-sm-5"><label class="control-label">آخر تعديل بواسطة</label></div>
+                                    <div class="col-sm-7"><span class="detail-value">@Model.EditedBy</span></div>
+                                </div>
+                            </div>
+                            <div class="row-detail">
+                                <div class="row">
+                                    <div class="col-sm-5"><label class="control-label">تاريخ التعديل</label></div>
+                                    <div class="col-sm-7"><span class="detail-value">@Html.DisplayFor(m => m.EditDate)</span></div>
+                                </div>
+                            </div>
+                            <div class="row-detail">
+                                <div class="row">
+                                    <div class="col-sm-5"><label class="control-label">ملاحظات التعديل</label></div>
+                                    <div class="col-sm-7"><span class="detail-value">@Model.EditNote</span></div>
+                                </div>
+                            </div>
+                        }
+                        <!-- اعتماد التقرير -->
+                        @if (Model.Status == "معتمد" || Model.Status == "ملغي")
+                        {
+                            <div class="row">
+                                <div class="col-sm-12 p-3 fw-bold" style="background-color:#f5fbed">
+                                    <i class="fas fa-check-circle" style="margin-left:5px; color:#6ba644;"></i>
+                                    اعتماد التقرير
+                                </div>
+                            </div>
+                            <div class="row-detail">
+                                <div class="row">
+                                    <div class="col-sm-5"><label class="control-label">المعتمد</label></div>
+                                    <div class="col-sm-7"><span class="detail-value">@Model.ApprovedBy</span></div>
+                                </div>
+                            </div>
+                            <div class="row-detail">
+                                <div class="row">
+                                    <div class="col-sm-5"><label class="control-label">تاريخ الاعتماد</label></div>
+                                    <div class="col-sm-7"><span class="detail-value">@Html.DisplayFor(m => m.ApproveDate)</span></div>
+                                </div>
+                            </div>
+                            <div class="row-detail">
+                                <div class="row">
+                                    <div class="col-sm-5"><label class="control-label">ملاحظات الاعتماد</label></div>
+                                    <div class="col-sm-7"><span class="detail-value">@Html.DisplayFor(m => m.ApproveNotes)</span></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </div>
-</div>
-</div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            // Add any additional JavaScript if needed
+            $('.section-container').hover(
+                function () { $(this).css('box-shadow', '0 4px 8px rgba(129, 113, 94, 0.1)'); },
+                function () { $(this).css('box-shadow', 'none'); }
+            );
 
-            // Print functionality with better formatting
             window.addEventListener('beforeprint', function () {
-                $('.btn-back, .btn-print').hide();
+                $('.btn-back, .btn-edit').hide();
             });
-
             window.addEventListener('afterprint', function () {
-                $('.btn-back, .btn-print').show();
+                $('.btn-back, .btn-edit').show();
             });
         });
     </script>

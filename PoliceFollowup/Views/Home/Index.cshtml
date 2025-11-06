@@ -174,7 +174,7 @@
 
         .card-text {
             font-size: 14px;
-            color: #666;
+            color: #666; 
             line-height: 1.6;
             margin-top: 10px;
         }
@@ -279,7 +279,7 @@
            
 
             <div class="row p-2">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <a href="@Url.Action("ConvictFileList", "ConvictFile")" class="text-decoration-none text-dark">
                         <div class="CustomCard">
                             <div>
@@ -289,6 +289,21 @@
                                 </div>
                                 <div class="card-text">
                                     عرض و الاستعلام عن ملفات المحكومين
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <a href="@Url.Action("OneWeekList", "ElectronicMonitoring")" class="text-decoration-none text-dark">
+                        <div class="CustomCard">
+                            <div>
+                                <img src="~/Content/images/alert-folder.png" />
+                                <div class="CustomText">
+                                    <strong>المراقبة الالكترونية المنتهية خلال اسبوع</strong>
+                                </div>
+                                <div class="card-text">
+                                    عرض و الاستعلام عن المراقبة الالكترونية المنتهية خلال اسبوع
                                 </div>
                             </div>
                         </div>

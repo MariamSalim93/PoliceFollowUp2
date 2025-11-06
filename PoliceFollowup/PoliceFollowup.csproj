@@ -136,6 +136,11 @@
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=7.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.7.5.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.IO.FileSystem.AccessControl, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IO.FileSystem.AccessControl.5.0.0\lib\net461\System.IO.FileSystem.AccessControl.dll</HintPath>
     </Reference>
@@ -488,7 +493,6 @@
     <Content Include="Views\CommunityServicePledge\RecordsCase.cshtml" />
     <Content Include="Views\ConvictFile\ConvictFileList.cshtml" />
     <Content Include="Views\ConvictFile\AddConvictFile.cshtml" />
-    <Content Include="Views\ConvictFile\AddConvict.cshtml" />
     <Content Include="Views\ConvictFile\ConvictFileDetails.cshtml" />
     <Content Include="Views\ConvictFile\UpdateReport.cshtml" />
     <Content Include="Views\CommunityService\AddCommunityService.cshtml" />
@@ -506,7 +510,6 @@
     <Content Include="Views\ConvictFile\AddPledgeHandcuff.cshtml" />
     <Content Include="Views\ConvictFile\_AddReceiveCase.cshtml" />
     <Content Include="Views\ConvictFile\_AddVisit.cshtml" />
-    <Content Include="Views\ConvictFile\Add.cshtml" />
     <Content Include="Views\ReceiveCase\ReceiveCaseList.cshtml" />
     <Content Include="Views\ReceiveCase\UpdateReport.cshtml" />
     <Content Include="Views\ReceiveCase\ReceiveCaseDetails.cshtml" />
@@ -540,6 +543,11 @@
     <Content Include="Views\Master\SupervisorList.cshtml" />
     <Content Include="Views\Master\VisitsList.cshtml" />
     <Content Include="Views\Master\ResidenceList.cshtml" />
+    <Content Include="Views\ReceiveCase\_Approve.cshtml" />
+    <Content Include="Views\ReceiveCase\Approve.cshtml" />
+    <Content Include="Views\FinalReports\Approve.cshtml" />
+    <Content Include="Views\Master\Master.cshtml" />
+    <Content Include="Views\ElectronicMonitoring\OneWeekList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

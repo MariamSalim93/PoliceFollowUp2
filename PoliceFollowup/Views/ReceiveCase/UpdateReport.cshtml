@@ -14,70 +14,197 @@
     <link href="~/Content/CSSFiles/HomeStyle.css" rel="stylesheet" />
 
     <style>
-
-        .btn.btn-Add {
-            background-color: #7b7268 !important;
-            color: white;
-            text-align: center;
-            padding: 5px 15px;
-            font-weight: 600;
-        }
-
-        .btn-Add:hover {
-            background-color: #e8e3dd;
-            color: #7b7268;
-        }
-
         * {
             text-align: right;
-            direction: rtl
+            direction: rtl;
         }
 
+        body {
+            background: #f5f6fa;
+        }
+
+        /* Modern Header Style */
+        .page-header {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            padding: 30px;
+            margin: 20px 5px 30px 5px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(129, 113, 94, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .page-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -100px;
+                width: 200px;
+                height: 200px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+            }
+
+            .page-header::after {
+                content: '';
+                position: absolute;
+                bottom: -50px;
+                left: -50px;
+                width: 150px;
+                height: 150px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 50%;
+            }
+
+            .page-header h3 {
+                color: white !important;
+                margin: 0;
+                font-size: 28px;
+                font-weight: 600;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                position: relative;
+                z-index: 1;
+            }
+
+            .page-header img {
+                filter: brightness(0) invert(1);
+                position: relative;
+                z-index: 1;
+            }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Section Headers */
         .Subtitle {
-            background-color: #81715e0e;
+            background: linear-gradient(to right, #bdb0a1, #f0ece9);
             color: #81715e;
-            padding: 15px;
+            padding: 12px 20px;
             font-weight: 700;
             font-size: 15px;
+            margin-bottom: 20px;
+            margin-top: 15px;
+            border-right: 4px solid #81715e;
+            border-radius: 4px;
         }
 
+        /* Form Controls */
         .control-label {
             font-weight: 600;
+            color: #4a4a4a;
+            font-size: 13px;
+            display: block;
+            margin-bottom: 6px;
         }
 
         .form-control {
-            font-size: small;
+            font-size: 13px;
+            padding: 8px 12px;
+            height: 38px;
+            border: 1.5px solid #d4d4d4;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
 
-        select {
-            -webkit-appearance: menulist;
-            -moz-appearance: menulist;
-            appearance: menulist;
-        }
-
-            select.custom-select {
-                -webkit-appearance: none;
-                -moz-appearance: none;
-                appearance: none;
-                background-image: url('arrow-down-icon.png');
-                background-repeat: no-repeat;
-                background-position: right center;
-                padding-right: 300px;
+            .form-control:focus {
+                border-color: #81715e;
+                box-shadow: 0 0 0 0.2rem rgba(129, 113, 94, 0.15);
+                outline: none;
             }
 
-        .nav-link {
-            color: #81715e;
+            .form-control[readonly] {
+                background-color: #f8f9fa !important;
+                cursor: not-allowed;
+            }
+
+        /* Form Layout */
+        .row {
+            margin-bottom: 0 !important;
         }
 
-        .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
-            background-color: #81715e0b;
-            color: #81715e;
+        .col-md-4, .col-md-8, .col-md-12 {
+            margin-bottom: 18px;
+        }
+
+        /* Validation Styles */
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+        .text-danger {
+            font-size: 11px;
+            color: #dc3545;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Table Styling */
+        .table {
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        thead.Subtitle th {
+            background-color: #81715e !important;
+            color: white !important;
+            padding: 10px 8px;
             font-weight: 600;
-            border-top: 3px solid #81715e;
-            border-radius: 0px;
+            font-size: 14px;
+            text-align: center;
+            border: none !important;
+        }
+
+        .table td {
+            padding: 10px 8px;
+            vertical-align: middle;
+            border-color: #e0e0e0;
+        }
+
+        .table-bordered {
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Submit Button */
+        .btn-Add {
+            background: #81715e;
+            color: white;
+            border: none;
+            padding: 10px 30px !important;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(129, 113, 94, 0.3);
+        }
+
+            .btn-Add:hover {
+                background: #6b5f50;
+                box-shadow: 0 4px 10px rgba(129, 113, 94, 0.4);
+                transform: translateY(-1px);
+            }
+
+        /* Dropdown Arrow */
+        select.form-control {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+            padding-left: 35px;
+        }
+
+        /* Alert Styles */
+        .alert {
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
+
 <div class="container-fluid mt-3">
     @if (TempData["Success"] != null)
     {
@@ -88,188 +215,155 @@
         <div class="alert alert-danger">@TempData["Error"]</div>
     }
 
-
     @using (Html.BeginForm("UpdateReport", "ReceiveCase", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
-        <div class="container-fluid mt-3">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.ReportID)
-
-
-            <div class="p-3 bg-white shadow-sm" style="font-size:small">
-                <div class="d-flex align-items-center" style="gap: 10px;">
-
-                    <img src="~/Content/images/writing.png" width="34" style="margin-top: -4px;" />
-                    <h3 class="mb-0" style="color: #7b7268">تعديل استقبال حالة</h3>
-                </div>
-                <br />
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">رقم التقرير</label>
-                            @Html.TextBoxFor(model => model.ReportID, new { @class = "form-control", @readonly = "readonly" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">رقم الملف</label>
-                            @Html.TextBoxFor(model => model.FileNo, new { @class = "form-control", @readonly = "readonly" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">نوع الحالة</label>
-                            @Html.DropDownListFor(model => model.StatusType,
-                             new SelectList(new[] {
-                                 new { Value = "", Text = "يرجى الاختيار" },
-                                 new { Value = "خدمة مجتمعية", Text = "خدمة مجتمعية" },
-                                 new { Value = "مراقبة إلكترونية", Text = "مراقبة إلكترونية" },
-                             }, "Value", "Text", Model.StatusType),
-                             new { @class = "form-control is-invalid", @Required = "@Required" })
-                            @Html.ValidationMessageFor(model => model.StatusType, "", new { @class = "text-danger" })
-
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">الحكم أو القرار الصادر</label>
-                            @Html.DropDownListFor(model => model.Decision, new SelectList(ViewBag.DecisionMaster, "DecisionName", "DecisionName"), "يرجى الاختيار", new { @Id = "Decision", @class = "form-control is-invalid", @Required = "@Required" })
-                            @Html.ValidationMessageFor(model => model.Decision, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">جهة التنفيذ</label>
-                            @Html.DropDownListFor(model => model.ImplementingAuthority, new SelectList(ViewBag.AuthorityMaster, "AuthorityName", "AuthorityName"), "يرجى الاختيار", new { @Id = "ImplementingAuthority", @class = "form-control is-invalid", @Required = "@Required" })
-                            @Html.ValidationMessageFor(model => model.ImplementingAuthority, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">مصدر الحكم</label>
-                            @Html.DropDownListFor(model => model.JudgmentSource, new SelectList(ViewBag.JudgmentSourceMaster, "JudgmentSourceName", "JudgmentSourceName"), "يرجى الاختيار", new { @Id = "JudgmentSource", @class = "form-control is-invalid", @Required = "@Required" })
-                            @Html.ValidationMessageFor(model => model.JudgmentSource, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-
-                </div>
-                <div class="row date-range">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">تاريخ بدء التنفيذ</label>
-                            @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
-
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">تاريخ الانتهاء</label>
-                            @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="Subtitle" style="margin-bottom: 20px; text-align: right;">توضيح المعلومات والبيانات</div>
-                <div style="max-width: 700px; margin-right: 0; margin-left: auto;">
-                    <table class="table table-bordered table-sm text-center" style="font-size: 18px;">
-                        <thead class="Subtitle">
-                            <tr>
-                                <th style="width: 5%; font-size: 18px;">م</th>
-                                <th style="width: 60%; font-size: 18px;">المعلومات التي تم توضيحها</th>
-                                <th style="width: 6%; font-size: 18px;">نعم</th>
-                                <th style="width: 6%; font-size: 18px;">لا</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>منطوق الحكم أو القرار الصادر من الجهة القضائية</td>
-                                <td>@Html.RadioButtonFor(m => m.Info1, "نعم", new { @id = "Info1_Yes" })</td>
-                                <td>@Html.RadioButtonFor(m => m.Info1, "لا", new { @id = "Info1_No" })</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>الجهة المعنية بالتنفيذ</td>
-                                <td>@Html.RadioButtonFor(m => m.Info2, "نعم", new { @id = "Info2_Yes" })</td>
-                                <td>@Html.RadioButtonFor(m => m.Info2, "لا", new { @id = "Info2_No" })</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>المدة القانونية بالتنفيذ</td>
-                                <td>@Html.RadioButtonFor(m => m.Info3, "نعم", new { @id = "Info3_Yes" })</td>
-                                <td>@Html.RadioButtonFor(m => m.Info3, "لا", new { @id = "Info3_No" })</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>الإجراءات الواجب اتباعها</td>
-                                <td>@Html.RadioButtonFor(m => m.Info4, "نعم", new { @id = "Info4_Yes" })</td>
-                                <td>@Html.RadioButtonFor(m => m.Info4, "لا", new { @id = "Info4_No" })</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>العقوبات المترتبة في حال مخالفة الأوامر والتعليمات</td>
-                                <td>@Html.RadioButtonFor(m => m.Info5, "نعم", new { @id = "Info5_Yes" })</td>
-                                <td>@Html.RadioButtonFor(m => m.Info5, "لا", new { @id = "Info5_No" })</td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>طريقة التواصل مع جهات التنفيذ و الإشراف</td>
-                                <td>@Html.RadioButtonFor(m => m.Info6, "نعم", new { @id = "Info6_Yes" })</td>
-                                <td>@Html.RadioButtonFor(m => m.Info6, "لا", new { @id = "Info6_No" })</td>
-                            </tr>
-                            <tr id="question7">
-                                <td>7</td>
-                                <td>الهدف العام من تطبيق الخدمة المجتمعية</td>
-                                <td>@Html.RadioButtonFor(m => m.Info7, "نعم", new { @id = "Info7_Yes" })</td>
-                                <td>@Html.RadioButtonFor(m => m.Info7, "لا", new { @id = "Info7_No" })</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-                <div style="display:none">
-                    @Html.EditorFor(model => model.FileNo)
-                    @Html.EditorFor(model => model.CreatedDate)
-                    @Html.EditorFor(model => model.CreatedBy)
-                    @Html.EditorFor(model => model.EditedBy)
-                    @Html.EditorFor(model => model.EditDate)
-                    @Html.EditorFor(model => model.EditNote)
-                    @Html.EditorFor(model => model.Status)
-                </div>
-                <div class="row">
-                    <div class="mt-3" style="text-align: left !important;">
-                        <input type="submit" class="btn btn-sm btn-Add p-2" value="حفظ" />
+        <!-- Modern Header -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <div class="d-flex align-items-center" style="gap: 15px;">
+                        <img src="~/Content/images/writing.png" width="40" />
+                        <h3 class="mb-0">تعديل استقبال حالة</h3>
                     </div>
                 </div>
             </div>
-
-
         </div>
 
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ReportID)
 
+        <div class="form-card">
+            <div class="Subtitle">بيانات استقبال الحالة</div>
 
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label">رقم التقرير</label>
+                    @Html.TextBoxFor(model => model.ReportID, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">رقم الملف</label>
+                    @Html.TextBoxFor(model => model.FileNo, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">نوع الحالة</label>
+                    @Html.DropDownListFor(model => model.StatusType,
+                     new SelectList(new[] {
+                         new { Value = "", Text = "يرجى الاختيار" },
+                         new { Value = "خدمة مجتمعية", Text = "خدمة مجتمعية" },
+                         new { Value = "مراقبة إلكترونية", Text = "مراقبة إلكترونية" },
+                     }, "Value", "Text", Model.StatusType),
+                     new { @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.StatusType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label">الحكم أو القرار الصادر</label>
+                    @Html.DropDownListFor(model => model.Decision, new SelectList(ViewBag.DecisionMaster, "DecisionName", "DecisionName"), "يرجى الاختيار", new { @Id = "Decision", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.Decision, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">جهة التنفيذ</label>
+                    @Html.DropDownListFor(model => model.ImplementingAuthority, new SelectList(ViewBag.AuthorityMaster, "AuthorityName", "AuthorityName"), "يرجى الاختيار", new { @Id = "ImplementingAuthority", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.ImplementingAuthority, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">مصدر الحكم</label>
+                    @Html.DropDownListFor(model => model.JudgmentSource, new SelectList(ViewBag.JudgmentSourceMaster, "JudgmentSourceName", "JudgmentSourceName"), "يرجى الاختيار", new { @Id = "JudgmentSource", @class = "form-control is-invalid", @Required = "@Required" })
+                    @Html.ValidationMessageFor(model => model.JudgmentSource, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="row date-range">
+                <div class="col-md-4">
+                    <label class="control-label">تاريخ بدء التنفيذ</label>
+                    @Html.TextBoxFor(model => model.StartDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label">تاريخ الانتهاء</label>
+                    @Html.TextBoxFor(model => model.EndDate, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                </div>
+            </div>
+
+            <div class="Subtitle">توضيح المعلومات والبيانات</div>
+
+            <div style="max-width: 700px; margin-right: 0; margin-left: auto;">
+                <table class="table table-bordered table-sm text-center">
+                    <thead class="Subtitle">
+                        <tr>
+                            <th style="width: 5%;">م</th>
+                            <th style="width: 60%;">المعلومات التي تم توضيحها</th>
+                            <th style="width: 6%;">نعم</th>
+                            <th style="width: 6%;">لا</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>منطوق الحكم أو القرار الصادر من الجهة القضائية</td>
+                            <td>@Html.RadioButtonFor(m => m.Info1, "نعم", new { @id = "Info1_Yes" })</td>
+                            <td>@Html.RadioButtonFor(m => m.Info1, "لا", new { @id = "Info1_No" })</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>الجهة المعنية بالتنفيذ</td>
+                            <td>@Html.RadioButtonFor(m => m.Info2, "نعم", new { @id = "Info2_Yes" })</td>
+                            <td>@Html.RadioButtonFor(m => m.Info2, "لا", new { @id = "Info2_No" })</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>المدة القانونية بالتنفيذ</td>
+                            <td>@Html.RadioButtonFor(m => m.Info3, "نعم", new { @id = "Info3_Yes" })</td>
+                            <td>@Html.RadioButtonFor(m => m.Info3, "لا", new { @id = "Info3_No" })</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>الإجراءات الواجب اتباعها</td>
+                            <td>@Html.RadioButtonFor(m => m.Info4, "نعم", new { @id = "Info4_Yes" })</td>
+                            <td>@Html.RadioButtonFor(m => m.Info4, "لا", new { @id = "Info4_No" })</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>العقوبات المترتبة في حال مخالفة الأوامر والتعليمات</td>
+                            <td>@Html.RadioButtonFor(m => m.Info5, "نعم", new { @id = "Info5_Yes" })</td>
+                            <td>@Html.RadioButtonFor(m => m.Info5, "لا", new { @id = "Info5_No" })</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>طريقة التواصل مع جهات التنفيذ و الإشراف</td>
+                            <td>@Html.RadioButtonFor(m => m.Info6, "نعم", new { @id = "Info6_Yes" })</td>
+                            <td>@Html.RadioButtonFor(m => m.Info6, "لا", new { @id = "Info6_No" })</td>
+                        </tr>
+                        <tr id="question7">
+                            <td>7</td>
+                            <td>الهدف العام من تطبيق الخدمة المجتمعية</td>
+                            <td>@Html.RadioButtonFor(m => m.Info7, "نعم", new { @id = "Info7_Yes" })</td>
+                            <td>@Html.RadioButtonFor(m => m.Info7, "لا", new { @id = "Info7_No" })</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Hidden fields -->
+            <div style="display:none">
+                @Html.EditorFor(model => model.FileNo)
+                @Html.EditorFor(model => model.CreatedDate)
+                @Html.EditorFor(model => model.CreatedBy)
+                @Html.EditorFor(model => model.EditedBy)
+                @Html.EditorFor(model => model.EditDate)
+                @Html.EditorFor(model => model.EditNote)
+                @Html.EditorFor(model => model.Status)
+            </div>
+
+            <div class="mt-4" style="text-align: left !important;">
+                <input type="submit" class="btn btn-sm btn-Add" value="حفظ" />
+            </div>
+        </div>
     }
-
-
 </div>
-
-
-
-
-
 
 <script>
     (function () {
@@ -279,35 +373,26 @@
         }
 
         function applyVisibility() {
-            // التقط اختيار نوع الحالة (نص عربي كما في القائمة)
             var v = ($('select[name="StatusType"]').val() || '').trim();
 
             var isCommunity = (v === 'خدمة مجتمعية');
             var isElectronic = (v === 'مراقبة إلكترونية');
 
-            // خدمة مجتمعية: أخفِ التاريخ، أظهر Info7
             if (isCommunity) {
                 setVisible($('.date-range'), false);
                 setVisible($('#question7'), true);
             }
-            // مراقبة إلكترونية: أظهر التاريخ، أخفِ Info7
             else if (isElectronic) {
                 setVisible($('.date-range'), true);
                 setVisible($('#question7'), false);
             }
-            // غير ذلك (يرجى الاختيار): أظهر الاثنين أو اختر ما يناسبك
             else {
                 setVisible($('.date-range'), true);
                 setVisible($('#question7'), true);
             }
         }
 
-        // عند تغيير نوع الحالة
         $(document).on('change', 'select[name="StatusType"]', applyVisibility);
-
-        // عند التحميل الأول (لو في قيمة بالموديل)
         $(function () { applyVisibility(); });
     })();
 </script>
-
-

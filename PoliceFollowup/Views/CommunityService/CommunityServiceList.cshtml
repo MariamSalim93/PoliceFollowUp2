@@ -7,39 +7,152 @@
     <link href="~/Content/CSSFiles/HomeStyle.css" rel="stylesheet" />
     <link href="~/Content/CSSFiles/StatusStyle.css" rel="stylesheet" />
     <style>
+        * {
+            text-align: right;
+            direction: rtl;
+        }
+
+        body {
+            background: #f5f6fa;
+        }
+
+        /* Modern Header Style */
+        .page-header {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            padding: 30px;
+            margin: 20px 5px 30px 5px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(129, 113, 94, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .page-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -100px;
+                width: 200px;
+                height: 200px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+            }
+
+            .page-header::after {
+                content: '';
+                position: absolute;
+                bottom: -50px;
+                left: -50px;
+                width: 150px;
+                height: 150px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 50%;
+            }
+
+            .page-header h3 {
+                color: white !important;
+                margin: 0;
+                font-size: 28px;
+                font-weight: 600;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                position: relative;
+                z-index: 1;
+            }
+
+            .page-header img {
+                filter: brightness(0) invert(1);
+                position: relative;
+                z-index: 1;
+            }
+
+        /* Table Styles */
+        table.dataTable thead th {
+            background-color: #81715e !important;
+            color: #fff !important;
+            border: none !important;
+            padding: 12px 8px !important;
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            text-align: center !important;
+        }
+
+        table.dataTable tbody tr {
+            background: #fff;
+            transition: background 0.2s ease;
+        }
+
+            table.dataTable tbody tr:hover {
+                background: #f8f9fa !important;
+            }
+
+        table.dataTable tbody td {
+            padding: 10px 8px !important;
+            font-size: 12px !important;
+            vertical-align: middle !important;
+        }
+
+        .dt-buttons .btn {
+            background: #81715e;
+            color: white;
+            border: none;
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+
+            .dt-buttons .btn:hover {
+                background: #6b5f50;
+            }
+
+        .dataTables_filter input {
+            border: 2px solid #e0dad1 !important;
+            border-radius: 6px !important;
+            padding: 6px 12px !important;
+        }
+
+            .dataTables_filter input:focus {
+                border-color: #81715e !important;
+                outline: none !important;
+            }
 
         @@media print {
             @@page {
                 size: A3 landscape;
                 font-size: 8px;
             }
-        }
 
-        table thead tr {
-            border: none;
+            .page-header, .dt-buttons {
+                display: none !important;
+            }
         }
     </style>
-
 </head>
 
 <div class="container-fluid mt-3">
-    <div class="p-3 bg-white shadow-sm">
-        <div class="d-flex align-items-center" style="gap: 10px;">
-            <img src="~/Content/images/read.png" width="34" style="margin-top: -4px;" />
-            <h3 class="mb-0" style="color: #7b7268;">قائمة تنفيذ الخدمة المجتمعية</h3>
+    <!-- Modern Header -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <div class="d-flex align-items-center" style="gap: 15px;">
+                    <img src="~/Content/images/read.png" width="40" />
+                    <h3 class="mb-0">قائمة تنفيذ الخدمة المجتمعية</h3>
+                </div>
+            </div>
         </div>
-        <br />
-        <table id="TableId" class="display border-0 nowrap" style="width:100%;font-size:smaller ">
-            <thead style="text-align:right;">
-                <tr style="background-color: #e0dad1; color: #221f1c; ">
-                    <th> @Html.DisplayNameFor(model => model.ReportID)</th>
-                    <th> @Html.DisplayNameFor(model => model.FileNo)</th>
-                    <th> @Html.DisplayNameFor(model => model.CaseNo)</th>
-                    <th> @Html.DisplayNameFor(model => model.Blame)</th>
-                    <th> @Html.DisplayNameFor(model => model.StartDate)</th>
-                    <th> @Html.DisplayNameFor(model => model.EndDate)</th>
-                    <th> @Html.DisplayNameFor(model => model.CreatedDate)</th>
-                    <th> @Html.DisplayNameFor(model => model.CreatedBy)</th>
+    </div>
+
+    <!-- Table Card -->
+    <div class="p-3 bg-white shadow-sm" style="border-radius: 12px;">
+        <table id="TableId" class="display border-0 nowrap" style="width:100%;font-size:smaller">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.ReportID)</th>
+                    <th>@Html.DisplayNameFor(model => model.FileNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.CaseNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.Blame)</th>
+                    <th>@Html.DisplayNameFor(model => model.StartDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.EndDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreatedDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreatedBy)</th>
                     <th>التفاصيل</th>
                 </tr>
             </thead>
@@ -70,130 +183,157 @@
     <script src="~/Scripts/DataTables/buttons.print.min.js"></script>
     <script src="~/Scripts/mainScripts/InfoSourceDT.js"></script>
     <script type="text/javascript">
-
-    $(document).ready(function () {
-        var oTable;
-        $.ajax({
-            url: "@Url.Action("GetListOfCommunityServiceJson", "CommunityService")",
-            type: "GET",
-            dataType: "json",
-            success: function(data) {
-                oTable = $('#TableId').DataTable({
-                    data: data,
-                    responsive: true,
-                    columns: [
-                        { data: "ReportID", width: 70 },
-                        { data: "FileNo", width: 200 },
-                        { data: "CaseNo", width: 200 },
-                        { data: "Blame", width: 200 },
-
-                        {
-                            data: "StartDate", width: 70,
-                            render: function (data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    var match = data.match(/\/Date\((\d+)\)\//);
-                                    if (match) {
-                                        var date = new Date(parseInt(match[1], 10));
-                                        var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-                                        return formattedDate;
-                                    } else {
-                                        return "Invalid date";
+        $(document).ready(function () {
+            var oTable;
+            $.ajax({
+                url: "@Url.Action("GetListOfCommunityServiceJson", "CommunityService")",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    oTable = $('#TableId').DataTable({
+                        data: data,
+                        responsive: true,
+                        columns: [
+                            {
+                                data: "ReportID",
+                                width: "7%",
+                                className: "text-center"
+                            },
+                            {
+                                data: "FileNo",
+                                width: "10%",
+                                className: "text-center"
+                            },
+                            {
+                                data: "CaseNo",
+                                width: "12%",
+                                className: "text-center"
+                            },
+                            {
+                                data: "Blame",
+                                width: "18%",
+                                className: "text-center"
+                            },
+                            {
+                                data: "StartDate",
+                                width: "10%",
+                                className: "text-center",
+                                render: function (data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        var match = data.match(/\/Date\((\d+)\)\//);
+                                        if (match) {
+                                            var date = new Date(parseInt(match[1], 10));
+                                            var formattedDate = date.getFullYear() + '-' +
+                                                String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                                                String(date.getDate()).padStart(2, '0');
+                                            return formattedDate;
+                                        }
+                                        return "تاريخ غير صحيح";
                                     }
+                                    return data;
                                 }
-                                return data;
-                            }
-                        },
-                        {
-                            data: "EndDate", width: 70,
-                            render: function (data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    var match = data.match(/\/Date\((\d+)\)\//);
-                                    if (match) {
-                                        var date = new Date(parseInt(match[1], 10));
-                                        var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-                                        return formattedDate;
-                                    } else {
-                                        return "Invalid date";
+                            },
+                            {
+                                data: "EndDate",
+                                width: "10%",
+                                className: "text-center",
+                                render: function (data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        var match = data.match(/\/Date\((\d+)\)\//);
+                                        if (match) {
+                                            var date = new Date(parseInt(match[1], 10));
+                                            var formattedDate = date.getFullYear() + '-' +
+                                                String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                                                String(date.getDate()).padStart(2, '0');
+                                            return formattedDate;
+                                        }
+                                        return "تاريخ غير صحيح";
                                     }
+                                    return data;
                                 }
-                                return data;
-                            }
-                        },
-                        {
-                            data: "CreatedDate", width: 70,
-                            render: function (data, type, row) {
-                                if (type === 'display' || type === 'filter') {
-                                    var match = data.match(/\/Date\((\d+)\)\//);
-                                    if (match) {
-                                        var date = new Date(parseInt(match[1], 10));
-                                        var formattedDate = (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear();
-                                        return formattedDate;
-                                    } else {
-                                        return "Invalid date";
+                            },
+                            {
+                                data: "CreatedDate",
+                                width: "10%",
+                                className: "text-center",
+                                render: function (data, type, row) {
+                                    if (type === 'display' || type === 'filter') {
+                                        var match = data.match(/\/Date\((\d+)\)\//);
+                                        if (match) {
+                                            var date = new Date(parseInt(match[1], 10));
+                                            var formattedDate = date.getFullYear() + '-' +
+                                                String(date.getMonth() + 1).padStart(2, '0') + '-' +
+                                                String(date.getDate()).padStart(2, '0');
+                                            return formattedDate;
+                                        }
+                                        return "تاريخ غير صحيح";
                                     }
+                                    return data;
                                 }
-                                return data;
+                            },
+                            {
+                                data: "CreatedBy",
+                                width: "13%",
+                                className: "text-center"
+                            },
+                            {
+                                data: null,
+                                width: "7%",
+                                className: "text-center",
+                                render: function (data, type, row) {
+                                    return '<a href="/CommunityService/CommunityServiceDetails/' + row.ReportID + '" target="_blank" data-toggle="tooltip" data-placement="left" title="عرض التفاصيل" style="text-decoration:none">' +
+                                           '<img src="/Content/images/View.png" width="26" style="transition: transform 0.2s;" onmouseover="this.style.transform=\'scale(1.1)\'" onmouseout="this.style.transform=\'scale(1)\'" /> ' +
+                                           '</a>';
+                                }
+                            }
+                        ],
+                        order: [[0, 'desc']],
+                        language: {
+                            search: "",
+                            searchPlaceholder: "🔍 البحث...",
+                            sLengthMenu: "عرض _MENU_ سجل",
+                            info: "عرض _START_ إلى _END_ من إجمالي _TOTAL_ سجل",
+                            infoFiltered: "(تصفية من _MAX_ سجل)",
+                            infoEmpty: "لا توجد سجلات",
+                            zeroRecords: "لم يتم العثور على نتائج",
+                            paginate: {
+                                next: 'التالي',
+                                previous: 'السابق'
                             }
                         },
-                        { data: "CreatedBy", width: 200 },
-                        {
-                            data: null, width: 40,
-                            render: function (data, type, row) {
-                                var links = "";
-
-                                links += "<a href='/CommunityService/CommunityServiceDetails/" + row.ReportID + "' target='_blank' data-toggle='tooltip' data-placement='left' title='التفاصيل' style='text-decoration:none'><img src='/Content/images/View.png' width='24' /> </a>";
-
-                                return links;
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'copy',
+                                text: '<i class="fa fa-copy"></i> نسخ',
+                                className: 'btn btn-sm buttons-copy'
+                            },
+                            {
+                                extend: 'excel',
+                                text: '<i class="fa fa-file-excel-o"></i> إكسل',
+                                className: 'btn btn-sm buttons-excel'
+                            },
+                            {
+                                extend: 'print',
+                                text: '<i class="fa fa-print"></i> طباعة',
+                                className: 'btn btn-sm buttons-print'
                             }
+                        ],
+                        initComplete: function () {
+                            $('.dataTables_filter input').addClass('form-control');
+                            $('[data-toggle="tooltip"]').tooltip();
                         }
-                    ],
-                    order: [[0, 'desc']],
-                    language: {
-                        search: "",
-                        searchPlaceholder: " الاستعــلام",
-                        sLengthMenu: "_MENU_ ",
-                        info: "عرض _START_ إلى _END_ من اجمالي _TOTAL_ ",
-                        infoFiltered: "(تصفية _MAX_ من الاجمالي)",
-                        paginate: {
-                            next: 'التالي',
-                            previous: 'السابق'
-                        }
-                    },
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'copy',
-                            text: '<i class="fa fa-copy"></i> نسخ',
-                            className: 'btn btn-sm buttons-copy'
-                      },
-                        {
-                            extend: 'excel',
-                            text: '<i class="fa fa fa-file-excel-o"></i> اكسل',
-                            className: 'btn btn-sm buttons-excel'
-                        },
-                        {
-                            extend: 'print',
-                            text: '<i class="fa fa-print"></i> طباعة',
-                            className: 'btn btn-sm buttons-print '
-                        }
-                    ],
+                    });
 
-                    initComplete: function () {
-                        $('.dataTables_filter input').addClass('form-control');
-                    }
-                });
-
-                $('input', oTable.table().header()).on('keyup', function () {
-                    var colIdx = $(this).closest('th').index();
-                    oTable.column(colIdx).search(this.value).draw();
-                });
-            },
-            error: function(xhr, status, error) {
-                console.error("An error occurred:", status, error);
-            }
+                    $('input', oTable.table().header()).on('keyup', function () {
+                        var colIdx = $(this).closest('th').index();
+                        oTable.column(colIdx).search(this.value).draw();
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("حدث خطأ:", status, error);
+                }
+            });
         });
-    });
     </script>
-
 }
-

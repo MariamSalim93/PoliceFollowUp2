@@ -16,7 +16,7 @@ namespace RepositoryLayer.ReportRepo
         private readonly SqlHelper _helper = new SqlHelper();
         #endregion
 
-        #region Get List Of Electronic Monitoring
+        #region Get List Of Final Reports
         public async Task<List<FinalReportsDTO>> GetListOfFinalReportsAsync()
         {
             DataTable dt = await _helper.GetDataTableAsync("[dbo].[SP_FinalReports_GetList]");
@@ -32,6 +32,7 @@ namespace RepositoryLayer.ReportRepo
                     ImplementingAuthority = dr["ImplementingAuthority"].ToString(),
                     ImplementingDate = DateTime.Parse(dr["ImplementingDate"].ToString()),
                     EndDate = DateTime.Parse(dr["EndDate"].ToString()),
+                    Status = dr["Status"].ToString(),
                     CreatedDate = DateTime.Parse(dr["CreatedDate"].ToString()),
                     CreatedBy = dr["CreatedBy"].ToString(),
 
@@ -44,7 +45,7 @@ namespace RepositoryLayer.ReportRepo
         }
         #endregion
 
-        #region Add Electronic Monitoring
+        #region Add Final Reports
         public async Task AddFinalReportsAsync(FinalReportsDTO finalReports)
         {
             IDbDataParameter[] parameters =
@@ -70,7 +71,7 @@ namespace RepositoryLayer.ReportRepo
         }
         #endregion
 
-        #region Get Electronic Monitoring By Id
+        #region Get Final Reports By Id
         public async Task<FinalReportsDTO> GetFinalReportsByIdAsync(int reprotID)
         {
             IDbDataParameter[] parameters =
@@ -100,6 +101,7 @@ namespace RepositoryLayer.ReportRepo
                     EditNote = dr["EditNote"] != DBNull.Value ? Convert.ToString(dr["EditNote"]) : null,
                     Status = dr["Status"] != DBNull.Value ? Convert.ToString(dr["Status"]) : null,
                     ApprovedBy = dr["ApprovedBy"] != DBNull.Value ? Convert.ToString(dr["ApprovedBy"]) : null,
+                    ApproveNotes = dr["ApproveNotes"] != DBNull.Value ? dr["ApproveNotes"].ToString() : null,
                     ApproveDate = dr["ApproveDate"] != DBNull.Value ? Convert.ToDateTime(dr["ApproveDate"]) : (DateTime?)null,
 
                 };
@@ -109,7 +111,7 @@ namespace RepositoryLayer.ReportRepo
         }
         #endregion
 
-        #region Update CommunityService
+        #region Update Final Reports
         public async Task UpdateFinalReportsAsync(FinalReportsDTO finalReports)
         {
             IDbDataParameter[] parameters =
@@ -133,6 +135,22 @@ namespace RepositoryLayer.ReportRepo
             };
 
             await _helper.ExecuteNonQueryAsync("[dbo].[SP_FinalReports_Update]", parameters);
+        }
+        #endregion
+
+        #region Approve Final Reports
+        public async Task ApproveFinalReportsAsync(FinalReportsDTO finalReports)
+        {
+            IDbDataParameter[] parameters =
+            {
+            new SqlParameter("@ReportID", finalReports.ReportID),
+            new SqlParameter("@Status", finalReports.Status),
+            new SqlParameter("@ApprovedBy", finalReports.ApprovedBy),
+            new SqlParameter("@ApproveDate", finalReports.ApproveDate),
+            new SqlParameter("@ApproveNotes", finalReports.ApproveNotes)
+        };
+
+            await _helper.ExecuteNonQueryAsync("[dbo].[SP_FinalReports_Approve]", parameters);
         }
         #endregion
 

@@ -110,16 +110,111 @@ namespace PoliceFollowup.Controllers
         #endregion
 
 
-        #region Convict File : Details
+        #region ReceiveCase : Details
         public async Task<ActionResult> ReceiveCaseDetails(int id)
         {
             var model = await RCRepo.GetReceiveCaseByIdAsync(id);
+            if (model == null)
+            {
+                TempData["Error"] = "لم يتم العثور على التقرير";
+                return RedirectToAction("ReceiveCaseList");
+            }
 
+            // تعبئة افتراضية للعرض الأولي في صفحة التفاصيل
+            if (model.ApproveDate == null) model.ApproveDate = DateTime.Now;
+            if (string.IsNullOrWhiteSpace(model.ApprovedBy)) model.ApprovedBy = "مريم سالم الحمادي";
 
             return View(model);
         }
 
         #endregion
+
+
+
+
+        #region Visit : Aprove
+
+        // ReceiveCaseController.cs
+
+        public async Task<ActionResult> Approve(int id)
+        {
+            try
+            {
+                // Properly await the async method
+                var existingCase = await RCRepo.GetReceiveCaseByIdAsync(id);
+
+                if (existingCase == null)
+                {
+                    TempData["Error"] = "لم يتم العثور على التقرير";
+                    return RedirectToAction("ReceiveCaseList");
+                }
+
+                // Create the approval model with the ReportID
+                var approveModel = new ReceiveCaseDTO
+                {
+                    ReportID = id, // IMPORTANT: Set the ReportID
+                    FileNo = existingCase.FileNo,
+                    ApproveDate = DateTime.Now,
+                    ApprovedBy = "مريم سالم الحمادي",
+
+                };
+
+                return View(approveModel);
+            }
+            catch (Exception ex)
+            {
+                log4net.LogicalThreadContext.Properties["Controller"] = "ReceiveCase";
+                log4net.LogicalThreadContext.Properties["Action"] = "Approve";
+                log4net.LogicalThreadContext.Properties["Error"] = ex.Message;
+
+                TempData["Error"] = "حدث خطأ في تحميل البيانات";
+                return RedirectToAction("ReceiveCaseList");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Approve(ReceiveCaseDTO rc)
+        {
+            try
+            {
+                // Validate ReportID
+                if (rc.ReportID <= 0)
+                {
+                    TempData["Error"] = "رقم التقرير غير صحيح";
+                    return RedirectToAction("ReceiveCaseList");
+                }
+
+                // Set default values if not provided
+                rc.ApprovedBy = string.IsNullOrWhiteSpace(rc.ApprovedBy) ? "مريم سالم الحمادي" : rc.ApprovedBy;
+                rc.ApproveDate = rc.ApproveDate ?? DateTime.Now;
+
+                #region Logs
+                log4net.LogicalThreadContext.Properties["Controller"] = this.ControllerContext.RouteData.Values["controller"];
+                log4net.LogicalThreadContext.Properties["Action"] = this.ControllerContext.RouteData.Values["action"];
+                log4net.LogicalThreadContext.Properties["UserName"] = "HAJER EISA";
+                log4net.LogicalThreadContext.Properties["ReportID"] = rc.ReportID;
+                #endregion
+
+                await RCRepo.ApproveReceiveCaseAsync(rc);
+
+                TempData["Success"] = "تم اعتماد التقرير بنجاح";
+                return RedirectToAction("ReceiveCaseDetails", new { id = rc.ReportID });
+            }
+            catch (Exception ex)
+            {
+                log4net.LogicalThreadContext.Properties["Error"] = ex.Message;
+
+                ModelState.AddModelError("", "حدث خطأ أثناء اعتماد التقرير: " + ex.Message);
+                TempData["Error"] = "حدث خطأ ما أثناء اعتماد التقرير";
+
+                // Return the view with the model to show errors
+                return View(rc);
+            }
+        }
+
+        #endregion
+
 
         public ActionResult AddCase()
         {
