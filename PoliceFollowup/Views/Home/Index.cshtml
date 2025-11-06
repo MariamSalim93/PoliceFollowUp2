@@ -12,254 +12,113 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-        * {
-            font-family: 'Changa', sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { font-family: 'Changa', sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            background: linear-gradient(135deg, #f8f7f6 0%, #ebe8e4 100%);
-            min-height: 100vh;
-        }
+        body { background: linear-gradient(135deg, #f8f7f6 0%, #ebe8e4 100%); min-height: 100vh; }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
 
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(129, 113, 94, 0.2);
-            position: relative;
-            overflow: hidden;
-            text-align:center;
+            border-radius: 20px; padding: 30px; margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(129,113,94,.2); position: relative; overflow: hidden; text-align:center;
+        }
+        .hero-section::before {
+            content: ''; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px;
+            background: rgba(255,255,255,.1); border-radius: 50%;
+        }
+        .hero-section h1 { color:#fff; font-size:32px; font-weight:700; margin-bottom:10px; position:relative; z-index:1; }
+        .hero-section p { color:rgba(255,255,255,.9); font-size:16px; position:relative; z-index:1; }
+
+        /* Section header */
+        .InternalSystems{
+            background:#dfdad0; border-radius:15px; padding:15px 25px; margin-bottom:15px;
+            display:flex; align-items:center; gap:15px; box-shadow:0 3px 15px rgba(0,0,0,.08);
+            position:relative; overflow:hidden; color:#81715e; font-size:20px; font-weight:700;
+        }
+        .InternalSystems::after{ content:''; position:absolute; right:0; top:0; bottom:0; width:5px;
+            background:linear-gradient(135deg,#81715e 0%, #ab9e8f 100%);
+        }
+        .InternalSystems img{ width:50px; height:50px; background:linear-gradient(135deg,#81715e 0%, #ab9e8f 100%);
+            padding:12px; border-radius:12px; margin:0;
         }
 
-            .hero-section::before {
-                content: '';
-                position: absolute;
-                top: -50px;
-                right: -50px;
-                width: 200px;
-                height: 200px;
-                background: rgba(255, 255, 255, 0.1);
-                border-radius: 50%;
-            }
-
-            .hero-section h1 {
-                color: white;
-                font-size: 32px;
-                font-weight: 700;
-                margin-bottom: 10px;
-                position: relative;
-                z-index: 1;
-            }
-
-            .hero-section p {
-                color: rgba(255, 255, 255, 0.9);
-                font-size: 16px;
-                position: relative;
-                z-index: 1;
-            }
-
-/*        #c1b7ac
-*/        /* Enhanced Section Headers */
-        .InternalSystems {
-            background: #dfdad0;
-            border-radius: 15px;
-            padding: 15px 25px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-            color: #81715e;
-            font-size: 20px;
-            font-weight: 700;
+        /* ===== Card Design ===== */
+        .CustomCard{
+            background:#fff; border-radius:15px; padding:20px; position:relative;
+            box-shadow:0 3px 15px rgba(0,0,0,.08); transition:all .3s cubic-bezier(.4,0,.2,1);
+            cursor:pointer; border:1px solid transparent; height:100%; overflow:hidden;
+            animation: fadeInUp .5s ease-out both;
         }
-
-            .InternalSystems::after {
-                content: '';
-                position: absolute;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                width: 5px;
-                background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
-            }
-
-            .InternalSystems img {
-                width: 50px;
-                height: 50px;
-                background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
-                padding: 12px;
-                border-radius: 12px;
-                margin: 0;
-            }
-
-        /* Enhanced Card Design */
-        .CustomCard {
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            position: relative;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            border: 1px solid transparent;
-            height: 100%;
-            overflow: hidden;
+        .CustomCard::before{
+            content:''; position:absolute; top:0; left:0; right:0; height:4px;
+            background:linear-gradient(90deg,#81715e 0%, #ab9e8f 100%);
+            transform:scaleX(0); transition:transform .3s ease; transform-origin:right;
         }
+        .CustomCard:hover::before{ transform:scaleX(1); }
+        .CustomCard:hover{ transform:translateY(-5px); box-shadow:0 8px 25px rgba(129,113,94,.2); border:1px solid #81715e; background-color:#fafafa; }
 
-            .CustomCard::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 4px;
-                background: linear-gradient(90deg, #81715e 0%, #ab9e8f 100%);
-                transform: scaleX(0);
-                transition: transform 0.3s ease;
-                transform-origin: right;
-            }
-
-            .CustomCard:hover::before {
-                transform: scaleX(1);
-            }
-
-            .CustomCard:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 25px rgba(129, 113, 94, 0.2);
-                border: 1px solid #81715e;
-                background-color: #fafafa;
-            }
-
-            .CustomCard img {
-                width: 60px;
-                height: 60px;
-                background: linear-gradient(135deg, #f8f6f4 0%, #ebe8e4 100%);
-                border-radius: 15px;
-                padding: 12px;
-                margin-bottom: 15px;
-                transition: all 0.3s ease;
-                float: none !important;
-            }
-
-            .CustomCard:hover img {
-                background: linear-gradient(135deg, #ab9e8f 0%, #c1b7ac 100%);
-                transform: scale(1.1);
-            }
-
-        .CustomText {
-            font-size: 18px;
-            font-weight: 700;
-            color: #2c2c2c;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
+        /* Icon block look */
+        .CustomCard img{
+            width:60px; height:60px;
+            background:linear-gradient(135deg,#f8f6f4 0%, #ebe8e4 100%);
+            border-radius:15px; padding:12px; transition:all .3s ease; float:none !important;
         }
+        .CustomCard:hover img{ background:linear-gradient(135deg,#ab9e8f 0%, #c1b7ac 100%); transform:scale(1.1); }
 
-        .CustomCard:hover .CustomText {
-            color: #81715e;
+        .CustomText{ font-size:18px; font-weight:700; color:#2c2c2c; transition:color .3s ease; margin:0; }
+        .CustomCard:hover .CustomText{ color:#81715e; }
+
+        .card-text{ font-size:14px; color:#666; line-height:1.6; margin-top:10px; }
+        .CustomCard:hover .card-text{ color:#81715e; }
+
+        a.text-decoration-none{ text-decoration:none !important; }
+        a.text-decoration-none:hover{ text-decoration:none !important; }
+
+        .row{ margin-bottom:15px; }
+        .row.p-2{ padding-top:.5rem !important; padding-bottom:.5rem !important; }
+        .row.pt-2.pb-2{ padding-top:.5rem !important; padding-bottom:.5rem !important; }
+
+        /* ===== Key fix: use GRID inside card ===== */
+        .CustomCard > div{
+            display:grid;
+            grid-template-columns:auto 1fr;   /* صورة + عمود النص */
+            grid-auto-rows:min-content;
+            column-gap:12px;
+            align-items:center;
+            direction:rtl;                    /* RTL */
         }
-
-        .card-text {
-            font-size: 14px;
-            color: #666; 
-            line-height: 1.6;
-            margin-top: 10px;
+        /* الصورة: عمود 1 وتمتد صفّين */
+        .CustomCard > div > img{
+            grid-column:1;
+            grid-row:1 / span 2;
+            margin-bottom:0;                  /* يتغلّب على القيمة العامة */
         }
-
-        .CustomCard:hover .card-text {
-            color: #81715e;
+        /* العنوان: عمود 2 صف 1 */
+        .CustomCard > div > .CustomText{
+            grid-column:2; grid-row:1; margin:0;
         }
-
-        a.text-decoration-none {
-            text-decoration: none !important;
+        /* الوصف: عمود 2 صف 2 (تحت العنوان) */
+        .CustomCard > div > .card-text{
+            grid-column:2; grid-row:2; margin:0; line-height:1.5;
         }
-
-            a.text-decoration-none:hover {
-                text-decoration: none !important;
-            }
-
-        /* Grid adjustments */
-        .row {
-            margin-bottom: 15px;
-        }
-
-            .row.p-2 {
-                padding-top: 0.5rem !important;
-                padding-bottom: 0.5rem !important;
-            }
-
-            .row.pt-2.pb-2 {
-                padding-top: 0.5rem !important;
-                padding-bottom: 0.5rem !important;
-            }
+        /* في حال وُجدت text-col داخل بعض الكروت */
+        .CustomCard .text-col{ display:contents; }
 
         /* Animation */
-        @@keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
+        @@keyframes fadeInUp{ from{opacity:0; transform:translateY(30px);} to{opacity:1; transform:translateY(0);} }
+        .col-md-4:nth-child(1) .CustomCard{ animation-delay:.1s; }
+        .col-md-4:nth-child(2) .CustomCard{ animation-delay:.2s; }
+        .col-md-4:nth-child(3) .CustomCard{ animation-delay:.3s; }
+        .col-md-6:nth-child(1) .CustomCard{ animation-delay:.1s; }
+        .col-md-6:nth-child(2) .CustomCard{ animation-delay:.2s; }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .CustomCard {
-            animation: fadeInUp 0.5s ease-out;
-            animation-fill-mode: both;
-        }
-
-        .col-md-4:nth-child(1) .CustomCard {
-            animation-delay: 0.1s;
-        }
-
-        .col-md-4:nth-child(2) .CustomCard {
-            animation-delay: 0.2s;
-        }
-
-        .col-md-4:nth-child(3) .CustomCard {
-            animation-delay: 0.3s;
-        }
-
-        .col-md-6:nth-child(1) .CustomCard {
-            animation-delay: 0.1s;
-        }
-
-        .col-md-6:nth-child(2) .CustomCard {
-            animation-delay: 0.2s;
-        }
-
-        /* Responsive Design */
-        @@media (max-width: 768px) {
-            .hero-section {
-                padding: 25px;
-            }
-
-                .hero-section h1 {
-                    font-size: 24px;
-                }
-
-            .InternalSystems {
-                font-size: 18px;
-                padding: 15px 20px;
-            }
-
-           
+        /* Responsive */
+        @@media (max-width:768px){
+            .hero-section{ padding:25px; }
+            .hero-section h1{ font-size:24px; }
+            .InternalSystems{ font-size:18px; padding:15px 20px; }
         }
     </style>
 </head>
@@ -271,40 +130,31 @@
         <p>إدارة شاملة لملفات المحكومين والخدمات المجتمعية</p>
     </div>
 
-
-
     <!-- المحكومين Section -->
     <div class="row">
         <div class="col-md-12">
-           
-
             <div class="row p-2">
                 <div class="col-md-6">
                     <a href="@Url.Action("ConvictFileList", "ConvictFile")" class="text-decoration-none text-dark">
                         <div class="CustomCard">
                             <div>
                                 <img src="~/Content/images/arrest.png" />
-                                <div class="CustomText">
-                                    <strong>ملفات المحكومين</strong>
-                                </div>
-                                <div class="card-text">
-                                    عرض و الاستعلام عن ملفات المحكومين
+                                <div class="text-col">
+                                    <div class="CustomText"><strong>ملفات المحكومين</strong></div>
+                                    <div class="card-text">عرض و الاستعلام عن ملفات المحكومين</div>
                                 </div>
                             </div>
                         </div>
                     </a>
                 </div>
+
                 <div class="col-md-6">
                     <a href="@Url.Action("OneWeekList", "ElectronicMonitoring")" class="text-decoration-none text-dark">
                         <div class="CustomCard">
                             <div>
                                 <img src="~/Content/images/alert-folder.png" />
-                                <div class="CustomText">
-                                    <strong>المراقبة الالكترونية المنتهية خلال اسبوع</strong>
-                                </div>
-                                <div class="card-text">
-                                    عرض و الاستعلام عن المراقبة الالكترونية المنتهية خلال اسبوع
-                                </div>
+                                <div class="CustomText"><strong>المراقبة الالكترونية المنتهية خلال اسبوع</strong></div>
+                                <div class="card-text">عرض و الاستعلام عن المراقبة الالكترونية المنتهية خلال اسبوع</div>
                             </div>
                         </div>
                     </a>
@@ -313,7 +163,7 @@
         </div>
     </div>
 
-    <!-- المراقبة الالكترونية والخدمة المجتمعية Section -->
+    <!-- اجراءات المحكوم Section -->
     <div class="row">
         <div class="col-md-12">
             <div class="row pt-2 pb-2">
@@ -331,42 +181,32 @@
                         <div class="CustomCard">
                             <div>
                                 <img src="~/Content/images/writing.png" />
-                                <div class="CustomText">
-                                    <strong>استمارة استقبال حالة</strong>
-                                </div>
-                                <div class="card-text">
-                                    عرض و الاستعلام عن استمارة استقبال حالة
-                                </div>
+                                <div class="CustomText"><strong>استمارة استقبال حالة</strong></div>
+                                <div class="card-text">عرض و الاستعلام عن استمارة استقبال حالة</div>
                             </div>
                         </div>
                     </a>
                 </div>
+
                 <div class="col-md-4">
                     <a href="@Url.Action("ElectronicMonitoringList", "ElectronicMonitoring")" class="text-decoration-none text-dark">
                         <div class="CustomCard">
                             <div>
                                 <img src="~/Content/images/monitor.png" />
-                                <div class="CustomText">
-                                    <strong>تنفيذ المراقبة الالكترونية</strong>
-                                </div>
-                                <div class="card-text">
-                                    عرض و الاستعلام عن تنفيذ المراقبة الالكترونية
-                                </div>
+                                <div class="CustomText"><strong>تنفيذ المراقبة الالكترونية</strong></div>
+                                <div class="card-text">عرض و الاستعلام عن تنفيذ المراقبة الالكترونية</div>
                             </div>
                         </div>
                     </a>
                 </div>
+
                 <div class="col-md-4">
                     <a href="@Url.Action("CommunityServiceList", "CommunityService")" class="text-decoration-none text-dark">
                         <div class="CustomCard">
                             <div>
                                 <img src="~/Content/images/read.png" />
-                                <div class="CustomText">
-                                    <strong>تنفيذ الخدمة المجتمعية</strong>
-                                </div>
-                                <div class="card-text">
-                                    عرض و الاستعلام عن تنفيذ الخدمة المجتمعية
-                                </div>
+                                <div class="CustomText"><strong>تنفيذ الخدمة المجتمعية</strong></div>
+                                <div class="card-text">عرض و الاستعلام عن تنفيذ الخدمة المجتمعية</div>
                             </div>
                         </div>
                     </a>
@@ -375,38 +215,29 @@
         </div>
     </div>
 
-
     <!-- التقارير Section -->
     <div class="row">
         <div class="col-md-12">
-           
             <div class="row p-2">
                 <div class="col-md-6">
                     <a href="@Url.Action("VisitList", "Visit")" class="text-decoration-none text-dark">
                         <div class="CustomCard">
                             <div>
                                 <img src="~/Content/images/checking.png" />
-                                <div class="CustomText">
-                                    <strong>الزيارات التنفيذية</strong>
-                                </div>
-                                <div class="card-text">
-                                    عرض و الاستعلام عن الزيارات التنفيذية
-                                </div>
+                                <div class="CustomText"><strong>الزيارات التنفيذية</strong></div>
+                                <div class="card-text">عرض و الاستعلام عن الزيارات التنفيذية</div>
                             </div>
                         </div>
                     </a>
                 </div>
+
                 <div class="col-md-6">
                     <a href="@Url.Action("FinalReportsList", "FinalReports")" class="text-decoration-none text-dark">
                         <div class="CustomCard">
                             <div>
                                 <img src="~/Content/images/report.png" />
-                                <div class="CustomText">
-                                    <strong>التقارير النهائية</strong>
-                                </div>
-                                <div class="card-text">
-                                    عرض و الاستعلام عن التقارير النهائية
-                                </div>
+                                <div class="CustomText"><strong>التقارير النهائية</strong></div>
+                                <div class="card-text">عرض و الاستعلام عن التقارير النهائية</div>
                             </div>
                         </div>
                     </a>
@@ -414,6 +245,7 @@
             </div>
         </div>
     </div>
+
     <!-- التعهدات Section -->
     <div class="row">
         <div class="col-md-12">
@@ -432,27 +264,20 @@
                         <div class="CustomCard">
                             <div>
                                 <img src="~/Content/images/gps.png" />
-                                <div class="CustomText">
-                                    <strong>تعهد وتسليم القيد الالكتروني</strong>
-                                </div>
-                                <div class="card-text">
-                                    عرض و الاستعلام عن تعهد وتسليم القيد الالكتروني
-                                </div>
+                                <div class="CustomText"><strong>تعهد وتسليم القيد الالكتروني</strong></div>
+                                <div class="card-text">عرض و الاستعلام عن تعهد وتسليم القيد الالكتروني</div>
                             </div>
                         </div>
                     </a>
                 </div>
+
                 <div class="col-md-6">
                     <a href="@Url.Action("CommunityPledgeList", "CommunityServicePledge")" class="text-decoration-none text-dark">
                         <div class="CustomCard">
                             <div>
                                 <img src="~/Content/images/student.png" />
-                                <div class="CustomText">
-                                    <strong>تعهد تنفيذ خدمة مجتمعية</strong>
-                                </div>
-                                <div class="card-text">
-                                    عرض و الاستعلام عن تعهد تنفيذ خدمة مجتمعية
-                                </div>
+                                <div class="CustomText"><strong>تعهد تنفيذ خدمة مجتمعية</strong></div>
+                                <div class="card-text">عرض و الاستعلام عن تعهد تنفيذ خدمة مجتمعية</div>
                             </div>
                         </div>
                     </a>
@@ -460,5 +285,4 @@
             </div>
         </div>
     </div>
-
 </div>

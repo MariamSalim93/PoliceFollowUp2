@@ -19,6 +19,7 @@
 
         body {
             background: #f5f6fa;
+            overflow-x: hidden;
         }
 
         .container-fluid {
@@ -36,9 +37,13 @@
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(129, 113, 94, 0.2);
             position: relative;
-            overflow: hidden;
+        }
+        .header-actions {
+            position: relative;
+            z-index: 10; 
         }
 
+          
             .page-header::before {
                 content: '';
                 position: absolute;
@@ -71,9 +76,14 @@
                 z-index: 1;
             }
 
+
             .page-header img {
                 position: relative;
                 z-index: 1;
+                width: 45px;
+                background: #f4f1ed;
+                padding: 8px;
+                border-radius: 10px;
             }
 
         .Subtitle {
@@ -325,15 +335,16 @@
                             <h3 class="mb-0">تفاصيل استقبال الحالة</h3>
                         </div>
                         <div class="header-actions d-flex" style="gap: 10px;">
-                            @using (Html.BeginForm("UpdateReport", "ReceiveCase", new { id = Model.ReportID }, FormMethod.Get, new { @class = "m-0" }))
+                            <a href="@Url.Action("UpdateReport", "ReceiveCase", new { id = Model.ReportID })"
+                               class="btn btn-warning btn-sm d-inline-flex align-items-center gap-1">
+                                <i class="fa fa-edit"></i> تعديل
+                            </a>
+                            @using (Html.BeginForm("ReceiveCaseList", "ReceiveCase", FormMethod.Get, new { @class = "m-0" }))
                             {
-                                <button type="submit" class="btn btn-warning btn-sm d-inline-flex align-items-center gap-1">
-                                    <i class="fa fa-edit"></i> تعديل
+                                <button type="submit" class="btn btn-light btn-sm d-inline-flex align-items-center gap-1">
+                                    <i class="fa fa-arrow-right"></i> رجوع
                                 </button>
                             }
-                            <a href='@Url.Action("ReceiveCaseList", "ReceiveCase")' class="btn btn-light btn-sm d-inline-flex align-items-center gap-1">
-                                <i class="fas fa-arrow-right"></i> رجوع
-                            </a>
                         </div>
                     </div>
                 </div>
