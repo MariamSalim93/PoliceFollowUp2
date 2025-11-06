@@ -200,6 +200,21 @@ namespace PoliceFollowup.Controllers
 
         #endregion
 
+        #region Electronic Monitoring : View oneWeek
+        public ActionResult OneWeekList()
+        {
+            return View();
+        }
+
+
+        [HttpGet]
+        public async Task<JsonResult> GetListOfOneWeekJson()
+        {
+            var ElectronicMonitoring = await EMRepo.GetListOfElectronicMonitoringAsync();
+            return Json(ElectronicMonitoring, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
         public ActionResult AddMonitor1()
         {
             return View();

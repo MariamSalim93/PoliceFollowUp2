@@ -33,6 +33,7 @@ namespace RepositoryLayer.ReportRepo
                     JudgmentSource = dr["JudgmentSource"].ToString(),
                     StartDate = dr["StartDate"] != DBNull.Value ? Convert.ToDateTime(dr["StartDate"]) : (DateTime?)null,
                     EndDate = dr["EndDate"] != DBNull.Value ? Convert.ToDateTime(dr["EndDate"]) : (DateTime?)null,
+                    Status = dr["Status"].ToString(),
                     CreatedDate = DateTime.Parse(dr["CreatedDate"].ToString()),
                     CreatedBy = dr["CreatedBy"].ToString(),
 
@@ -97,7 +98,7 @@ namespace RepositoryLayer.ReportRepo
 
                     ReportID = Int32.Parse(dr["ReportID"].ToString()),
                     FileNo = Int32.Parse(dr["FileNo"].ToString()),
-                    StatusType = dr["StatusType"].ToString(),           
+                    StatusType = dr["StatusType"].ToString(),
                     Decision = dr["Decision"].ToString(),
                     ImplementingAuthority = dr["ImplementingAuthority"].ToString(),
                     JudgmentSource = dr["JudgmentSource"].ToString(),
@@ -115,11 +116,12 @@ namespace RepositoryLayer.ReportRepo
                     EditDate = dr["EditDate"] != DBNull.Value ? Convert.ToDateTime(dr["EditDate"]) : (DateTime?)null,
                     EditedBy = dr["EditedBy"] != DBNull.Value ? dr["EditedBy"].ToString() : null,
                     EditNote = dr["EditNote"] != DBNull.Value ? dr["EditNote"].ToString() : null,
-                    Status = dr["Status"].ToString(),
-                    ApprovedBy = dr["ApprovedBy"].ToString(),
-                    ApproveDate = dr["ApproveDate"] != DBNull.Value ? Convert.ToDateTime(dr["ApproveDate"]) : (DateTime?)null,
-
-                };
+                    Status = dr["Status"] != DBNull.Value ? dr["Status"].ToString() : null,
+                    ApprovedBy = dr["ApprovedBy"] != DBNull.Value ? dr["ApprovedBy"].ToString() : null,
+                    ApproveNotes = dr["ApproveNotes"] != DBNull.Value ? dr["ApproveNotes"].ToString() : null,
+                    ApproveDate = dr["ApproveDate"] != DBNull.Value ? Convert.ToDateTime(dr["ApproveDate"]) : (DateTime?)null
+                
+            };
             }
 
             return receiveCase;
@@ -148,18 +150,34 @@ namespace RepositoryLayer.ReportRepo
                 new SqlParameter("@Info7", receiveCase.Info7 ??(object) DBNull.Value),
                 new SqlParameter("@CreatedBy", receiveCase.CreatedBy ??(object) DBNull.Value),
                 new SqlParameter("@CreatedDate", receiveCase.CreatedDate ??(object) DBNull.Value),
-                new SqlParameter("@EditedBy", receiveCase.EditedBy?? (object)DBNull.Value),
-                new SqlParameter("@EditDate", receiveCase.EditDate ??(object) DBNull.Value),
-                new SqlParameter("@EditNote", receiveCase.EditNote ??(object) DBNull.Value),
-                new SqlParameter("@Status", receiveCase.Status ??(object) DBNull.Value),
-                new SqlParameter("@ApprovedBy", receiveCase.ApprovedBy ??(object) DBNull.Value),
-                new SqlParameter("@ApproveDate", receiveCase.ApproveDate ??(object) DBNull.Value),
-                new SqlParameter("@ApproveNotes", receiveCase.ApproveNotes ??(object) DBNull.Value),
+                new SqlParameter("@EditedBy", receiveCase.EditedBy ?? (object)DBNull.Value),
+                new SqlParameter("@EditDate", receiveCase.EditDate ?? (object)DBNull.Value),
+                new SqlParameter("@EditNote", receiveCase.EditNote ?? (object)DBNull.Value),
+                new SqlParameter("@Status", receiveCase.Status ?? (object)DBNull.Value),
+                new SqlParameter("@ApprovedBy", receiveCase.ApprovedBy ?? (object)DBNull.Value),
+                new SqlParameter("@ApproveDate", receiveCase.ApproveDate ?? (object)DBNull.Value),
+                new SqlParameter("@ApproveNotes", receiveCase.ApproveNotes ?? (object)DBNull.Value)
+
             };
 
             await _helper.ExecuteNonQueryAsync("[dbo].[SP_ReceiveCase_Update]", parameters);
         }
         #endregion
 
+        #region Receive Case Reports
+        public async Task ApproveReceiveCaseAsync(ReceiveCaseDTO receiveCase)
+        {
+            IDbDataParameter[] parameters =
+            {
+            new SqlParameter("@ReportID", receiveCase.ReportID),
+            new SqlParameter("@Status", receiveCase.Status),
+            new SqlParameter("@ApprovedBy", receiveCase.ApprovedBy),
+            new SqlParameter("@ApproveDate", receiveCase.ApproveDate),
+            new SqlParameter("@ApproveNotes", receiveCase.ApproveNotes)
+        };
+
+            await _helper.ExecuteNonQueryAsync("[dbo].[SP_ReceiveCase_Approve]", parameters);
+        }
+        #endregion
     }
 }

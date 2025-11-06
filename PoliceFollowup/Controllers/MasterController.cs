@@ -31,6 +31,11 @@ namespace PoliceFollowup.Controllers
 
         #endregion
 
+        public ActionResult Master()
+        {
+            return View();
+        }
+
         #region Master :  AccusationType
 
         #region AccusationType : List

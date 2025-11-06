@@ -17,6 +17,9 @@
             direction: rtl
         }
 
+        body {
+            background: #f5f6fa;
+        }
 
         .container-fluid {
             font-size: 12px;
@@ -26,6 +29,53 @@
             font-size: 18px !important;
         }
 
+        .page-header {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            padding: 30px;
+            margin: 20px 5px 30px 5px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(129, 113, 94, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .page-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -100px;
+                width: 200px;
+                height: 200px;
+                background: rgba(255,255,255,0.1);
+                border-radius: 50%;
+            }
+
+            .page-header::after {
+                content: '';
+                position: absolute;
+                bottom: -50px;
+                left: -50px;
+                width: 150px;
+                height: 150px;
+                background: rgba(255,255,255,0.05);
+                border-radius: 50%;
+            }
+
+            .page-header h3 {
+                color: #fff !important;
+                margin: 0;
+                font-size: 28px !important;
+                font-weight: 600;
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                position: relative;
+                z-index: 1;
+            }
+
+            .page-header img {
+                position: relative;
+                z-index: 1;
+            }
+
         .Subtitle {
             background-color: #81715e0e;
             color: #81715e;
@@ -33,6 +83,7 @@
             font-weight: 700;
             font-size: 13px;
             margin-bottom: 10px;
+            border-right: 4px solid #81715e;
         }
 
         .control-label {
@@ -59,20 +110,6 @@
                 border-bottom: none;
             }
 
-        .nav-link {
-            color: #81715e;
-            font-size: 12px;
-        }
-
-        .nav-tabs .nav-item.show .nav-link,
-        .nav-tabs .nav-link.active {
-            background-color: #81715e0b;
-            color: #81715e;
-            font-weight: 600;
-            border-top: 3px solid #81715e;
-            border-radius: 0px;
-        }
-
         .status-badge {
             padding: 3px 8px;
             border-radius: 4px;
@@ -82,7 +119,7 @@
 
         .status-active {
             background-color: #28a745;
-            color: white;
+            color: #fff;
         }
 
         .status-pending {
@@ -91,101 +128,33 @@
         }
 
         .status-inactive {
-            background-color: #dc3545;
-            color: white;
+            background-color: #29579d;
+            color: #fff;
         }
 
-        .info-check {
-            width: 14px;
-            height: 14px;
-            cursor: not-allowed;
+        .status-cancel {
+            background-color: #ef2828;
+            color: #fff;
         }
 
-        .btn-back {
-            background-color: #81715e;
-            color: white;
-            padding: 5px 15px;
-            font-weight: 600;
-            font-size: 11px;
-            border: none;
-            border-radius: 4px;
-            transition: all 0.3s ease;
+        .status-inprocess {
+            background-color: #e0782d;
+            color: #fff;
         }
 
-            .btn-back:hover {
-                background-color: #6b5f50;
-                color: white;
-                text-decoration: none;
-            }
-
-        .btn-print {
-            background-color: #e8e3dd;
-            color: #7b7268;
-            padding: 5px 15px;
-            font-weight: 600;
-            font-size: 11px;
-            border: 1px solid #7b7268;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
-
-            .btn-print:hover {
-                background-color: #7b7268;
-                color: white;
-            }
-
-        .table {
-            font-size: 11px;
-        }
-
-            .table th {
-                font-size: 11px;
-                padding: 5px;
-            }
-
-            .table td {
-                padding: 5px;
-            }
-
-        .p-3 {
-            padding: 0.75rem !important;
-        }
-
-        .p-2 {
-            padding: 0.5rem !important;
-        }
-
-
-        .btn i {
-            font-size: 10px;
-        }
-        /* Make both buttons identical in box metrics */
         .btn-back, .btn-edit {
             display: inline-flex;
             align-items: center;
-            gap: .25rem; /* same as gap-1 */
-            padding: 5px 15px; /* identical */
-            font-size: 11px; /* identical */
-            line-height: 1.2; /* identical */
-            border-radius: 8px; /* identical cornerradius */
-            border: 0; /* kill Bootstrap border on btn-warning */
+            gap: .25rem;
+            padding: 5px 15px;
+            font-size: 11px;
+            line-height: 1.2;
+            border-radius: 8px;
+            border: 0;
             vertical-align: middle;
+            transition: all .3s ease;
         }
 
-        /* Make both buttons identical in box metrics */
-        .btn-back, .btn-edit {
-            display: inline-flex;
-            align-items: center;
-            gap: .25rem; /* same as gap-1 */
-            padding: 5px 15px; /* identical */
-            font-size: 11px; /* identical */
-            line-height: 1.2; /* identical */
-            border-radius: 8px; /* identical cornerradius */
-            border: 0; /* kill Bootstrap border on btn-warning */
-            vertical-align: middle;
-        }
-
-        /* Colors only */
         .btn-edit {
             background: #ffc107;
             color: #4e4a45;
@@ -209,8 +178,97 @@
         .header-actions {
             margin-right: auto;
         }
-        /* RTL: pushes actions to the left */
 
+        .table {
+            font-size: 11px;
+        }
+
+            .table th {
+                font-size: 11px;
+                padding: 5px;
+            }
+
+            .table td {
+                padding: 5px;
+            }
+
+        .p-3 {
+            padding: .75rem !important;
+        }
+
+        .p-2 {
+            padding: .5rem !important;
+        }
+
+        .btn i {
+            font-size: 10px;
+        }
+
+        .section-container {
+            background-color: #fff;
+            border: 1px solid #e3e3e3;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .left-column, .right-column {
+            padding: 0 15px;
+        }
+
+        .visit-info-box {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border: 1px solid #9c27b0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+            .visit-info-box .visit-label {
+                color: #6a1b9a;
+                font-weight: 700;
+                font-size: 11px;
+                margin-bottom: 5px;
+            }
+
+            .visit-info-box .visit-value {
+                color: #4a148c;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+        .visit-report-box {
+            background-color: #fafafa;
+            border-left: 3px solid #81715e;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+            min-height: 100px;
+        }
+
+        .text-right {
+            text-align: right !important;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+        .visit-icon {
+            font-size: 24px;
+            color: #7b1fa2;
+        }
+
+        @@media print {
+            .btn-back, .btn-edit, .header-actions {
+                display: none !important;
+            }
+
+            .col-md-6 {
+                width: 50% !important;
+                float: right !important;
+            }
+        }
     </style>
 </head>
 
@@ -224,216 +282,186 @@
         <div class="alert alert-danger">@TempData["Error"]</div>
     }
 
-<div class="p-3 bg-white shadow-sm">
-   
-    <div class="d-flex align-items-center mb-3">
-        <img src="~/Content/images/checking.png" width="34" style="margin-top:-4px;">
-        <h3 class="mb-0 mx-2" style="color:#7b7268">تفاصيل زيارة مراقبة الكترونية أو خدمة مجتمعية</h3>
-
-        <div class="header-actions">
-            @using (Html.BeginForm("UpdateReport", "Visit", new { id = Model.ReportID }, FormMethod.Get, new { @class = "d-inline-block m-0" }))
-            {
-                <button type="submit" class="btn btn-edit"><i class="fa fa-edit" style="margin-left:.25rem;"></i> تعديل</button>
-            }
-            <a href='@Url.Action("VisitList","Visit")' class="btn btn-back">
-                <i class="fas fa-arrow-right" style="margin-left:.25rem;"></i> رجوع
-            </a>
-        </div>
-    </div>
-
-    <br />
-
-    <div class="row">
-        <!-- القسم الأول: المعلومات الأساسية -->
-        <div class="col-md-6">
-            <div class="Subtitle">معلومات التقرير</div>
-            <div class="p-2">
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">رقم التقرير</label>
+    <div class="p-3 bg-white shadow-sm">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center" style="gap: 15px;">
+                            <img src="~/Content/images/checking.png" width="40" />
+                            <h3 class="mb-0">تفاصيل زيارة مراقبة الكترونية أو خدمة مجتمعية</h3>
                         </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.ReportID</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">رقم الملف</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.FileNo</span>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">حالة التدقيق</label>
-                        </div>
-                        <div class="col-sm-7">
-                            @{
-                                string statusClass = Model.Status == "جديد" ? "status-active" :
-                                                    Model.Status == "تم التعديل" ? "status-pending" : "status-inactive";
+                        <div class="header-actions d-flex" style="gap: 10px;">
+                            @using (Html.BeginForm("UpdateReport", "Visit", new { id = Model.ReportID }, FormMethod.Get, new { @class = "m-0" }))
+                            {
+                                <button type="submit" class="btn btn-warning btn-sm d-inline-flex align-items-center gap-1">
+                                    <i class="fa fa-edit"></i> تعديل
+                                </button>
                             }
-                            <span class="status-badge @statusClass">@Model.Status</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تاريخ الإنشاء</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Html.DisplayFor(m => m.CreatedDate)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">منشئ التقرير</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.CreatedBy</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">آخر تعديل بواسطة</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.EditedBy</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تاريخ التعديل</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Html.DisplayFor(m => m.EditDate)</span>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">ملاحظات التعديل</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.EditNote</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">المعتمد</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.ApprovedBy</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تاريخ الاعتماد</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Html.DisplayFor(m => m.ApproveDate)</span>
+                            <a href='@Url.Action("VisitList", "Visit")' class="btn btn-light btn-sm d-inline-flex align-items-center gap-1">
+                                <i class="fas fa-arrow-right"></i> رجوع
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- القسم الثاني: بيانات الحكم -->
-        <div class="col-md-6">
-            <div class="Subtitle">بيانات الحكم</div>
-            <div class="p-2">
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تاريخ الزيارة</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Html.DisplayFor(m => m.VisitDate)</span>
+        <br />
+
+        <!-- Two Column Layout -->
+        <div class="row">
+            <!-- Left Column -->
+            <div class="col-md-8 left-column">
+                <!-- معلومات التقرير -->
+                <div class="section-container">
+                    <div class="Subtitle">
+                        معلومات التقرير
+                        @{
+                            string statusClass = Model.Status == "جديد" ? "status-inactive" :
+                                                 Model.Status == "تم التعديل" ? "status-pending" :
+                                                 Model.Status == "قيد المراجعة" ? "status-inprocess" :
+                                                 Model.Status == "ملغي" ? "status-cancel" : "status-active";
+                        }
+                        <span class="status-badge @statusClass" style="float:left">@Model.Status</span>
+                    </div>
+                    <div class="p-2">
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-3"><label class="control-label">رقم التقرير</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Model.ReportID</span></div>
+                                <div class="col-sm-3"><label class="control-label">رقم الملف</label></div>
+                                <div class="col-sm-3 d-flex align-items-center">
+                                    <span class="detail-value" style="margin-left:8px;">@Model.FileNo</span>
+                                    <a href="@Url.Action("ConvictFileDetails", "ConvictFile", new { id = Model.FileNo })"
+                                       target="_blank"
+                                       data-toggle="tooltip"
+                                       data-placement="left"
+                                       title="عرض ملف المحكوم"
+                                       class="btn btn-sm btn-Add"
+                                       style="font-size:11px; margin-right:8px;">
+                                        <i class="fas fa-folder-open ml-1"></i> عرض ملف المحكوم
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">مكان الزيارة</label>
+                <!-- بيانات الزيارة -->
+                <div class="section-container">
+                    <div class="Subtitle">بيانات الزيارة</div>
+                    <div class="p-2">
+                        <!-- معلومات الزيارة المميزة -->
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-3"><label class="control-label">مكان الزيارة</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Model.VisitPlace</span></div>
+                                <div class="col-sm-3"><label class="control-label">تاريخ الزيارة</label></div>
+                                <div class="col-sm-3"><span class="detail-value">@Html.DisplayFor(m => m.VisitDate)</span></div>
+                            </div>
                         </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.VisitPlace</span>
+
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-3"><label class="control-label">الجهة المنفذة</label></div>
+                                <div class="col-sm-9"><span class="detail-value">@Model.ImplementingAuthority</span></div>
+                            </div>
                         </div>
+
+                        <!-- تقرير الزيارة -->
+                        <div class="visit-report-box">
+                            <label class="control-label" style="color:#81715e; font-size:13px;">
+                                <i class="fas fa-file-alt" style="margin-left:5px;"></i>
+                                تقرير الزيارة
+                            </label>
+                            <div class="mt-3">
+                                <span class="detail-value" style="font-size:12px; line-height:1.6;">
+                                    @(string.IsNullOrWhiteSpace(Model.VisitReport) ? "لم يتم إضافة تقرير بعد" : Model.VisitReport)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-md-4 right-column">
+                <!-- متابعة التقرير -->
+                <div class="section-container">
+                    <div class="Subtitle">متابعة التقرير</div>
+                    <div class="p-2">
+                        <!-- تحرير التقرير -->
+                        <div class="row">
+                            <div class="col-sm-12 p-3 fw-bold" style="background-color:#e9f0f5">تحرير التقرير</div>
+                        </div>
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-5"><label class="control-label">تاريخ الإنشاء</label></div>
+                                <div class="col-sm-7"><span class="detail-value">@Html.DisplayFor(m => m.CreatedDate)</span></div>
+                            </div>
+                        </div>
+                        <div class="row-detail">
+                            <div class="row">
+                                <div class="col-sm-5"><label class="control-label">منشئ التقرير</label></div>
+                                <div class="col-sm-7"><span class="detail-value">@Model.CreatedBy</span></div>
+                            </div>
+                        </div>
+
+                        <!-- تعديل التقرير -->
+                        @if (!string.IsNullOrWhiteSpace(Model.EditedBy))
+                        {
+                            <div class="row">
+                                <div class="col-sm-12 p-3 fw-bold" style="background-color:#f9f7e7">تعديل التقرير</div>
+                            </div>
+                            <div class="row-detail">
+                                <div class="row">
+                                    <div class="col-sm-5"><label class="control-label">آخر تعديل بواسطة</label></div>
+                                    <div class="col-sm-7"><span class="detail-value">@Model.EditedBy</span></div>
+                                </div>
+                            </div>
+                            <div class="row-detail">
+                                <div class="row">
+                                    <div class="col-sm-5"><label class="control-label">تاريخ التعديل</label></div>
+                                    <div class="col-sm-7"><span class="detail-value">@Html.DisplayFor(m => m.EditDate)</span></div>
+                                </div>
+                            </div>
+                            <div class="row-detail">
+                                <div class="row">
+                                    <div class="col-sm-5"><label class="control-label">ملاحظات التعديل</label></div>
+                                    <div class="col-sm-7"><span class="detail-value">@Model.EditNote</span></div>
+                                </div>
+                            </div>
+                        }
+
                     </div>
                 </div>
 
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">اسم الجهة المنفذة</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.ImplementingAuthority</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row-detail">
-                    <div class="row">
-                        <div class="col-sm-5">
-                            <label class="control-label">تقرير الزيارة</label>
-                        </div>
-                        <div class="col-sm-7">
-                            <span class="detail-value">@Model.VisitReport</span>
-                        </div>
-                    </div>
-                </div>
-
+          
             </div>
         </div>
-
-
     </div>
-</div>
 </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            // Add any additional JavaScript if needed
+            // Hover effect for sections
+            $('.section-container').hover(
+                function () { $(this).css('box-shadow', '0 4px 8px rgba(129, 113, 94, 0.1)'); },
+                function () { $(this).css('box-shadow', 'none'); }
+            );
 
-            // Print functionality with better formatting
+            // Initialize tooltips
+            $('[data-toggle="tooltip"]').tooltip();
+
+            // Print handlers
             window.addEventListener('beforeprint', function () {
-                $('.btn-back, .btn-print').hide();
+                $('.btn-back, .btn-edit, .header-actions').hide();
             });
 
             window.addEventListener('afterprint', function () {
-                $('.btn-back, .btn-print').show();
+                $('.btn-back, .btn-edit, .header-actions').show();
             });
         });
     </script>

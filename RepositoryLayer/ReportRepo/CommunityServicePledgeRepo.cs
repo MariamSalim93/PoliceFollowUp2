@@ -132,6 +132,17 @@ namespace RepositoryLayer.ReportRepo
         }
         #endregion
 
+        #region Sign CommunityServicePledge
+        public async Task SignCommunityPledgeAsync(CommunityServicePledgeDTO CommunityPledge)
+        {
+            IDbDataParameter[] parameters =
+            {
+        new SqlParameter("@ReportID", CommunityPledge.ReportID),
+        new SqlParameter("@Signature", CommunityPledge.Signature)
+    };
 
+            await _helper.ExecuteNonQueryAsync("[PE].[SP_CommunityServicePledge_Sign]", parameters);
+        }
+        #endregion
     }
 }

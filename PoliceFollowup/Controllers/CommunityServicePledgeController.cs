@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using RepositoryLayer.MasterRepo;
 using RepositoryLayer.ReportRepo;
 using SharedLayer.Models;
@@ -11,15 +13,27 @@ using SharedLayer.Models;
 
 namespace PoliceFollowup.Controllers
 {
+
     public class CommunityServicePledgeController : Controller
     {
         #region Repositories and Logs
 
-        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(ConvictFileController));
+        private static readonly log4net.ILog Log = log4net.LogManager.GetLogger(typeof(CommunityServicePledgeController));
         readonly CommunityServicePledgeRepo CPRepo = new CommunityServicePledgeRepo();
+        readonly ConvictFileRepo CFRepo = new ConvictFileRepo();
         readonly AccusationTypeRepo MasterAT = new AccusationTypeRepo();
 
+        private readonly string controllerName;
+        private readonly string username;
         #endregion
+        public CommunityServicePledgeController()
+        {
+            controllerName = nameof(CommunityServicePledgeController);
+            TempData["Controller"] = controllerName;
+            string user = "HAJER EISA MOHAMED";
+            username = user;
+        }
+
 
         #region Community Pledge : View All reports
         public ActionResult CommunityPledgeList()
@@ -102,17 +116,87 @@ namespace PoliceFollowup.Controllers
 
         #endregion
 
-        #region Community Service : Details
+        #region Community Pledge : Details
         public async Task<ActionResult> CommunityPledgeDetails(int id)
         {
-            var model = await CPRepo.GetCommunityServicePledgeByIdAsync(id);
+            try
+            {
+                var model = await CPRepo.GetCommunityServicePledgeByIdAsync(id);
+                var Convict = await CFRepo.GetConvictFileByIdAsync(id);
+
+                if (model == null) return HttpNotFound();
 
 
-            return View(model);
+            ViewBag.Data = new ConvictFileDTO
+            {
+                ReportID = model.FileNo ,
+                UnifiedNo = Convict.UnifiedNo,
+                Name = Convict.Name,                
+            };
+
+
+                // Handle Signature Display
+
+                ViewBag.CreatedDate = DateTime.Now;
+                ViewBag.CreatedBy = Session["EmployeeName"]?.ToString() ?? "HAJER EISA";
+
+                Log.Info($"Community Pledge Details Loaded Successfully");
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Exception = ex.Message;
+                ViewBag.ControllerName = ControllerContext.RouteData.Values["controller"];
+                ViewBag.ActionName = ControllerContext.RouteData.Values["action"];
+                Log.Error($"An error occurred while viewing Community Pledge details ID: {id}", ex);
+                return RedirectToAction("Error", "Error");
+            }
         }
 
         #endregion
 
+        #region Community Pledge: Sign File
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SignFile(CommunityServicePledgeDTO pledge)
+        {
+            try
+            {
+                // Save the drawn canvas signature as image file
+                if (!string.IsNullOrWhiteSpace(pledge.Signature) &&
+                    pledge.Signature.StartsWith("data:image/png;base64,"))
+                {
+                    string base64Data = pledge.Signature.Replace("data:image/png;base64,", "");
+                    byte[] imageBytes = Convert.FromBase64String(base64Data);
+                    string fileName = $"Signature_{pledge.ReportID}_{DateTime.Now:yyyyMMddHHmmss}.png";
+                    string folderPath = Server.MapPath("~/Content/Documents/Signatures/");
+
+                    if (!Directory.Exists(folderPath))
+                        Directory.CreateDirectory(folderPath);
+
+                    string filePath = Path.Combine(folderPath, fileName);
+                    System.IO.File.WriteAllBytes(filePath, imageBytes);
+
+                    // Save the file path
+                    pledge.Signature = $"~/Content/Documents/Signatures/{fileName}";
+                }
+
+                await CPRepo.UpdateCommunityServicePledgeAsync(pledge);
+
+                TempData["Success"] = "تم التوقيع بنجاح.";
+                return RedirectToAction("CommunityPledgeDetails", new { id = pledge.ReportID });
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Exception = ex.Message;
+                Log.Error($"An error occurred while signing pledge ID: {pledge.ReportID}", ex);
+                TempData["Error"] = "حدث خطأ أثناء حفظ التوقيع.";
+                return RedirectToAction("CommunityPledgeDetails", new { id = pledge.ReportID });
+            }
+        }
+
+        #endregion
         public ActionResult AddPledge()
         {
             return View();

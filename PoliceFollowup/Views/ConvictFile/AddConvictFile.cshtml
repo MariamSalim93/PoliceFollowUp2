@@ -16,70 +16,201 @@
     <style>
         * {
             text-align: right;
+            direction: rtl;
         }
 
+        body {
+            background: #f5f6fa;
+        }
+
+        /* Modern Header Style */
+        .page-header {
+            background: linear-gradient(135deg, #81715e 0%, #ab9e8f 100%);
+            padding: 30px;
+            margin: 20px 5px 30px 5px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(129, 113, 94, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+            .page-header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: -100px;
+                width: 200px;
+                height: 200px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+            }
+
+            .page-header::after {
+                content: '';
+                position: absolute;
+                bottom: -50px;
+                left: -50px;
+                width: 150px;
+                height: 150px;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 50%;
+            }
+
+            .page-header h3 {
+                color: white !important;
+                margin: 0;
+                font-size: 28px;
+                font-weight: 600;
+                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                position: relative;
+                z-index: 1;
+            }
+
+            .page-header img {
+                filter: brightness(0) invert(1);
+                position: relative;
+                z-index: 1;
+            }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Section Headers */
         .Subtitle {
-            background-color: #81715e0e;
-            color: #7b7268;
-            padding: 12px 15px;
+            background: linear-gradient(to right, #bdb0a1, #e8e0d7);
+            color: #81715e;
+            padding: 12px 20px;
             font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 15px;
-            margin-top: 20px;
+            font-size: 15px;
+            margin-bottom: 20px;
+            margin-top: 25px;
+            border-right: 4px solid #81715e;
+            border-radius: 4px;
         }
 
+        /* Form Controls */
         .control-label {
             font-weight: 600;
-            color: #666;
+            color: #4a4a4a;
             font-size: 13px;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .form-control {
             font-size: 13px;
-            padding: 6px 10px;
-            height: 34px;
+            padding: 8px 12px;
+            height: 38px;
+            border: 1.5px solid #d4d4d4;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
+
+            .form-control:focus {
+                border-color: #81715e;
+                box-shadow: 0 0 0 0.2rem rgba(129, 113, 94, 0.15);
+                outline: none;
+            }
+
+            .form-control[readonly] {
+                background-color: #f8f9fa;
+                cursor: not-allowed;
+            }
 
         textarea.form-control {
             height: auto;
-            min-height: 80px;
+            min-height: 85px;
+            resize: vertical;
         }
 
-        /* Critical: Remove extra spacing */
+        /* Form Layout */
         .form-group {
-            margin-bottom: 15px !important;
+            margin-bottom: 18px !important;
         }
 
         .row {
             margin-bottom: 0 !important;
         }
 
-        .col-md-4, .col-4 {
-            margin-bottom: 15px;
+        .col-md-4, .col-4, .col-md-12 {
+            margin-bottom: 18px;
         }
 
-        /* Remove Bootstrap's default form spacing */
         .form-horizontal .form-group {
             margin-left: 0;
             margin-right: 0;
+        }
+
+        /* Validation Styles */
+        .is-invalid {
+            border-color: #dc3545 !important;
+        }
+
+        .text-danger {
+            font-size: 11px;
+            color: #dc3545;
+            margin-top: 4px;
+            display: block;
+        }
+
+        /* Submit Button */
+        .btn-Add {
+            background: #81715e;
+            color: white;
+            border: none;
+            padding: 10px 30px !important;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 6px rgba(129, 113, 94, 0.3);
+        }
+
+            .btn-Add:hover {
+                background: #6b5f50;
+                box-shadow: 0 4px 10px rgba(129, 113, 94, 0.4);
+                transform: translateY(-1px);
+            }
+
+        /* File Input Styling */
+        input[type="file"].form-control {
+            padding: 6px 12px;
+            height: auto;
+        }
+
+        /* Dropdown Arrow */
+        select.form-control {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+            padding-left: 35px;
         }
     </style>
 </head>
 
 <div class="container-fluid mt-3">
+    <!-- Modern Header -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="page-header">
+                <div class="d-flex align-items-center" style="gap: 15px;">
+                    <img src="~/Content/images/arrest.png" width="40" />
+                    <h3 class="mb-0">اضافة ملف محكوم</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @using (Html.BeginForm("AddConvictFile", "ConvictFile", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
 
-        <div class="p-3 bg-white shadow-sm" style="font-size:small">
-            <div class="d-flex align-items-center" style="gap: 10px;">
-                <img src="~/Content/images/arrest.png" width="34" style="margin-top: -4px;" />
-                <h3 class="mb-0" style="color: #7b7268;">اضافة ملف محكوم</h3>
-            </div>
-            <br />
-
+        <div class="form-card">
             <div class="Subtitle">بيانات المحكوم</div>
 
             <div class="row">
@@ -87,7 +218,6 @@
                     <label class="control-label">الاسم</label>
                     @Html.TextBoxFor(model => model.Name, new { @class = "form-control is-invalid", @Required = "@Required" })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">الاسم الوهمي</label>
@@ -101,7 +231,6 @@
                         new { Value = "أنثى", Text = "أنثى" }
                     }, "Value", "Text"), new { @class = "form-control is-invalid", @Required = "@Required" })
                     @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-
                 </div>
             </div>
 
@@ -110,17 +239,15 @@
                     <label class="control-label">الجنسية</label>
                     @Html.DropDownListFor(model => model.Nationality, new SelectList(ViewBag.Nationality, "NationalityName", "NationalityName"), "يرجى الاختيار", new { @Id = "Nationality", @class = "form-control is-invalid", @Required = "@Required" })
                     @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
-
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">تاريخ الميلاد</label>
                     @Html.TextBoxFor(model => model.BirthDate, "{0:yyyy-MM-dd}", new { @class = "form-control is-invalid", @Required = "@Required", type = "date", @id = "BirthDate" })
                     @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
-
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">العمر</label>
-                    @Html.TextBoxFor(model => model.Age, new { @class = "form-control", @readonly = "readonly", @id = "Age", style = "background-color: #f8f8f8;" })
+                    @Html.TextBoxFor(model => model.Age, new { @class = "form-control", @readonly = "readonly", @id = "Age" })
                 </div>
             </div>
 
@@ -163,7 +290,6 @@
                         }, "Value", "Text"),
                         new { @class = "form-control is-invalid", @Required = "@Required" })
                     @Html.ValidationMessageFor(model => model.MaritalStatus, "", new { @class = "text-danger" })
-
                 </div>
             </div>
 
@@ -182,19 +308,16 @@
                         }, "Value", "Text"),
                         new { @class = "form-control is-invalid", @Required = "@Required" })
                     @Html.ValidationMessageFor(model => model.Profession, "", new { @class = "text-danger" })
-
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">مقر السكن</label>
                     @Html.DropDownListFor(model => model.Residence, new SelectList(ViewBag.ResidenceMaster, "ResidenceName", "ResidenceName"), "يرجى الاختيار", new { @Id = "Residence", @class = "form-control is-invalid", @Required = "@Required" })
                     @Html.ValidationMessageFor(model => model.Residence, "", new { @class = "text-danger" })
-
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">الرقم الموحد</label>
                     @Html.TextBoxFor(model => model.UnifiedNo, new { @class = "form-control is-invalid", @Required = "@Required" })
                     @Html.ValidationMessageFor(model => model.UnifiedNo, "", new { @class = "text-danger" })
-
                 </div>
             </div>
 
@@ -207,7 +330,6 @@
                     <label class="control-label">رقم الهاتف</label>
                     @Html.TextBoxFor(model => model.Phone, new { @class = "form-control is-invalid", @Required = "@Required" })
                     @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-
                 </div>
                 <div class="col-md-4">
                     <label class="control-label">المرفقات</label>
@@ -215,13 +337,14 @@
                     @Html.ValidationMessageFor(model => model.Attachments, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="row">
-               
                 <div class="col-md-12">
                     <label class="control-label">الملاحظات</label>
                     @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", rows = 3 })
                 </div>
             </div>
+
             <!-- Hidden fields -->
             <div style="display:none">
                 @Html.EditorFor(model => model.CreatedDate)
@@ -234,7 +357,7 @@
         </div>
 
         <div class="mt-3" style="text-align: left !important;">
-            <input type="submit" class="btn btn-sm btn-Add p-2" value="حفظ" />
+            <input type="submit" class="btn btn-sm btn-Add" value="حفظ" />
         </div>
     }
 </div>

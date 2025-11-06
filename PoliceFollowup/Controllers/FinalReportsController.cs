@@ -107,9 +107,103 @@ namespace PoliceFollowup.Controllers
         public async Task<ActionResult> FinalReportsDetails(int id)
         {
             var model = await FRRepo.GetFinalReportsByIdAsync(id);
+            if (model == null)
+            {
+                TempData["Error"] = "لم يتم العثور على التقرير";
+                return RedirectToAction("FinalReportsList");
+            }
 
+            // تعبئة افتراضية للعرض الأولي في صفحة التفاصيل
+            if (model.ApproveDate == null) model.ApproveDate = DateTime.Now;
+            if (string.IsNullOrWhiteSpace(model.ApprovedBy)) model.ApprovedBy = "مريم سالم الحمادي";
 
             return View(model);
+        }
+
+        #endregion
+
+        #region Visit : Aprove
+
+        // ReceiveCaseController.cs
+
+        public async Task<ActionResult> Approve(int id)
+        {
+            try
+            {
+                // Properly await the async method
+                var existingCase = await FRRepo.GetFinalReportsByIdAsync(id);
+
+                if (existingCase == null)
+                {
+                    TempData["Error"] = "لم يتم العثور على التقرير";
+                    return RedirectToAction("FinalReportsList");
+                }
+
+                // Create the approval model with the ReportID
+                var approveModel = new FinalReportsDTO
+                {
+                    ReportID = id, // IMPORTANT: Set the ReportID
+                    FileNo = existingCase.FileNo,
+                    ApproveDate = DateTime.Now,
+                    ApprovedBy = "مريم سالم الحمادي",
+                    ApproveNotes = existingCase.ApproveNotes,// optional prefill
+
+                    Status = "معتمد"
+                };
+
+                return View(approveModel);
+            }
+            catch (Exception ex)
+            {
+                log4net.LogicalThreadContext.Properties["Controller"] = "ReceiveCase";
+                log4net.LogicalThreadContext.Properties["Action"] = "Approve";
+                log4net.LogicalThreadContext.Properties["Error"] = ex.Message;
+
+                TempData["Error"] = "حدث خطأ في تحميل البيانات";
+                return RedirectToAction("FinalReportsList");
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Approve(FinalReportsDTO fr)
+        {
+            try
+            {
+                // Validate ReportID
+                if (fr.ReportID <= 0)
+                {
+                    TempData["Error"] = "رقم التقرير غير صحيح";
+                    return RedirectToAction("FinalReportsDetails", new { id = fr.ReportID });
+                }
+
+                // Set default values if not provided
+                fr.ApprovedBy = string.IsNullOrWhiteSpace(fr.ApprovedBy) ? "مريم سالم الحمادي" : fr.ApprovedBy;
+                fr.ApproveDate = fr.ApproveDate ?? DateTime.Now;
+                fr.Status = string.IsNullOrWhiteSpace(fr.Status) ? "معتمد" : fr.Status;
+
+                #region Logs
+                log4net.LogicalThreadContext.Properties["Controller"] = this.ControllerContext.RouteData.Values["controller"];
+                log4net.LogicalThreadContext.Properties["Action"] = this.ControllerContext.RouteData.Values["action"];
+                log4net.LogicalThreadContext.Properties["UserName"] = "HAJER EISA";
+                log4net.LogicalThreadContext.Properties["ReportID"] = fr.ReportID;
+                #endregion
+
+                await FRRepo.ApproveFinalReportsAsync(fr);
+
+                TempData["Success"] = "تم اعتماد التقرير بنجاح";
+                return RedirectToAction("FinalReportsList");
+            }
+            catch (Exception ex)
+            {
+                log4net.LogicalThreadContext.Properties["Error"] = ex.Message;
+
+                ModelState.AddModelError("", "حدث خطأ أثناء اعتماد التقرير: " + ex.Message);
+                TempData["Error"] = "حدث خطأ ما أثناء اعتماد التقرير";
+
+                // Return the view with the model to show errors
+                return View(fr);
+            }
         }
 
         #endregion
